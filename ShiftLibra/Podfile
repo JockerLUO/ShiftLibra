@@ -1,0 +1,30 @@
+# Uncomment the next line to define a global platform for your project
+  platform :ios, '9.0'
+
+target 'ShiftLibra' do
+
+    use_frameworks!
+
+    inhibit_all_warnings!
+
+  # Pods for ShiftLibra
+
+    pod 'SnapKit'
+
+    pod 'AFNetworking'
+
+    # 加载指示器
+    pod 'SVProgressHUD'
+
+    #字典转模型
+    pod 'YYModel'
+
+    pod 'pop'
+
+    pod 'YYText'
+
+    pod 'FMDB'
+
+    pod 'FoldingCell'
+
+end

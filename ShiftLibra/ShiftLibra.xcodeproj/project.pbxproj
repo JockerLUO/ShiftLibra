@@ -7,21 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1C76C771F1E40FA007FF107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C76C761F1E40FA007FF107 /* AppDelegate.swift */; };
-		B1C76C791F1E40FA007FF107 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C76C781F1E40FA007FF107 /* ViewController.swift */; };
-		B1C76C7C1F1E40FA007FF107 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C76C7A1F1E40FA007FF107 /* Main.storyboard */; };
-		B1C76C7E1F1E40FA007FF107 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C76C7D1F1E40FA007FF107 /* Assets.xcassets */; };
-		B1C76C811F1E40FA007FF107 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C76C7F1F1E40FA007FF107 /* LaunchScreen.storyboard */; };
+		5ED14AB1E001F0BF6A7E1666 /* Pods_ShiftLibra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */; };
+		B16943691F2444F9008F0029 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435A1F2444F9008F0029 /* Common.swift */; };
+		B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */; };
+		B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435D1F2444F9008F0029 /* Extension + UIButton.swift */; };
+		B169436C1F2444F9008F0029 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435E1F2444F9008F0029 /* Extension + UIImage.swift */; };
+		B169436E1F2444F9008F0029 /* Extension + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943601F2444F9008F0029 /* Extension + UILabel.swift */; };
+		B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943671F2444F9008F0029 /* SLHomeCell.swift */; };
+		B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943721F2445E9008F0029 /* AppDelegate.swift */; };
+		B16943781F2445E9008F0029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16943731F2445E9008F0029 /* Assets.xcassets */; };
+		B16943791F2445E9008F0029 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B16943751F2445E9008F0029 /* LaunchScreen.storyboard */; };
+		B169437B1F2445F8008F0029 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B169437A1F2445F8008F0029 /* Info.plist */; };
+		B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943801F24471E008F0029 /* SLHomeViewController.swift */; };
+		B16943871F24A5AD008F0029 /* SLHomeDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShiftLibra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.debug.xcconfig"; sourceTree = "<group>"; };
+		B169435A1F2444F9008F0029 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIBarButtonItem.swift"; sourceTree = "<group>"; };
+		B169435D1F2444F9008F0029 /* Extension + UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
+		B169435E1F2444F9008F0029 /* Extension + UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
+		B16943601F2444F9008F0029 /* Extension + UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UILabel.swift"; sourceTree = "<group>"; };
+		B16943671F2444F9008F0029 /* SLHomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeCell.swift; sourceTree = "<group>"; };
+		B16943721F2445E9008F0029 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B16943731F2445E9008F0029 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B16943761F2445E9008F0029 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B169437A1F2445F8008F0029 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B16943801F24471E008F0029 /* SLHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewController.swift; sourceTree = "<group>"; };
+		B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailTableView.swift; sourceTree = "<group>"; };
 		B1C76C731F1E40FA007FF107 /* ShiftLibra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftLibra.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1C76C761F1E40FA007FF107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B1C76C781F1E40FA007FF107 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B1C76C7B1F1E40FA007FF107 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B1C76C7D1F1E40FA007FF107 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B1C76C801F1E40FA007FF107 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B1C76C821F1E40FA007FF107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAEB100510176BDC4EB4A1B2 /* Pods-ShiftLibra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +46,127 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED14AB1E001F0BF6A7E1666 /* Pods_ShiftLibra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B18440ECB0CF589DCA1CBA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */,
+				FAEB100510176BDC4EB4A1B2 /* Pods-ShiftLibra.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B16943571F2444F9008F0029 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				B16943581F2444F9008F0029 /* Model */,
+				B16943591F2444F9008F0029 /* Tools */,
+				B16943621F2444F9008F0029 /* View */,
+				B16943681F2444F9008F0029 /* ViewModel */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		B16943581F2444F9008F0029 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B16943591F2444F9008F0029 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				B169435A1F2444F9008F0029 /* Common.swift */,
+				B169435B1F2444F9008F0029 /* Extension */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		B169435B1F2444F9008F0029 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */,
+				B169435D1F2444F9008F0029 /* Extension + UIButton.swift */,
+				B169435E1F2444F9008F0029 /* Extension + UIImage.swift */,
+				B16943601F2444F9008F0029 /* Extension + UILabel.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B16943621F2444F9008F0029 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B16943631F2444F9008F0029 /* Home */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B16943631F2444F9008F0029 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B16943641F2444F9008F0029 /* Controller */,
+				B16943661F2444F9008F0029 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B16943641F2444F9008F0029 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B16943801F24471E008F0029 /* SLHomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B16943661F2444F9008F0029 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B16943671F2444F9008F0029 /* SLHomeCell.swift */,
+				B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B16943681F2444F9008F0029 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B16943741F2445E9008F0029 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				B16943751F2445E9008F0029 /* LaunchScreen.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		B169437D1F244617008F0029 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B16943721F2445E9008F0029 /* AppDelegate.swift */,
+				B169437A1F2445F8008F0029 /* Info.plist */,
+				B16943731F2445E9008F0029 /* Assets.xcassets */,
+				B16943741F2445E9008F0029 /* Base.lproj */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		B1C76C6A1F1E40FA007FF107 = {
 			isa = PBXGroup;
 			children = (
 				B1C76C751F1E40FA007FF107 /* ShiftLibra */,
 				B1C76C741F1E40FA007FF107 /* Products */,
+				0B18440ECB0CF589DCA1CBA1 /* Pods */,
+				E93428A755475B7AFBBF2572 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +181,18 @@
 		B1C76C751F1E40FA007FF107 /* ShiftLibra */ = {
 			isa = PBXGroup;
 			children = (
-				B1C76C761F1E40FA007FF107 /* AppDelegate.swift */,
-				B1C76C781F1E40FA007FF107 /* ViewController.swift */,
-				B1C76C7A1F1E40FA007FF107 /* Main.storyboard */,
-				B1C76C7D1F1E40FA007FF107 /* Assets.xcassets */,
-				B1C76C7F1F1E40FA007FF107 /* LaunchScreen.storyboard */,
-				B1C76C821F1E40FA007FF107 /* Info.plist */,
+				B16943571F2444F9008F0029 /* Class */,
+				B169437D1F244617008F0029 /* Other */,
 			);
 			path = ShiftLibra;
+			sourceTree = "<group>";
+		};
+		E93428A755475B7AFBBF2572 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1C76C851F1E40FA007FF107 /* Build configuration list for PBXNativeTarget "ShiftLibra" */;
 			buildPhases = (
+				C76DEC4DF7E47531E067F832 /* [CP] Check Pods Manifest.lock */,
 				B1C76C6F1F1E40FA007FF107 /* Sources */,
 				B1C76C701F1E40FA007FF107 /* Frameworks */,
 				B1C76C711F1E40FA007FF107 /* Resources */,
+				8B8808E690F0B3523E8AC6F8 /* [CP] Embed Pods Frameworks */,
+				B551E2101C0291B498D7A714 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -90,6 +224,7 @@
 		B1C76C6B1F1E40FA007FF107 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SL;
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = JockerLuo;
@@ -124,39 +259,86 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C76C811F1E40FA007FF107 /* LaunchScreen.storyboard in Resources */,
-				B1C76C7E1F1E40FA007FF107 /* Assets.xcassets in Resources */,
-				B1C76C7C1F1E40FA007FF107 /* Main.storyboard in Resources */,
+				B16943781F2445E9008F0029 /* Assets.xcassets in Resources */,
+				B16943791F2445E9008F0029 /* LaunchScreen.storyboard in Resources */,
+				B169437B1F2445F8008F0029 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B8808E690F0B3523E8AC6F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B551E2101C0291B498D7A714 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C76DEC4DF7E47531E067F832 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B1C76C6F1F1E40FA007FF107 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C76C791F1E40FA007FF107 /* ViewController.swift in Sources */,
-				B1C76C771F1E40FA007FF107 /* AppDelegate.swift in Sources */,
+				B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */,
+				B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */,
+				B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */,
+				B169436E1F2444F9008F0029 /* Extension + UILabel.swift in Sources */,
+				B16943691F2444F9008F0029 /* Common.swift in Sources */,
+				B169436C1F2444F9008F0029 /* Extension + UIImage.swift in Sources */,
+				B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */,
+				B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */,
+				B16943871F24A5AD008F0029 /* SLHomeDetailTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B1C76C7A1F1E40FA007FF107 /* Main.storyboard */ = {
+		B16943751F2445E9008F0029 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B1C76C7B1F1E40FA007FF107 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B1C76C7F1F1E40FA007FF107 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B1C76C801F1E40FA007FF107 /* Base */,
+				B16943761F2445E9008F0029 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -259,6 +441,7 @@
 		};
 		B1C76C861F1E40FA007FF107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U8276FQ2Z4;
@@ -272,6 +455,7 @@
 		};
 		B1C76C871F1E40FA007FF107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAEB100510176BDC4EB4A1B2 /* Pods-ShiftLibra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U8276FQ2Z4;
@@ -302,6 +486,7 @@
 				B1C76C871F1E40FA007FF107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
