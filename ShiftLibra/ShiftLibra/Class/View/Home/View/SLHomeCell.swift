@@ -17,6 +17,8 @@ class SLHomeCell: FoldingCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        itemCount = 3
+        
         setupUI()
     }
     
@@ -55,13 +57,32 @@ class SLHomeCell: FoldingCell {
         
         addConstraint(containerViewTop)
         
-        contentView.addSubview(detailTableView)
         
-//        detailTableView.delegate = self
-//        
-//        detailTableView.dataSource = self
         
-        detailTableView.snp.makeConstraints { (make) in
+        
+        foregroundView.addSubview(bgView)
+        
+        bgView.snp.makeConstraints { (make) in
+            
+            make.right.top.bottom.equalTo(foregroundView)
+            make.left.equalTo(foregroundView.snp.centerX)
+        }
+        
+        bgView.backgroundColor = UIColor.blue
+        
+        
+        
+        fgView.backgroundColor = bottom_left_bgColor
+        
+        bgView.backgroundColor = bottom_right_bgColor
+        
+        
+        
+        
+        
+        contentView.addSubview(detailView)
+        
+        detailView.snp.makeConstraints { (make) in
             
             make.top.equalTo(SCREENH / 11)
             
@@ -76,7 +97,7 @@ class SLHomeCell: FoldingCell {
             
             make.centerY.equalTo(foregroundView)
             
-            make.centerX.equalTo(foregroundView.snp.centerX).offset(-30)
+            make.right.equalTo(foregroundView.snp.centerX).offset(-30)
         }
         
         foregroundView.addSubview(labRight)
@@ -85,24 +106,19 @@ class SLHomeCell: FoldingCell {
             
             make.centerY.equalTo(foregroundView)
             
-            make.centerX.equalTo(foregroundView.snp.centerX).offset(30)
+            make.left.equalTo(foregroundView.snp.centerX).offset(30)
         }
         
     }
     
     override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
-        
-        // durations count equal it itemCount
-//        let durations = [0.33, 0.26, 0.26] // timing animation for each view
-//        return durations[itemIndex]
-        return 0.05
+
+        return 0.01
     }
     
     lazy var fgView: RotatedView! = {
         
         let view = RotatedView()
-        
-        view.backgroundColor = randomColor()
         
         return view
     }()
@@ -116,15 +132,18 @@ class SLHomeCell: FoldingCell {
         return view
     }()
     
+    lazy var bgView : UIView = UIView()
+
+    
     lazy var labLeft: UILabel = {
         
         let lab = UILabel()
         
         lab.text = "123"
         
-        lab.font = UIFont.systemFont(ofSize: normalFontSize)
+        lab.font = UIFont.systemFont(ofSize: bottomFontSize)
         
-        lab.textColor = UIColor.darkText
+        lab.textColor = bottom_left_textColor
         
         lab.sizeToFit()
         
@@ -137,52 +156,16 @@ class SLHomeCell: FoldingCell {
         
         lab.text = "321"
         
-        lab.font = UIFont.systemFont(ofSize: normalFontSize)
+        lab.font = UIFont.systemFont(ofSize: bottomFontSize)
         
-        lab.textColor = UIColor.darkText
+        lab.textColor = bottom_right_textColor
         
         lab.sizeToFit()
         
         return lab
     }()
     
-    lazy var detailTableView: UITableView = {
-        
-        let tableView = UITableView()
-        
-        tableView.rowHeight = (SCREENH * 9 / 11) / 10
-        
-        tableView.bounces = false
-        
-        tableView.register(SLHomeCell.self, forCellReuseIdentifier: detailID)
-
-        return tableView
-    }()
-}
-
-extension SLHomeCell : UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier:SLHomeCell.detailID , for: indexPath)
-        
-        cell.selectionStyle = .none
-        
-        return cell
-    }
-    
-    
-    
+    lazy var detailView: SLHomeDetailView = SLHomeDetailView()
 }
 
 

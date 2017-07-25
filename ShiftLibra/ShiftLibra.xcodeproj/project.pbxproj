@@ -19,7 +19,9 @@
 		B16943791F2445E9008F0029 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B16943751F2445E9008F0029 /* LaunchScreen.storyboard */; };
 		B169437B1F2445F8008F0029 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B169437A1F2445F8008F0029 /* Info.plist */; };
 		B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943801F24471E008F0029 /* SLHomeViewController.swift */; };
-		B16943871F24A5AD008F0029 /* SLHomeDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */; };
+		B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */; };
+		B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */; };
+		B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +38,10 @@
 		B16943761F2445E9008F0029 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B169437A1F2445F8008F0029 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B16943801F24471E008F0029 /* SLHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewController.swift; sourceTree = "<group>"; };
-		B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailTableView.swift; sourceTree = "<group>"; };
 		B1C76C731F1E40FA007FF107 /* ShiftLibra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftLibra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailView.swift; sourceTree = "<group>"; };
+		B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailCell.swift; sourceTree = "<group>"; };
+		B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderView.swift; sourceTree = "<group>"; };
 		FAEB100510176BDC4EB4A1B2 /* Pods-ShiftLibra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				B16943671F2444F9008F0029 /* SLHomeCell.swift */,
-				B16943861F24A5AD008F0029 /* SLHomeDetailTableView.swift */,
+				B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */,
+				B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */,
+				B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -323,12 +329,14 @@
 				B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */,
 				B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */,
 				B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */,
+				B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */,
+				B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */,
 				B169436E1F2444F9008F0029 /* Extension + UILabel.swift in Sources */,
 				B16943691F2444F9008F0029 /* Common.swift in Sources */,
 				B169436C1F2444F9008F0029 /* Extension + UIImage.swift in Sources */,
+				B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */,
 				B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */,
 				B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */,
-				B16943871F24A5AD008F0029 /* SLHomeDetailTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

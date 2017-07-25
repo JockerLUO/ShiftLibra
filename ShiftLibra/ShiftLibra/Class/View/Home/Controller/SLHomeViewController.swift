@@ -13,9 +13,12 @@ class SLHomeViewController: UIViewController {
 
     let cellID = "cellID"
     
-    override func loadView() {
-        view = tableView
-    }
+//    let headerID = "headerID"
+
+    
+//    override func loadView() {
+//        view = tableView
+//    }
     
     fileprivate struct C {
         struct CellHeight {
@@ -31,24 +34,62 @@ class SLHomeViewController: UIViewController {
     let kOpenCellHeight = CGFloat(SCREENH * 10 / 11)
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        view.addSubview(headerView)
+        
+        headerView.snp.makeConstraints { (make) in
+            
+            make.left.right.equalTo(self.view)
+            
+            make.top.equalTo(self.view.snp.top).offset(20)
+            
+            make.height.equalTo(SCREENH / 11)
+            
+        }
+        
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            
+            make.top.equalTo(headerView.snp.bottom)
+            
+            make.left.bottom.right.equalTo(self.view)
+            
+        }
+        
+        
         
         tableView.delegate = self
         
         tableView.dataSource = self
         
-        tableView.separatorStyle = .none
+        tableView.separatorInset = .zero
         
         tableView.estimatedRowHeight = kCloseCellHeight
         
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.register(SLHomeCell.self, forCellReuseIdentifier: cellID)
+        
+//        tableView.register(SLHomeHeaderView.self, forHeaderFooterViewReuseIdentifier: headerID)
     }
+    
+    lazy var headerView: SLHomeHeaderView = {
+        
+        let view = SLHomeHeaderView()
+        
+        return view
+    }()
+    
+    
     
     lazy var tableView: UITableView = {
         
         let tableView = UITableView()
+        
+        tableView.backgroundColor = homeTable_bgcolor
         
         return tableView
     }()
@@ -96,10 +137,17 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
             duration = 1.1
         }
         
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { 
+            _ in
+            
             tableView.beginUpdates()
             tableView.endUpdates()
-        }, completion: nil)
+            
+        }) { (_) in
+            
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -114,4 +162,17 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-
+//extension SLHomeViewController {
+//    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:headerID )
+//        
+//        return headerView
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return SCREENH / 11
+//    }
+//}
