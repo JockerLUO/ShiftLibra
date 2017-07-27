@@ -73,7 +73,6 @@ class SLHomeViewController: UIViewController {
         
         tableView.register(SLHomeCell.self, forCellReuseIdentifier: cellID)
         
-//        tableView.register(SLHomeHeaderView.self, forHeaderFooterViewReuseIdentifier: headerID)
     }
     
     lazy var headerView: SLHomeHeaderView = {
