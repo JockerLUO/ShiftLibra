@@ -34,7 +34,7 @@ class SLHomeDetailView: UIView {
         
         tableView.dataSource = self
         
-        tableView.rowHeight = (SCREENH * 9 / 11) / 10
+        tableView.rowHeight = homeDetailTableViewCellHight
         
         tableView.bounces = false
         
@@ -47,7 +47,7 @@ class SLHomeDetailView: UIView {
         
         let tableView = UITableView()
         
-        tableView.backgroundColor = detailTable_bgcolor
+//        tableView.backgroundColor = detailTable_bgcolor
         
         return tableView
     }()

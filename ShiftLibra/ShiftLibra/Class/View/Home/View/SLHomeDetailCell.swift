@@ -49,7 +49,7 @@ class SLHomeDetailCell: UITableViewCell {
             
             make.centerY.equalTo(contentView)
             
-            make.right.equalTo(contentView.snp.centerX).offset(-30)
+            make.right.equalTo(contentView.snp.centerX).offset(-labSpace)
         }
         
         contentView.addSubview(labRight)
@@ -58,7 +58,7 @@ class SLHomeDetailCell: UITableViewCell {
             
             make.centerY.equalTo(contentView)
             
-            make.left.equalTo(contentView.snp.centerX).offset(30)
+            make.left.equalTo(contentView.snp.centerX).offset(labSpace)
         }
 
         

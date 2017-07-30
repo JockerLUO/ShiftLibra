@@ -12,26 +12,19 @@ import FoldingCell
 class SLHomeViewController: UIViewController {
 
     let cellID = "cellID"
-    
-//    let headerID = "headerID"
-
-    
-//    override func loadView() {
-//        view = tableView
-//    }
-    
+        
     fileprivate struct C {
         struct CellHeight {
-            static let close: CGFloat = SCREENH / 11
-            static let open: CGFloat = SCREENH * 10 / 11
+            static let close: CGFloat = homeTableViewCellHight
+            static let open: CGFloat = homeTableViewCellHight + homeDetailTableViewCellHight * 10
         }
     }
     
     var cellHeights = (0..<10).map { _ in C.CellHeight.close }
     
-    let kCloseCellHeight = CGFloat(SCREENH / 11)
+    let kCloseCellHeight = homeTableViewCellHight
     
-    let kOpenCellHeight = CGFloat(SCREENH * 10 / 11)
+    let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
 
     override func viewDidLoad() {
         
@@ -45,9 +38,16 @@ class SLHomeViewController: UIViewController {
             
             make.top.equalTo(self.view.snp.top).offset(20)
             
-            make.height.equalTo(SCREENH / 11)
+            make.height.equalTo(homeHeaderHight)
             
         }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headerViewClick))
+
+        headerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        
         
         view.addSubview(tableView)
         
@@ -58,8 +58,6 @@ class SLHomeViewController: UIViewController {
             make.left.bottom.right.equalTo(self.view)
             
         }
-        
-        
         
         tableView.delegate = self
         
@@ -94,6 +92,20 @@ class SLHomeViewController: UIViewController {
     }()
 }
 
+extension SLHomeViewController {
+    
+    func headerViewClick() -> () {
+        
+        SLHomeSettingView.show(superController: self)
+        
+        
+        
+    }
+    
+}
+
+
+
 extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,24 +128,29 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return cellHeights[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
             return
         }
         
         var duration = 0.0
-        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
+        
+        if cellHeights[indexPath.row] == kCloseCellHeight {
             cellHeights[indexPath.row] = kOpenCellHeight
             
             cell.setSelected(true, animated: true)
-            duration = 0.5
-        } else {// close cell
+            duration = 0.25
+            
+        } else {
+            
             cellHeights[indexPath.row] = kCloseCellHeight
             cell.setSelected(false, animated: true)
-            duration = 1.1
+            duration = 0.25
         }
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { 
@@ -161,17 +178,3 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-//extension SLHomeViewController {
-//    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:headerID )
-//        
-//        return headerView
-//        
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return SCREENH / 11
-//    }
-//}

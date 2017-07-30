@@ -36,7 +36,7 @@ class SLHomeCell: FoldingCell {
             
             make.left.equalTo(0)
             make.right.equalTo(0)
-            make.height.equalTo(SCREENH / 11)
+            make.height.equalTo(homeTableViewCellHight)
         }
         
         foregroundViewTop = NSLayoutConstraint(item: foregroundView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
@@ -50,14 +50,12 @@ class SLHomeCell: FoldingCell {
         containerView.snp.makeConstraints { (make) in
             
             make.left.right.equalTo(foregroundView.snp.left)
-            make.height.equalTo(SCREENH  * 9 / 11 )
+            make.height.equalTo(homeDetailTableViewCellHight * 10)
         }
         
-        containerViewTop = NSLayoutConstraint(item: containerView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: (SCREENH / 11))
+        containerViewTop = NSLayoutConstraint(item: containerView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: (homeTableViewCellHight))
         
         addConstraint(containerViewTop)
-        
-        
         
         
         foregroundView.addSubview(bgView)
@@ -68,23 +66,17 @@ class SLHomeCell: FoldingCell {
             make.left.equalTo(foregroundView.snp.centerX)
         }
         
-        bgView.backgroundColor = UIColor.blue
-        
-        
         
         fgView.backgroundColor = bottom_left_bgColor
         
         bgView.backgroundColor = bottom_right_bgColor
         
         
-        
-        
-        
         contentView.addSubview(detailView)
         
         detailView.snp.makeConstraints { (make) in
             
-            make.top.equalTo(SCREENH / 11)
+            make.top.equalTo(homeTableViewCellHight)
             
             make.left.right.equalTo(contentView)
             
@@ -97,7 +89,7 @@ class SLHomeCell: FoldingCell {
             
             make.centerY.equalTo(foregroundView)
             
-            make.right.equalTo(foregroundView.snp.centerX).offset(-30)
+            make.right.equalTo(foregroundView.snp.centerX).offset(-labSpace)
         }
         
         foregroundView.addSubview(labRight)
@@ -106,7 +98,7 @@ class SLHomeCell: FoldingCell {
             
             make.centerY.equalTo(foregroundView)
             
-            make.left.equalTo(foregroundView.snp.centerX).offset(30)
+            make.left.equalTo(foregroundView.snp.centerX).offset(labSpace)
         }
         
     }

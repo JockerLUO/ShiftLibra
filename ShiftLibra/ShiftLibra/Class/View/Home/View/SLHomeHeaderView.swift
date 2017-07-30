@@ -36,14 +36,13 @@ class SLHomeHeaderView: UIView {
         bgView.backgroundColor = top_right_bgColor
         
         
-        
         self.addSubview(labLeft)
         
         labLeft.snp.makeConstraints { (make) in
             
             make.centerY.equalTo(self)
             
-            make.right.equalTo(self.snp.centerX).offset(-30)
+            make.right.equalTo(self.snp.centerX).offset(-labSpace)
         }
         
         self.addSubview(labRight)
@@ -52,13 +51,22 @@ class SLHomeHeaderView: UIView {
             
             make.centerY.equalTo(self)
             
-            make.left.equalTo(self.snp.centerX).offset(30)
+            make.left.equalTo(self.snp.centerX).offset(labSpace)
+        }
+        
+        self.addSubview(btnBack)
+        
+        btnBack.snp.makeConstraints { (make) in
+            
+            make.centerY.equalTo(self)
+            
+            make.left.equalTo(self.snp.left).offset(16)
         }
         
         
     }
     
-    lazy var bgView : UIView = UIView()
+    lazy var bgView : SLHomeHeaderRightView = SLHomeHeaderRightView()
     
     lazy var labLeft: UILabel = {
         
@@ -88,6 +96,21 @@ class SLHomeHeaderView: UIView {
         lab.sizeToFit()
         
         return lab
+    }()
+    
+    lazy var btnBack: UIButton = {
+        
+        let btn = UIButton()
+        
+        btn.setTitle("<", for: UIControlState.normal)
+        
+        btn.setTitleColor(mid_right_textColor, for: UIControlState.normal)
+        
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: bottomFontSize)
+        
+        btn.sizeToFit()
+        
+        return btn
     }()
     
 }

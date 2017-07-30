@@ -26,27 +26,23 @@ func themeColor() -> (UIColor) {
 
 let smallFontSize = CGFloat(17)
 
-let normalFontSize = CGFloat(32)
+let normalFontSize = CGFloat(20)
 
-let largeFontSize = CGFloat(35)
+let settingFontSize = CGFloat(25)
 
-let topFontSize = CGFloat(42)
+let topFontSize = CGFloat(38)
 
-let midFontSize = CGFloat(32)
+let midFontSize = CGFloat(30)
 
 let bottomFontSize = CGFloat(35)
 
-let homeTableViewCellHight = SCREENH - 20
+let homeHeaderHight = (SCREENH - 20 - 20) / 11 + 20
 
+let homeTableViewCellHight = (SCREENH - 20 - 20) / 11
 
+let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 10
 
-
-
-
-
-
-
-
+let labSpace = 50
 
 
 func RGB(R : CGFloat, G : CGFloat, B : CGFloat, alpha : CGFloat) -> (UIColor) {
