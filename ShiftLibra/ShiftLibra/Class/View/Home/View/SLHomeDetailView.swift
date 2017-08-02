@@ -40,15 +40,15 @@ class SLHomeDetailView: UIView {
         
         tableView.separatorInset = .zero
         
+        tableView.separatorStyle = .none
+        
         tableView.register(SLHomeDetailCell.self, forCellReuseIdentifier:SLHomeDetailView.detailID)
     }
     
     lazy var tableView : UITableView = {
         
         let tableView = UITableView()
-        
-//        tableView.backgroundColor = detailTable_bgcolor
-        
+                
         return tableView
     }()
     

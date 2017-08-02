@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5ED14AB1E001F0BF6A7E1666 /* Pods_ShiftLibra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */; };
+		B144F8E31F2DFC8A00F5BBD6 /* SLHomeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */; };
+		B144F8E51F2DFD0200F5BBD6 /* SLOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */; };
+		B144F8EA1F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */; };
+		B144F8EC1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8EB1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift */; };
+		B144F8EE1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8ED1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift */; };
+		B144F8F01F2E0E8700F5BBD6 /* SLHomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */; };
 		B16943691F2444F9008F0029 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435A1F2444F9008F0029 /* Common.swift */; };
 		B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */; };
 		B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435D1F2444F9008F0029 /* Extension + UIButton.swift */; };
@@ -18,9 +24,16 @@
 		B16943781F2445E9008F0029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16943731F2445E9008F0029 /* Assets.xcassets */; };
 		B169437B1F2445F8008F0029 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B169437A1F2445F8008F0029 /* Info.plist */; };
 		B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943801F24471E008F0029 /* SLHomeViewController.swift */; };
-		B195C8E31F2C712C00864709 /* SLHomeHeaderRightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B195C8E21F2C712C00864709 /* SLHomeHeaderRightView.swift */; };
+		B18D27211F2F507400C6A8EF /* SLOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D27201F2F507400C6A8EF /* SLOptionTableViewCell.swift */; };
+		B18D27231F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D27221F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift */; };
 		B195C8E71F2C88CD00864709 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B195C8E61F2C88CD00864709 /* Launch Screen.storyboard */; };
-		B195C8E91F2C8B1F00864709 /* SLHomeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B195C8E81F2C8B1F00864709 /* SLHomeSettingView.swift */; };
+		B1CC4B9C1F301C0B00336582 /* SLNetworkingTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */; };
+		B1CC4B9E1F3021D000336582 /* SLSQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */; };
+		B1CC4BA21F3029BA00336582 /* SLHomeTableLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BA11F3029BA00336582 /* SLHomeTableLineView.swift */; };
+		B1CC4BA41F3029D200336582 /* SLHomeDetailTableLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BA31F3029D200336582 /* SLHomeDetailTableLineView.swift */; };
+		B1CC4BAC1F306B0800336582 /* SLCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAB1F306B0800336582 /* SLCurrency.swift */; };
+		B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */; };
+		B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */; };
 		B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */; };
 		B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */; };
 		B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */; };
@@ -29,6 +42,12 @@
 /* Begin PBXFileReference section */
 		0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShiftLibra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.debug.xcconfig"; sourceTree = "<group>"; };
+		B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeSettingView.swift; sourceTree = "<group>"; };
+		B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewController.swift; sourceTree = "<group>"; };
+		B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableBackgroundView.swift; sourceTree = "<group>"; };
+		B144F8EB1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailTableBackgroundView.swift; sourceTree = "<group>"; };
+		B144F8ED1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderBackgroundView.swift; sourceTree = "<group>"; };
+		B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableView.swift; sourceTree = "<group>"; };
 		B169435A1F2444F9008F0029 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIBarButtonItem.swift"; sourceTree = "<group>"; };
 		B169435D1F2444F9008F0029 /* Extension + UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
@@ -39,10 +58,17 @@
 		B16943731F2445E9008F0029 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B169437A1F2445F8008F0029 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B16943801F24471E008F0029 /* SLHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewController.swift; sourceTree = "<group>"; };
-		B195C8E21F2C712C00864709 /* SLHomeHeaderRightView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderRightView.swift; sourceTree = "<group>"; };
+		B18D27201F2F507400C6A8EF /* SLOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionTableViewCell.swift; sourceTree = "<group>"; };
+		B18D27221F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionTableHeaderView.swift; sourceTree = "<group>"; };
 		B195C8E61F2C88CD00864709 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		B195C8E81F2C8B1F00864709 /* SLHomeSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeSettingView.swift; sourceTree = "<group>"; };
 		B1C76C731F1E40FA007FF107 /* ShiftLibra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftLibra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLNetworkingTool.swift; sourceTree = "<group>"; };
+		B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLSQLManager.swift; sourceTree = "<group>"; };
+		B1CC4BA11F3029BA00336582 /* SLHomeTableLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableLineView.swift; sourceTree = "<group>"; };
+		B1CC4BA31F3029D200336582 /* SLHomeDetailTableLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailTableLineView.swift; sourceTree = "<group>"; };
+		B1CC4BAB1F306B0800336582 /* SLCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCurrency.swift; sourceTree = "<group>"; };
+		B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewModel.swift; sourceTree = "<group>"; };
+		B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewModel.swift; sourceTree = "<group>"; };
 		B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailView.swift; sourceTree = "<group>"; };
 		B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailCell.swift; sourceTree = "<group>"; };
 		B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderView.swift; sourceTree = "<group>"; };
@@ -70,6 +96,46 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B144F8DF1F2DFC8A00F5BBD6 /* Option */ = {
+			isa = PBXGroup;
+			children = (
+				B144F8E01F2DFC8A00F5BBD6 /* Controller */,
+				B144F8E11F2DFC8A00F5BBD6 /* View */,
+			);
+			path = Option;
+			sourceTree = "<group>";
+		};
+		B144F8E01F2DFC8A00F5BBD6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B144F8E11F2DFC8A00F5BBD6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */,
+				B18D27201F2F507400C6A8EF /* SLOptionTableViewCell.swift */,
+				B18D27221F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B144F8E81F2E032A00F5BBD6 /* backgroudView */ = {
+			isa = PBXGroup;
+			children = (
+				B144F8ED1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift */,
+				B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */,
+				B144F8EB1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift */,
+				B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */,
+				B1CC4BA11F3029BA00336582 /* SLHomeTableLineView.swift */,
+				B1CC4BA31F3029D200336582 /* SLHomeDetailTableLineView.swift */,
+			);
+			path = backgroudView;
+			sourceTree = "<group>";
+		};
 		B16943571F2444F9008F0029 /* Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +150,7 @@
 		B16943581F2444F9008F0029 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B1CC4BAB1F306B0800336582 /* SLCurrency.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -92,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				B169435A1F2444F9008F0029 /* Common.swift */,
+				B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */,
+				B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */,
 				B169435B1F2444F9008F0029 /* Extension */,
 			);
 			path = Tools;
@@ -112,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				B16943631F2444F9008F0029 /* Home */,
+				B144F8DF1F2DFC8A00F5BBD6 /* Option */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -136,12 +206,11 @@
 		B16943661F2444F9008F0029 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B144F8E81F2E032A00F5BBD6 /* backgroudView */,
 				B16943671F2444F9008F0029 /* SLHomeCell.swift */,
 				B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */,
 				B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */,
 				B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */,
-				B195C8E21F2C712C00864709 /* SLHomeHeaderRightView.swift */,
-				B195C8E81F2C8B1F00864709 /* SLHomeSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,6 +218,8 @@
 		B16943681F2444F9008F0029 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B1CC4BA71F306A9F00336582 /* Home */,
+				B1CC4BA81F306A9F00336582 /* Option */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,6 +268,22 @@
 				B169437D1F244617008F0029 /* Other */,
 			);
 			path = ShiftLibra;
+			sourceTree = "<group>";
+		};
+		B1CC4BA71F306A9F00336582 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B1CC4BA81F306A9F00336582 /* Option */ = {
+			isa = PBXGroup;
+			children = (
+				B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */,
+			);
+			path = Option;
 			sourceTree = "<group>";
 		};
 		E93428A755475B7AFBBF2572 /* Frameworks */ = {
@@ -332,19 +419,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B18D27231F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift in Sources */,
+				B144F8EE1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift in Sources */,
 				B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */,
 				B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */,
 				B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */,
+				B1CC4BAC1F306B0800336582 /* SLCurrency.swift in Sources */,
+				B144F8EC1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift in Sources */,
 				B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */,
 				B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */,
+				B1CC4BA41F3029D200336582 /* SLHomeDetailTableLineView.swift in Sources */,
+				B144F8EA1F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift in Sources */,
 				B169436E1F2444F9008F0029 /* Extension + UILabel.swift in Sources */,
+				B1CC4B9C1F301C0B00336582 /* SLNetworkingTool.swift in Sources */,
+				B1CC4BA21F3029BA00336582 /* SLHomeTableLineView.swift in Sources */,
+				B144F8F01F2E0E8700F5BBD6 /* SLHomeTableView.swift in Sources */,
+				B144F8E51F2DFD0200F5BBD6 /* SLOptionViewController.swift in Sources */,
+				B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */,
+				B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */,
 				B16943691F2444F9008F0029 /* Common.swift in Sources */,
-				B195C8E91F2C8B1F00864709 /* SLHomeSettingView.swift in Sources */,
+				B144F8E31F2DFC8A00F5BBD6 /* SLHomeSettingView.swift in Sources */,
 				B169436C1F2444F9008F0029 /* Extension + UIImage.swift in Sources */,
-				B195C8E31F2C712C00864709 /* SLHomeHeaderRightView.swift in Sources */,
 				B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */,
 				B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */,
+				B1CC4B9E1F3021D000336582 /* SLSQLManager.swift in Sources */,
 				B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */,
+				B18D27211F2F507400C6A8EF /* SLOptionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

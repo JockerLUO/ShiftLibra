@@ -15,7 +15,9 @@ class SLHomeViewController: UIViewController {
         
     fileprivate struct C {
         struct CellHeight {
+            
             static let close: CGFloat = homeTableViewCellHight
+            
             static let open: CGFloat = homeTableViewCellHight + homeDetailTableViewCellHight * 10
         }
     }
@@ -25,7 +27,7 @@ class SLHomeViewController: UIViewController {
     let kCloseCellHeight = homeTableViewCellHight
     
     let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -39,15 +41,11 @@ class SLHomeViewController: UIViewController {
             make.top.equalTo(self.view.snp.top).offset(20)
             
             make.height.equalTo(homeHeaderHight)
-            
         }
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headerViewClick))
 
         headerView.addGestureRecognizer(tapGestureRecognizer)
-        
-        
-        
         
         view.addSubview(tableView)
         
@@ -65,6 +63,8 @@ class SLHomeViewController: UIViewController {
         
         tableView.separatorInset = .zero
         
+        tableView.separatorStyle = .none
+        
         tableView.estimatedRowHeight = kCloseCellHeight
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -80,13 +80,9 @@ class SLHomeViewController: UIViewController {
         return view
     }()
     
-    
-    
-    lazy var tableView: UITableView = {
+    lazy var tableView: SLHomeTableView = {
         
-        let tableView = UITableView()
-        
-        tableView.backgroundColor = homeTable_bgcolor
+        let tableView = SLHomeTableView()
         
         return tableView
     }()
@@ -97,14 +93,8 @@ extension SLHomeViewController {
     func headerViewClick() -> () {
         
         SLHomeSettingView.show(superController: self)
-        
-        
-        
     }
-    
 }
-
-
 
 extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     

@@ -126,6 +126,8 @@ class SLHomeSettingView: UIView {
         
         btn.setTitle(" ✏️  设定自定义汇率...", for: UIControlState.normal)
         
+        btn.addTarget(self, action: #selector(btnSettingClick), for: .touchUpInside)
+        
         return btn
     }()
     
@@ -140,6 +142,8 @@ class SLHomeSettingView: UIView {
         btn.titleLabel?.textAlignment = .left
         
         btn.setTitle(" 🔄  切换", for: UIControlState.normal)
+        
+        btn.addTarget(self, action: #selector(btnShiftClick), for: .touchUpInside)
         
         return btn
     }()
@@ -156,6 +160,8 @@ class SLHomeSettingView: UIView {
 
         btn.setTitle(" ⌥  选择其他...", for: UIControlState.normal)
         
+        btn.addTarget(self, action: #selector(btnOtherClick), for: .touchUpInside)
+        
         return btn
     }()
     
@@ -171,8 +177,39 @@ class SLHomeSettingView: UIView {
         
         btn.titleLabel?.font = UIFont.systemFont(ofSize: settingFontSize)
         
+        btn.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
+
         return btn
     }()
+}
+
+extension SLHomeSettingView {
+    
+    @objc fileprivate func btnSettingClick() -> () {
+        
+        
+    }
+    
+    @objc fileprivate func btnShiftClick() -> () {
+        
+        
+    }
+    
+    @objc fileprivate func btnOtherClick() -> () {
+        
+        let vc = SLOptionViewController()
+        
+        self.superController?.present(vc, animated: true, completion: {
+            
+            self.removeFromSuperview()
+        })
+    }
+    
+    @objc fileprivate func btnCancelClick() -> () {
+        
+        self.removeFromSuperview()
+    }
+    
 }
 
 extension SLHomeSettingView {
@@ -185,7 +222,7 @@ extension SLHomeSettingView {
         
         settingAnimation?.beginTime = CACurrentMediaTime()
         
-        settingAnimation?.springBounciness = 10
+        settingAnimation?.springBounciness = 0
         
         settingView.pop_add(settingAnimation, forKey: nil)
         
@@ -196,7 +233,7 @@ extension SLHomeSettingView {
         
         cancelAnimation?.beginTime = CACurrentMediaTime()
         
-        cancelAnimation?.springBounciness = 10
+        cancelAnimation?.springBounciness = 0
         
         btnCancel.pop_add(cancelAnimation, forKey: nil)
         

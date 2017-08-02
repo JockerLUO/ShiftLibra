@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SLHomeHeaderView: UIView {
+class SLHomeHeaderView: SLHomeHeaderBackgroundView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,20 +21,6 @@ class SLHomeHeaderView: UIView {
     }
 
     func setupUI() -> () {
-        
-        addSubview(bgView)
-        
-        bgView.snp.makeConstraints { (make) in
-            
-            make.right.top.bottom.equalTo(self)
-            make.left.equalTo(self.snp.centerX)
-        }
-        
-        
-        self.backgroundColor = top_left_bgColor
-        
-        bgView.backgroundColor = top_right_bgColor
-        
         
         self.addSubview(labLeft)
         
@@ -65,9 +51,7 @@ class SLHomeHeaderView: UIView {
         
         
     }
-    
-    lazy var bgView : SLHomeHeaderRightView = SLHomeHeaderRightView()
-    
+        
     lazy var labLeft: UILabel = {
         
         let lab = UILabel()

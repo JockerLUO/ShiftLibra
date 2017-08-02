@@ -17,8 +17,8 @@ class SLHomeCell: FoldingCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        itemCount = 3
-        
+        itemCount = 1
+            
         setupUI()
     }
     
@@ -58,20 +58,6 @@ class SLHomeCell: FoldingCell {
         addConstraint(containerViewTop)
         
         
-        foregroundView.addSubview(bgView)
-        
-        bgView.snp.makeConstraints { (make) in
-            
-            make.right.top.bottom.equalTo(foregroundView)
-            make.left.equalTo(foregroundView.snp.centerX)
-        }
-        
-        
-        fgView.backgroundColor = bottom_left_bgColor
-        
-        bgView.backgroundColor = bottom_right_bgColor
-        
-        
         contentView.addSubview(detailView)
         
         detailView.snp.makeConstraints { (make) in
@@ -101,6 +87,15 @@ class SLHomeCell: FoldingCell {
             make.left.equalTo(foregroundView.snp.centerX).offset(labSpace)
         }
         
+        foregroundView.addSubview(line)
+        
+        line.snp.makeConstraints { (make) in
+            
+            make.left.right.bottom.equalTo(foregroundView)
+            
+            make.height.equalTo(1)
+        }
+        
     }
     
     override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
@@ -108,9 +103,9 @@ class SLHomeCell: FoldingCell {
         return 0.01
     }
     
-    lazy var fgView: RotatedView! = {
+    lazy var fgView: SLHomeTableBackgroundView! = {
         
-        let view = RotatedView()
+        let view = SLHomeTableBackgroundView()
         
         return view
     }()
@@ -124,14 +119,11 @@ class SLHomeCell: FoldingCell {
         return view
     }()
     
-    lazy var bgView : UIView = UIView()
-
-    
     lazy var labLeft: UILabel = {
         
         let lab = UILabel()
         
-        lab.text = "123"
+        lab.text = "456"
         
         lab.font = UIFont.systemFont(ofSize: bottomFontSize)
         
@@ -146,7 +138,7 @@ class SLHomeCell: FoldingCell {
         
         let lab = UILabel()
         
-        lab.text = "321"
+        lab.text = "654"
         
         lab.font = UIFont.systemFont(ofSize: bottomFontSize)
         
@@ -158,6 +150,8 @@ class SLHomeCell: FoldingCell {
     }()
     
     lazy var detailView: SLHomeDetailView = SLHomeDetailView()
+    
+    lazy var line : SLHomeTableLineView = SLHomeTableLineView()
 }
 
 

@@ -32,16 +32,9 @@ class SLHomeDetailCell: UITableViewCell {
         
         bgView.snp.makeConstraints { (make) in
             
-            make.right.top.bottom.equalTo(contentView)
-            make.left.equalTo(contentView.snp.centerX)
+            make.right.top.bottom.left.equalTo(contentView)
+            
         }
-        
-        
-        contentView.backgroundColor = mid_left_bgColor
-        
-        bgView.backgroundColor = mid_right_bgColor
-        
-        
         
         contentView.addSubview(labLeft)
         
@@ -60,11 +53,21 @@ class SLHomeDetailCell: UITableViewCell {
             
             make.left.equalTo(contentView.snp.centerX).offset(labSpace)
         }
+        
+        contentView.addSubview(line)
+        
+        line.snp.makeConstraints { (make) in
+            
+            make.left.right.bottom.equalTo(contentView)
+            
+            make.height.equalTo(1)
+        }
+
 
         
     }
     
-    lazy var bgView : UIView = UIView()
+    lazy var bgView : SLHomeDetailTableBackgroundView = SLHomeDetailTableBackgroundView()
 
     lazy var labLeft: UILabel = {
         
@@ -95,4 +98,6 @@ class SLHomeDetailCell: UITableViewCell {
         
         return lab
     }()
+    
+    lazy var line : SLHomeTableLineView = SLHomeTableLineView()
 }
