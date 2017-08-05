@@ -17,10 +17,34 @@ class SLOptionTableViewCell: UITableViewCell {
             labName.text = currency?.name
             
             labCode.text = currency?.code
-            
         }
-        
     }
+    
+    var optionType : SLOptionCurrencyType = .to {
+        
+        didSet {
+            
+            switch optionType {
+                
+            case .from:
+                
+                labName.textColor = bottom_left_textColor
+                
+                labCode.textColor = top_left_textColor
+                
+                lineView.backgroundColor = bottom_left_lineColor
+                
+            case .to:
+                
+                labName.textColor = bottom_right_textColor
+                
+                labCode.textColor = top_right_textColor
+                
+                lineView.backgroundColor = RGB(R: 91, G: 108, B: 109, alpha: 1)
+            }
+        }
+    }
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
@@ -63,6 +87,16 @@ class SLOptionTableViewCell: UITableViewCell {
         
         labName.textColor = UIColor.white
         
+        contentView.addSubview(lineView)
+        
+        lineView.snp.makeConstraints { (make) in
+            
+            make.left.right.bottom.equalTo(contentView)
+            
+            make.height.equalTo(0.5)
+        }
+        
+        lineView.backgroundColor = UIColor.white
     }
     
     lazy var labCode : UILabel = {
@@ -90,4 +124,6 @@ class SLOptionTableViewCell: UITableViewCell {
         
         return lab
     }()
+    
+    lazy var lineView : UIView = UIView()
 }

@@ -42,7 +42,7 @@ class SLSQLManager{
             
             if db.executeStatements(sql) == true{
                 
-                print("创建表成功")
+//                print("创建表成功")
                 
             } else {
                 
@@ -112,45 +112,5 @@ extension SLSQLManager{
     
     
     
-//    // 通过指定的sql语句查询数据库 返回 字典数据
-//    // 查2
-//    func executeRecodeSet(sql: String) -> [[String: Any]]{
-//        
-//        // 创建一个临时可变的空数组
-//        var tempList:[[String: Any]] = [[String: Any]]()
-//        
-//        // 执行sql
-//        SLSQLManager.shared.queue.inDatabase { (db) in
-//            
-//            do{
-//                let resultSet = try db.executeQuery(sql, values: nil)
-//                
-//                // 遍历每一行配合while循环使用(遍历每一行)
-//                while resultSet.next(){
-//                    
-//                    var dict:[String: Any] = [String: Any]()
-//                    
-//                    // 遍历每一列
-//                    for i in 0..<resultSet.columnCount {
-//                        
-//                        let name = resultSet.columnName(for: i)!
-//                        
-//                        let key = resultSet.object(forColumnIndex: i)
-//                        
-//                        dict[name] = key
-//                    }
-//                    
-//                    //                    // 添加到数组中
-//                    tempList.append(dict)
-//                }
-//                
-//            } catch {
-//                
-//                print(error)
-//            }
-//        }
-//        
-//        return tempList
-//    }
 }
 

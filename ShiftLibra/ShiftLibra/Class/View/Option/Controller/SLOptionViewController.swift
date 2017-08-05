@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 
 enum SLOptionCurrencyType : Int {
@@ -34,13 +35,13 @@ class SLOptionViewController: UIViewController {
                 
             case .to:
                 
-                tableViewBackgroundColor = top_right_bgColor
+                tableViewBackgroundColor = RGB(R: 55, G: 71, B: 73, alpha: 1)
 
                 themeTextColor = top_right_textColor
                 
                 subTextColor = bottom_right_textColor
                 
-                tableCellViewBackgroundColor = bottom_right_bgColor
+                tableCellViewBackgroundColor = RGB(R: 84, G: 101, B: 102, alpha: 1)
             }
         }
     }
@@ -64,72 +65,9 @@ class SLOptionViewController: UIViewController {
                 
         view.backgroundColor = tableViewBackgroundColor
         
-        view.addSubview(headerView)
-        
-        headerView.backgroundColor = tableViewBackgroundColor
-        
-        headerView.snp.makeConstraints { (make) in
-            
-            make.top.equalTo(self.view.snp.top).offset(20)
-            
-            make.left.right.equalTo(self.view)
-            
-            make.height.equalTo(homeHeaderHight)
-        }
-        
-        headerView.backgroundColor = tableViewBackgroundColor
-        
-        headerView.addSubview(labInfo)
-        
-        labInfo.textColor = themeTextColor
-        
-        labInfo.snp.makeConstraints { (make) in
-            
-            make.centerX.equalTo(headerView)
-            
-            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(0.5)
-        }
-        
-        headerView.addSubview(searchBar)
-        
-        searchBar.snp.makeConstraints { (make) in
-            
-            make.left.equalTo(headerView).offset(8)
-            
-            make.right.equalTo(headerView).offset(-48)
-            
-            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(1.5)
-        }
-        
-        searchBar.tintColor = themeTextColor
-        
-        searchBar.barTintColor = UIColor.clear
-        
-        searchBar.backgroundColor = UIColor.black
-        
-        
-        
-        headerView.addSubview(btnCancel)
-        
-        btnCancel.snp.makeConstraints { (make) in
-            
-            make.left.equalTo(searchBar.snp.right).offset(0)
-            
-            make.right.equalTo(headerView).offset(-8)
-            
-            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(1.5)
-        }
-        
-        btnCancel.setTitleColor(self.themeTextColor, for: .normal)
         
         view.addSubview(tableView)
         
-        tableView.snp.makeConstraints { (make) in
-            
-            make.left.right.bottom.equalTo(self.view)
-            
-            make.top.equalTo(headerView.snp.bottom)
-        }
         
         btnCancel.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
         
@@ -150,6 +88,47 @@ class SLOptionViewController: UIViewController {
         tableView.separatorStyle = .none
         
         tableView.sectionHeaderHeight = 25
+        
+        
+        
+        
+        
+        tableView.tableHeaderView = headerView
+        
+        headerView.backgroundColor = tableViewBackgroundColor
+        
+//        headerView.snp.makeConstraints { (make) in
+//            
+//            make.top.equalTo(tableView.snp.top).offset(0)
+//            
+//            make.left.right.equalTo(tableView)
+//            
+//            make.height.equalTo(homeHeaderHight)
+//        }
+        
+        headerView.backgroundColor = tableViewBackgroundColor
+        
+        headerView.addSubview(labInfo)
+        
+        labInfo.textColor = themeTextColor
+        
+       
+        
+        headerView.addSubview(searchBar)
+        
+        
+        searchBar.tintColor = themeTextColor
+        
+        searchBar.barTintColor = UIColor.clear
+        
+        searchBar.backgroundColor = UIColor.black
+
+        
+        headerView.addSubview(btnCancel)
+        
+        
+        
+        btnCancel.setTitleColor(self.themeTextColor, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,10 +137,63 @@ class SLOptionViewController: UIViewController {
         
         searchBar.becomeFirstResponder()
     }
+    
+    override func viewWillLayoutSubviews() {
+        
+        tableView.snp.makeConstraints { (make) in
+            
+            make.left.right.bottom.equalTo(self.view)
+            
+            make.top.equalTo(20)
+        }
+        
+        headerView.snp.makeConstraints { (make) in
+            
+            make.top.left.equalTo(tableView).offset(0)
+            
+            make.width.equalTo(SCREENW)
+            
+            make.height.equalTo(homeHeaderHight)
+        }
+        
+        labInfo.snp.makeConstraints { (make) in
+            
+            make.centerX.equalTo(headerView)
+            
+            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(0.5)
+        }
+        
+        searchBar.snp.makeConstraints { (make) in
+            
+            make.left.equalTo(headerView).offset(8)
+            
+            make.right.equalTo(headerView).offset(-48)
+            
+            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(1.5)
+        }
+        
+        btnCancel.snp.makeConstraints { (make) in
+            
+            make.left.equalTo(searchBar.snp.right).offset(0)
+            
+            make.right.equalTo(headerView).offset(-8)
+            
+            make.centerY.equalTo(headerView.snp.centerY).multipliedBy(1.5)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        
+    }
+    
+    
 
     lazy var headerView: UIView = {
         
-        let view = UIView()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width:SCREENW, height: homeHeaderHight))
         
         return view
     }()
@@ -199,9 +231,9 @@ class SLOptionViewController: UIViewController {
         return btn
     }()
     
-    lazy var tableView : UITableView = {
+    lazy var tableView : TPKeyboardAvoidingTableView = {
        
-        let view = UITableView(frame: CGRect(), style: .plain)
+        let view = TPKeyboardAvoidingTableView(frame: CGRect(), style: .plain)
         
         return view
     }()
@@ -248,6 +280,8 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         let currency = SLOptionViewModel.shared.currencyList![(keys?[indexPath.section])!]?[indexPath.item]
         
         cell.currency = currency
+        
+        cell.optionType = self.optionType
         
         return cell
     }
