@@ -10,6 +10,18 @@ import UIKit
 
 class SLOptionTableViewCell: UITableViewCell {
     
+    var currency : SLCurrency? {
+        
+        didSet {
+            
+            labName.text = currency?.name
+            
+            labCode.text = currency?.code
+            
+        }
+        
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         

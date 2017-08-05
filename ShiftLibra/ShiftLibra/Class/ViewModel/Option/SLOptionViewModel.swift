@@ -15,27 +15,22 @@ class SLOptionViewModel: NSObject {
     
     static let shared = SLOptionViewModel()
     
-    var currencyList : [SLCurrency]? {
-        
-        didSet {
-            
-            
-            
-            
-        }
-        
-    }
+    var currencyList : [String : [SLCurrency]]?
     
+    var currencyTyeList : [String]?
+
     override init() {
         super.init()
         
-        if let list : [SLCurrency] = self.getcurrencyList() {
+        if let list : [String: [SLCurrency]] = SLSQLManager.shared.orderSQL() {
             
             if list.count > 0 {
-            
-            self.currencyList = list
-            
-            return
+                
+                currencyList = list
+                
+                currencyTyeList = Array(currencyList!.keys).sorted()
+                                
+                return
             }
         }
         
@@ -56,43 +51,21 @@ class SLOptionViewModel: NSObject {
                 return
             }
             
-            let tmpList = [String : [SLCurrency]]()
+            SLSQLManager.shared.insertToSQL(dataList: dataList)
             
-            for currency in dataList {
-                
-                let code = currency.code
-                
-                let index = code?.index((code?.startIndex)!, offsetBy: 1)
-                
-//                let str = code?.substring(to: index))
-                let key = code?.substring(to: index!)
-            }
-             
+            self.currencyList = SLSQLManager.shared.orderSQL()
             
-            
-            self.saveCurrencyList(list: dataList)
-            
+            self.currencyTyeList = Array(self.currencyList!.keys).sorted()
+
         }, failure: { (error) in
             
             print("出错了",error)
         })
         
     }
-
+    
 }
 
 extension SLOptionViewModel {
-    
-    fileprivate func saveCurrencyList(list : [SLCurrency]) -> () {
-        
-        self.currencyList = list
-        
-        NSKeyedArchiver.archiveRootObject(list, toFile: listPath)
-    }
-    
-    func getcurrencyList() -> [SLCurrency]? {
-        let user = NSKeyedUnarchiver.unarchiveObject(withFile: listPath) as? [SLCurrency]
-        return user
-    }
     
 }

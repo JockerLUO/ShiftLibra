@@ -20,9 +20,8 @@ PODS:
   - FoldingCell (2.1.3)
   - pop (1.0.10)
   - SnapKit (3.2.0)
-  - SVProgressHUD (2.1.2)
+  - TPKeyboardAvoiding (1.3.1)
   - YYModel (1.0.4)
-  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
@@ -30,9 +29,8 @@ DEPENDENCIES:
   - FoldingCell
   - pop
   - SnapKit
-  - SVProgressHUD
+  - TPKeyboardAvoiding
   - YYModel
-  - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -40,10 +38,9 @@ SPEC CHECKSUMS:
   FoldingCell: f3073f8b24cf20866a35198f31e3b67aea64e96e
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
-  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 9a5f4a7a58991349fb77b4a990d058d0246f11e4
+PODFILE CHECKSUM: e8e85a9806deb3a8ffeca7e8666d09614fb8e139
 
 COCOAPODS: 1.2.1

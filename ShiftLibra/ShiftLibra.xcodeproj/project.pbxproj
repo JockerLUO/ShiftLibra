@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5ED14AB1E001F0BF6A7E1666 /* Pods_ShiftLibra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */; };
+		B1066D181F3352BB00B66653 /* currency.db in Resources */ = {isa = PBXBuildFile; fileRef = B1066D171F3352BB00B66653 /* currency.db */; };
 		B144F8E31F2DFC8A00F5BBD6 /* SLHomeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */; };
 		B144F8E51F2DFD0200F5BBD6 /* SLOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */; };
 		B144F8EA1F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */; };
@@ -42,12 +43,14 @@
 /* Begin PBXFileReference section */
 		0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShiftLibra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.debug.xcconfig"; sourceTree = "<group>"; };
+		B1066D171F3352BB00B66653 /* currency.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = currency.db; sourceTree = "<group>"; };
 		B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeSettingView.swift; sourceTree = "<group>"; };
 		B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewController.swift; sourceTree = "<group>"; };
 		B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableBackgroundView.swift; sourceTree = "<group>"; };
 		B144F8EB1F2E03A700F5BBD6 /* SLHomeDetailTableBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailTableBackgroundView.swift; sourceTree = "<group>"; };
 		B144F8ED1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderBackgroundView.swift; sourceTree = "<group>"; };
 		B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableView.swift; sourceTree = "<group>"; };
+		B15097441F347F5800A8FAC5 /* ShiftLibra-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShiftLibra-Bridging-Header.h"; sourceTree = "<group>"; };
 		B169435A1F2444F9008F0029 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIBarButtonItem.swift"; sourceTree = "<group>"; };
 		B169435D1F2444F9008F0029 /* Extension + UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
@@ -139,8 +142,8 @@
 		B16943571F2444F9008F0029 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				B16943581F2444F9008F0029 /* Model */,
 				B16943591F2444F9008F0029 /* Tools */,
+				B16943581F2444F9008F0029 /* Model */,
 				B16943621F2444F9008F0029 /* View */,
 				B16943681F2444F9008F0029 /* ViewModel */,
 			);
@@ -162,6 +165,7 @@
 				B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */,
 				B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */,
 				B169435B1F2444F9008F0029 /* Extension */,
+				B15097441F347F5800A8FAC5 /* ShiftLibra-Bridging-Header.h */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -239,6 +243,7 @@
 				B16943731F2445E9008F0029 /* Assets.xcassets */,
 				B195C8E61F2C88CD00864709 /* Launch Screen.storyboard */,
 				B16943741F2445E9008F0029 /* Base.lproj */,
+				B1066D171F3352BB00B66653 /* currency.db */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 					B1C76C721F1E40FA007FF107 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = U8276FQ2Z4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -360,6 +366,7 @@
 			files = (
 				B195C8E71F2C88CD00864709 /* Launch Screen.storyboard in Resources */,
 				B16943781F2445E9008F0029 /* Assets.xcassets in Resources */,
+				B1066D181F3352BB00B66653 /* currency.db in Resources */,
 				B169437B1F2445F8008F0029 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,11 +556,14 @@
 			baseConfigurationReference = 6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U8276FQ2Z4;
 				INFOPLIST_FILE = ShiftLibra/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JockerLuo.ShiftLibra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShiftLibra/Class/Tools/ShiftLibra-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -563,11 +573,13 @@
 			baseConfigurationReference = FAEB100510176BDC4EB4A1B2 /* Pods-ShiftLibra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U8276FQ2Z4;
 				INFOPLIST_FILE = ShiftLibra/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JockerLuo.ShiftLibra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShiftLibra/Class/Tools/ShiftLibra-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

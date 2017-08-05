@@ -8,14 +8,15 @@
 
 import UIKit
 
-enum optionCurrencyType : Int {
+
+enum SLOptionCurrencyType : Int {
     case from = 1001
     case to
 }
 
 class SLOptionViewController: UIViewController {
     
-    var optionType : optionCurrencyType = .to {
+    var optionType : SLOptionCurrencyType = .to {
         
         didSet {
             
@@ -60,9 +61,7 @@ class SLOptionViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        optionType = .from
-        
+                
         view.backgroundColor = tableViewBackgroundColor
         
         view.addSubview(headerView)
@@ -221,11 +220,17 @@ extension SLOptionViewController {
 extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        
+        return (SLOptionViewModel.shared.currencyList?.count)!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        let keys = SLOptionViewModel.shared.currencyTyeList
+
+        let count = SLOptionViewModel.shared.currencyList![(keys?[section])!]?.count
+        
+        return count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -237,7 +242,13 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         cell.labCode.textColor = subTextColor
         
         cell.selectionStyle = .none
-                
+        
+        let keys = SLOptionViewModel.shared.currencyTyeList
+
+        let currency = SLOptionViewModel.shared.currencyList![(keys?[indexPath.section])!]?[indexPath.item]
+        
+        cell.currency = currency
+        
         return cell
     }
     
@@ -255,6 +266,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["1","1","1","1","1","1","1","1","1","1"]
+        
+        return SLOptionViewModel.shared.currencyTyeList
     }
 }

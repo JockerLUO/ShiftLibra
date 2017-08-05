@@ -15,7 +15,9 @@ class SLCurrency: NSObject,NSCoding {
     
     var name : String?
     
-    var exchange : CGFloat = 0
+    var exchange : Double = 0.0
+    
+    var updatetime : String?
     
     override init() {
         super.init()
@@ -29,11 +31,4 @@ class SLCurrency: NSObject,NSCoding {
     func encode(with aCoder: NSCoder) {
         self.yy_modelEncode(with: aCoder)
     }
-
-    
-    
-    
-    
-    
-
 }

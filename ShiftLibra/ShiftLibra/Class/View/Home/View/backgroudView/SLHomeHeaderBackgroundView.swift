@@ -9,7 +9,7 @@
 import UIKit
 
 class SLHomeHeaderBackgroundView: UIView {
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         

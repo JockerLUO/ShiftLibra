@@ -13,11 +13,15 @@ class SLHomeSettingView: UIView {
     
     var superController : UIViewController?
     
-    class func show(superController : UIViewController) -> () {
+    var optionType : SLOptionCurrencyType?
+    
+    class func show(superController : UIViewController, optionType : SLOptionCurrencyType) -> () {
         
         let view = SLHomeSettingView(frame: superController.view.bounds)
         
         view.superController = superController
+        
+        view.optionType = optionType
         
         superController.view.addSubview(view)
     }
@@ -198,6 +202,8 @@ extension SLHomeSettingView {
     @objc fileprivate func btnOtherClick() -> () {
         
         let vc = SLOptionViewController()
+        
+        vc.optionType = self.optionType!
         
         self.superController?.present(vc, animated: true, completion: {
             

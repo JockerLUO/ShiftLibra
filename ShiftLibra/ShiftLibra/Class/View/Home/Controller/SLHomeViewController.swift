@@ -43,7 +43,7 @@ class SLHomeViewController: UIViewController {
             make.height.equalTo(homeHeaderHight)
         }
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headerViewClick))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headerViewClick(tap:)))
 
         headerView.addGestureRecognizer(tapGestureRecognizer)
         
@@ -90,9 +90,22 @@ class SLHomeViewController: UIViewController {
 
 extension SLHomeViewController {
     
-    func headerViewClick() -> () {
+    func headerViewClick(tap : UITapGestureRecognizer) -> () {
         
-        SLHomeSettingView.show(superController: self)
+        var optionType : SLOptionCurrencyType = .to
+        
+        let point = tap.location(in: tap.view)
+        
+        let view = tap.view
+        
+        let framViewRect = CGRect(x: 0, y: 0, width: (view?.bounds.width)! * 0.5, height: (view?.bounds.height)!)
+        
+        if framViewRect.contains(point) {
+            
+            optionType = .from
+        }
+    
+        SLHomeSettingView.show(superController: self, optionType: optionType)
     }
 }
 

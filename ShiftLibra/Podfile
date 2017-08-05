@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-  platform :ios, '9.0'
+  platform :ios, '10.0'
 
 target 'ShiftLibra' do
 
@@ -13,18 +13,14 @@ target 'ShiftLibra' do
 
     pod 'AFNetworking'
 
-    # 加载指示器
-    pod 'SVProgressHUD'
-
-    #字典转模型
     pod 'YYModel'
 
     pod 'pop'
 
-    pod 'YYText'
-
     pod 'FMDB'
 
     pod 'FoldingCell'
+    
+    pod 'TPKeyboardAvoiding'
 
 end
