@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5ED14AB1E001F0BF6A7E1666 /* Pods_ShiftLibra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */; };
 		B1066D181F3352BB00B66653 /* currency.db in Resources */ = {isa = PBXBuildFile; fileRef = B1066D171F3352BB00B66653 /* currency.db */; };
+		B12E94761F3724D700072044 /* currency_tmp.db in Resources */ = {isa = PBXBuildFile; fileRef = B12E94751F3724D700072044 /* currency_tmp.db */; };
 		B144F8E31F2DFC8A00F5BBD6 /* SLHomeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */; };
 		B144F8E51F2DFD0200F5BBD6 /* SLOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */; };
 		B144F8EA1F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */; };
@@ -44,6 +45,7 @@
 		0D4A98F78250C6EFCC08BB35 /* Pods_ShiftLibra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShiftLibra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6473B98967458DEA27295703 /* Pods-ShiftLibra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShiftLibra.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShiftLibra/Pods-ShiftLibra.debug.xcconfig"; sourceTree = "<group>"; };
 		B1066D171F3352BB00B66653 /* currency.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = currency.db; sourceTree = "<group>"; };
+		B12E94751F3724D700072044 /* currency_tmp.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = currency_tmp.db; sourceTree = "<group>"; };
 		B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeSettingView.swift; sourceTree = "<group>"; };
 		B144F8E41F2DFD0200F5BBD6 /* SLOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewController.swift; sourceTree = "<group>"; };
 		B144F8E91F2E039500F5BBD6 /* SLHomeTableBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableBackgroundView.swift; sourceTree = "<group>"; };
@@ -242,8 +244,9 @@
 				B169437A1F2445F8008F0029 /* Info.plist */,
 				B16943731F2445E9008F0029 /* Assets.xcassets */,
 				B195C8E61F2C88CD00864709 /* Launch Screen.storyboard */,
-				B16943741F2445E9008F0029 /* Base.lproj */,
 				B1066D171F3352BB00B66653 /* currency.db */,
+				B12E94751F3724D700072044 /* currency_tmp.db */,
+				B16943741F2445E9008F0029 /* Base.lproj */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12E94761F3724D700072044 /* currency_tmp.db in Resources */,
 				B195C8E71F2C88CD00864709 /* Launch Screen.storyboard in Resources */,
 				B16943781F2445E9008F0029 /* Assets.xcassets in Resources */,
 				B1066D181F3352BB00B66653 /* currency.db in Resources */,

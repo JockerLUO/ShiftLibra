@@ -42,7 +42,7 @@ class SLSQLManager{
             
             if db.executeStatements(sql) == true{
                 
-//                print("创建表成功")
+                //                print("创建表成功")
                 
             } else {
                 
@@ -91,6 +91,7 @@ extension SLSQLManager{
                 obj.code = rs.string(forColumn: "code")
                 obj.updatetime = rs.string(forColumn: "updatetime")
                 obj.exchange = rs.double(forColumn: "exchange")
+                obj.query = rs.string(forColumn: "query")
                 
                 let mainString = obj.code ?? "CNY"
                 
@@ -106,11 +107,42 @@ extension SLSQLManager{
                 list[key]?.append(obj)
             }
         }
-        
+
         return list
     }
     
+    func selectSQL(sql : String) -> [SLCurrency] {
+        
+        var list : [SLCurrency] = [SLCurrency]()
+        
+        SLSQLManager.shared.queue.inDatabase { (db) in
+            
+            guard let rs = db.executeQuery(sql, withParameterDictionary: nil) else {
+                return
+            }
+            
+            while rs.next() {
+                
+                let obj : SLCurrency = SLCurrency()
+                
+                obj.name = rs.string(forColumn: "name")
+                obj.code = rs.string(forColumn: "code")
+                obj.updatetime = rs.string(forColumn: "updatetime")
+                obj.exchange = rs.double(forColumn: "exchange")
+                obj.query = rs.string(forColumn: "query")
+                
+                list.append(obj)
+            }
+        }
+        return list
+    }
     
+    func updateSQL(sql : String) -> () {
+        
+        SLSQLManager.shared.queue.inTransaction { (db, rollback) in
+            
+            db.executeStatements(sql)
+        }
+    }
     
 }
-

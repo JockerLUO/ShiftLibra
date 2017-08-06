@@ -11,6 +11,7 @@ import UIKit
 class SLHomeHeaderView: SLHomeHeaderBackgroundView {
 
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         setupUI()
@@ -46,11 +47,24 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
             
             make.centerY.equalTo(self)
             
-            make.left.equalTo(self.snp.left).offset(16)
+            make.left.equalTo(self.snp.left).offset(20)
         }
         
+        btnBack.isHidden = true
         
+        labLeft.text = SLHomeViewModel.shared.fromCurrency?.code
+        
+        labRight.text = SLHomeViewModel.shared.toCurrency?.code
     }
+    
+    func update() -> () {
+        
+        labLeft.text = SLHomeViewModel.shared.fromCurrency?.code
+        
+        labRight.text = SLHomeViewModel.shared.toCurrency?.code
+    }
+    
+    
         
     lazy var labLeft: UILabel = {
         
@@ -86,11 +100,7 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         
         let btn = UIButton()
         
-        btn.setTitle("<", for: UIControlState.normal)
-        
-        btn.setTitleColor(mid_right_textColor, for: UIControlState.normal)
-        
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: bottomFontSize)
+        btn.setImage(UIImage(named : "button_close"), for: .normal)
         
         btn.sizeToFit()
         

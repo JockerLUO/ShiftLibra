@@ -19,6 +19,8 @@ class SLCurrency: NSObject,NSCoding {
     
     var updatetime : String?
     
+    var query : String?
+    
     override init() {
         super.init()
     }

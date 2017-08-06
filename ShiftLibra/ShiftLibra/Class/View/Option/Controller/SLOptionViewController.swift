@@ -33,6 +33,8 @@ class SLOptionViewController: UIViewController {
                 
                 tableCellViewBackgroundColor = bottom_left_bgColor
                 
+                textFiledColor = RGB(R: 4, G: 3, B: 7, alpha: 1)
+                
             case .to:
                 
                 tableViewBackgroundColor = RGB(R: 55, G: 71, B: 73, alpha: 1)
@@ -42,6 +44,8 @@ class SLOptionViewController: UIViewController {
                 subTextColor = bottom_right_textColor
                 
                 tableCellViewBackgroundColor = RGB(R: 84, G: 101, B: 102, alpha: 1)
+                
+                textFiledColor = RGB(R: 24, G: 41, B: 43, alpha: 1)
             }
         }
     }
@@ -58,18 +62,16 @@ class SLOptionViewController: UIViewController {
     
     let currencyTypeID = "currencyTypeID"
 
-
+    var textFiledColor : UIColor?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
                 
         view.backgroundColor = tableViewBackgroundColor
         
-        
         view.addSubview(tableView)
         
-        
-        btnCancel.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
         
         tableView.delegate = self
         
@@ -89,22 +91,11 @@ class SLOptionViewController: UIViewController {
         
         tableView.sectionHeaderHeight = 25
         
-        
-        
-        
-        
-        tableView.tableHeaderView = headerView
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+
+        view.addSubview(headerView)
         
         headerView.backgroundColor = tableViewBackgroundColor
-        
-//        headerView.snp.makeConstraints { (make) in
-//            
-//            make.top.equalTo(tableView.snp.top).offset(0)
-//            
-//            make.left.right.equalTo(tableView)
-//            
-//            make.height.equalTo(homeHeaderHight)
-//        }
         
         headerView.backgroundColor = tableViewBackgroundColor
         
@@ -112,23 +103,30 @@ class SLOptionViewController: UIViewController {
         
         labInfo.textColor = themeTextColor
         
-       
-        
         headerView.addSubview(searchBar)
-        
-        
+    
         searchBar.tintColor = themeTextColor
         
-        searchBar.barTintColor = UIColor.clear
-        
-        searchBar.backgroundColor = UIColor.black
+        for subView in searchBar.subviews {
+            
+            if subView.isKind(of: UIView.self) {
 
-        
+                subView.subviews[0].removeFromSuperview()
+                
+                if subView.subviews[0].isKind(of: UITextField.self) {
+                    
+                    let textFiled : UITextField = subView.subviews[0] as! UITextField
+                    
+                    textFiled.backgroundColor = textFiledColor
+                }
+            }
+        }
+
         headerView.addSubview(btnCancel)
         
-        
-        
         btnCancel.setTitleColor(self.themeTextColor, for: .normal)
+        
+        btnCancel.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,20 +138,20 @@ class SLOptionViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
+        headerView.snp.makeConstraints { (make) in
+            
+            make.top.equalTo(self.view).offset(20)
+            
+            make.left.right.equalTo(self.view)
+            
+            make.height.equalTo(homeHeaderHight)
+        }
+        
         tableView.snp.makeConstraints { (make) in
             
             make.left.right.bottom.equalTo(self.view)
             
-            make.top.equalTo(20)
-        }
-        
-        headerView.snp.makeConstraints { (make) in
-            
-            make.top.left.equalTo(tableView).offset(0)
-            
-            make.width.equalTo(SCREENW)
-            
-            make.height.equalTo(homeHeaderHight)
+            make.top.equalTo(headerView.snp.bottom)
         }
         
         labInfo.snp.makeConstraints { (make) in
@@ -185,15 +183,11 @@ class SLOptionViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-        
-        
     }
     
-    
-
     lazy var headerView: UIView = {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width:SCREENW, height: homeHeaderHight))
+        let view = UIView()
         
         return view
     }()
@@ -213,9 +207,13 @@ class SLOptionViewController: UIViewController {
     
     lazy var searchBar : UISearchBar = {
         
-        let view = UISearchBar()
+        let searchBar = UISearchBar()
         
-        return view
+        searchBar.keyboardAppearance = .dark
+        
+        searchBar.barTintColor = UIColor.clear
+        
+        return searchBar
     }()
     
     lazy var btnCancel : UIButton = {
@@ -243,6 +241,8 @@ extension SLOptionViewController {
     
     func btnCancelClick() -> () {
         
+        searchBar.endEditing(true)
+        
         self.dismiss(animated: true) { 
             
         }
@@ -253,14 +253,20 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return (SLOptionViewModel.shared.currencyList?.count)!
+        return (SLOptionViewModel.shared.currencyList?.count)! + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        
+        if section == 0 {
+            
+            return SLOptionViewModel.shared.queryList?.count ?? 0
+        }
+        
         let keys = SLOptionViewModel.shared.currencyTyeList
 
-        let count = SLOptionViewModel.shared.currencyList![(keys?[section])!]?.count
+        let count = SLOptionViewModel.shared.currencyList![(keys?[section - 1])!]?.count
         
         return count ?? 1
     }
@@ -275,9 +281,18 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        let keys = SLOptionViewModel.shared.currencyTyeList
+        if indexPath.section == 0 {
+        
+            cell.currency = SLOptionViewModel.shared.queryList?[indexPath.item]
+            
+            cell.optionType = self.optionType
 
-        let currency = SLOptionViewModel.shared.currencyList![(keys?[indexPath.section])!]?[indexPath.item]
+            return cell
+        }
+        
+        let keys = SLOptionViewModel.shared.currencyTyeList
+        
+        let currency = SLOptionViewModel.shared.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item]
         
         cell.currency = currency
         
@@ -294,13 +309,32 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         headerView.contentView.backgroundColor = tableViewBackgroundColor
         
-        headerView.label.text = "☆\(section)"
+        if section == 0 {
+            
+            headerView.label.text = "☆ 热门"
+            
+            return headerView
+        }
+        
+        headerView.label.text = SLOptionViewModel.shared.currencyTyeList?[section - 1] ?? "☆"
         
         return headerView
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
-        return SLOptionViewModel.shared.currencyTyeList
+        var arr : [String] = NSMutableArray.init(array: SLOptionViewModel.shared.currencyTyeList!, copyItems: true) as! [String]
+    
+        arr.insert("☆", at: 0)
+        
+        return arr
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     
+        
+        
+        
+        
     }
 }

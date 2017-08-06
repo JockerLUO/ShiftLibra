@@ -71,6 +71,14 @@ class SLHomeViewController: UIViewController {
         
         tableView.register(SLHomeCell.self, forCellReuseIdentifier: cellID)
         
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     lazy var headerView: SLHomeHeaderView = {
@@ -123,9 +131,13 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! SLHomeCell
         
         cell.selectionStyle = .none
+        
+        cell.labLeft.text = String(indexPath.row + 1)
+        
+        cell.labRight.text = String(Double(indexPath.row + 1) * SLHomeViewModel.shared.exchange)
         
         return cell
     }
@@ -137,7 +149,12 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.isScrollEnabled = !tableView.isScrollEnabled
+        
+        headerView.btnBack.isHidden = !headerView.btnBack.isHidden
+        
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
+            
             return
         }
         
