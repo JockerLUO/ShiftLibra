@@ -66,11 +66,15 @@ class SLOptionViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        super.viewDidLoad()
-                
-        view.backgroundColor = tableViewBackgroundColor
         
-        view.addSubview(tableView)
+        super.viewDidLoad()
+        
+        
+        view.addSubview(scrollerView)
+        
+        scrollerView.backgroundColor = tableViewBackgroundColor
+        
+        scrollerView.addSubview(tableView)
         
         
         tableView.delegate = self
@@ -91,9 +95,8 @@ class SLOptionViewController: UIViewController {
         
         tableView.sectionHeaderHeight = 25
         
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-
-        view.addSubview(headerView)
+        
+        scrollerView.addSubview(headerView)
         
         headerView.backgroundColor = tableViewBackgroundColor
         
@@ -118,6 +121,8 @@ class SLOptionViewController: UIViewController {
                     let textFiled : UITextField = subView.subviews[0] as! UITextField
                     
                     textFiled.backgroundColor = textFiledColor
+                    
+                    textFiled.textColor = themeTextColor
                 }
             }
         }
@@ -138,11 +143,19 @@ class SLOptionViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
+        scrollerView.snp.makeConstraints { (make) in
+            
+            make.edges.equalTo(self.view)
+            
+        }
+        
         headerView.snp.makeConstraints { (make) in
             
-            make.top.equalTo(self.view).offset(20)
+            make.top.equalTo(scrollerView).offset(20)
             
-            make.left.right.equalTo(self.view)
+            make.left.equalTo(scrollerView)
+            
+            make.width.equalTo(SCREENW)
             
             make.height.equalTo(homeHeaderHight)
         }
@@ -152,6 +165,10 @@ class SLOptionViewController: UIViewController {
             make.left.right.bottom.equalTo(self.view)
             
             make.top.equalTo(headerView.snp.bottom)
+            
+            make.height.equalTo(SCREENH - 20 - homeHeaderHight)
+            
+            make.width.equalTo(SCREENW)
         }
         
         labInfo.snp.makeConstraints { (make) in
@@ -184,6 +201,13 @@ class SLOptionViewController: UIViewController {
         
         super.viewDidLayoutSubviews()
     }
+    
+    lazy var scrollerView : TPKeyboardAvoidingScrollView = {
+        
+        let scrollerView = TPKeyboardAvoidingScrollView()
+        
+        return scrollerView
+    }()
     
     lazy var headerView: UIView = {
         
@@ -332,8 +356,31 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      
+        var model : SLCurrency
         
+        if indexPath.section == 0 {
+            
+            model = (SLOptionViewModel.shared.queryList?[indexPath.row])!
+            
+        } else {
+            
+            let keys = SLOptionViewModel.shared.currencyTyeList
+            
+            model = (SLOptionViewModel.shared.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item])!
+        }
         
+        if self.optionType == .to {
+            
+            SLHomeViewModel.shared.toCurrency = model
+            
+        } else {
+            
+            SLHomeViewModel.shared.fromCurrency = model
+        }
+        
+        self.dismiss(animated: true, completion: {
+            
+        })
         
         
     }

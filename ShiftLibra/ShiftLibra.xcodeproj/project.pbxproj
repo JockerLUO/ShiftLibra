@@ -24,7 +24,6 @@
 		B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943671F2444F9008F0029 /* SLHomeCell.swift */; };
 		B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943721F2445E9008F0029 /* AppDelegate.swift */; };
 		B16943781F2445E9008F0029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16943731F2445E9008F0029 /* Assets.xcassets */; };
-		B169437B1F2445F8008F0029 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B169437A1F2445F8008F0029 /* Info.plist */; };
 		B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943801F24471E008F0029 /* SLHomeViewController.swift */; };
 		B18D27211F2F507400C6A8EF /* SLOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D27201F2F507400C6A8EF /* SLOptionTableViewCell.swift */; };
 		B18D27231F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D27221F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift */; };
@@ -371,7 +370,6 @@
 				B195C8E71F2C88CD00864709 /* Launch Screen.storyboard in Resources */,
 				B16943781F2445E9008F0029 /* Assets.xcassets in Resources */,
 				B1066D181F3352BB00B66653 /* currency.db in Resources */,
-				B169437B1F2445F8008F0029 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

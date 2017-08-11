@@ -85,9 +85,15 @@ class SLHomeSettingView: UIView {
         
         let now = NSString.init(data: Data(), encoding: 5)
         
-        let name = "已更新:今天"
+        let fromCurrency = SLHomeViewModel.shared.fromCurrency
         
-        let str = "1 USD -> 6.7361 CNY\n\(name)"
+        let toCurrency = SLHomeViewModel.shared.toCurrency
+        
+        let exchange = SLHomeViewModel.shared.exchange
+        
+        let name = "已更新:\(toCurrency?.updatetime ?? "刚刚")"
+        
+        let str = "1 \(toCurrency?.code ?? "USD") → \(exchange) \(fromCurrency?.code ?? "CNY")\n\(name)"
         
         let range : NSRange = (str as NSString).range(of: name)
         

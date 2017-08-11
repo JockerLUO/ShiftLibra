@@ -41,7 +41,7 @@ let homeTableViewCellHight = (SCREENH - 20 - 20) / 11
 
 let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 10
 
-let labSpace = 50
+let labSpace = 30
 
 func RGB(R : CGFloat, G : CGFloat, B : CGFloat, alpha : CGFloat) -> (UIColor) {
     return UIColor(colorLiteralRed: Float(R / 255), green: Float(G / 255), blue: Float(B / 255), alpha: Float(alpha))

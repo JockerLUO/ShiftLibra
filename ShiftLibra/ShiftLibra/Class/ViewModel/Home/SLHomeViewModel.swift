@@ -12,24 +12,37 @@ class SLHomeViewModel: NSObject {
     
     static let shared : SLHomeViewModel = SLHomeViewModel()
     
+    var toMoney : Double = 1.0
+    
+    var fromMoney : Double = 1.0
+    
+    var toMoneyDigits : String?
+    
+    var fromMoneyDigits : String?
+    
     var fromCurrency : SLCurrency? {
         
         didSet {
             
-            exchange = (toCurrency?.exchange)! / (fromCurrency?.exchange)!
+            exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
         }
-        
     }
     
     var toCurrency : SLCurrency? {
         
         didSet {
             
-            exchange = (toCurrency?.exchange)! / (fromCurrency?.exchange)!
+            exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
         }
     }
     
-    var multiple : Double = 1.0
+    var multiple : Double = 1.0 {
+        
+        didSet {
+            
+            changeMonyeAndDigits()
+        }
+    }
     
     var exchange : Double = 1.0
     
@@ -41,7 +54,77 @@ class SLHomeViewModel: NSObject {
         
         toCurrency = SLOptionViewModel.shared.queryList?[1]
         
-        exchange = (toCurrency?.exchange)! / (fromCurrency?.exchange)!
+        exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
         
+        changeMonyeAndDigits()
+    }
+    
+    func changeMonyeAndDigits() -> () {
+        
+        fromMoneyDigits = ""
+        
+        toMoneyDigits = ""
+        
+        if multiple > 1e11 {
+            
+            multiple = 1e10
+        }
+        
+        if multiple < 1 {
+            
+            multiple = 1
+        }
+        
+        fromMoney = multiple
+        
+        if fromMoney > 1e10 {
+            
+            fromMoney = fromMoney / 1e9
+            
+            fromMoneyDigits = "B"
+            
+        } else if fromMoney > 1e7 {
+            
+            fromMoney = fromMoney / 1e6
+            
+            fromMoneyDigits = "M"
+            
+        } else if fromMoney > 1e4 {
+            
+            fromMoney = fromMoney / 1e3
+            
+            fromMoneyDigits = "K"
+        }
+        
+        toMoney = multiple * exchange
+        
+        
+        if toMoney > 1e10 {
+            
+            toMoney = toMoney / 1e9
+            
+            toMoneyDigits = "B"
+            
+        } else if toMoney > 1e7 {
+            
+            toMoney = toMoney / 1e6
+            
+            toMoneyDigits = "M"
+            
+        } else if toMoney > 1e4 {
+            
+            toMoney = toMoney / 1e3
+            
+            toMoneyDigits = "K"
+        }
+        
+        if toMoney < 10 {
+            
+            toMoney = (String(format: "%.2f", toMoney) as NSString).doubleValue
+            
+        } else {
+            
+            toMoney = Double(Int(toMoney))
+        }
     }
 }

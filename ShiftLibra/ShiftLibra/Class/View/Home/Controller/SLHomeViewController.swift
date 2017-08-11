@@ -28,6 +28,8 @@ class SLHomeViewController: UIViewController {
     
     let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
     
+    var selectIndex : Int = -1
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -71,13 +73,28 @@ class SLHomeViewController: UIViewController {
         
         tableView.register(SLHomeCell.self, forCellReuseIdentifier: cellID)
         
-       
+        let swipLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(swipe:)))
+        
+        swipLeft.direction = .left
+        
+        let swipRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(swipe:)))
+        
+        swipRight.direction = .right
+        
+        tableView.addGestureRecognizer(swipRight)
+        
+        tableView.addGestureRecognizer(swipLeft)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
+        self.headerView.labLeft.text = SLHomeViewModel.shared.fromCurrency?.code ?? "CNY"
+        
+        self.headerView.labRight.text = SLHomeViewModel.shared.toCurrency?.code ?? "USD"
+
         tableView.reloadData()
     }
     
@@ -115,6 +132,24 @@ extension SLHomeViewController {
     
         SLHomeSettingView.show(superController: self, optionType: optionType)
     }
+    
+    func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
+        
+        switch swipe.direction {
+        case UISwipeGestureRecognizerDirection.left:
+            
+            SLHomeViewModel.shared.multiple *= 10
+            
+        case UISwipeGestureRecognizerDirection.right:
+            
+            SLHomeViewModel.shared.multiple /= 10
+            
+        default :
+            break
+        }
+        
+        tableView.reloadData()
+    }
 }
 
 extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
@@ -135,9 +170,9 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        cell.labLeft.text = String(indexPath.row + 1)
+        cell.labLeft.text = "\(String(Double(indexPath.row + 1) * SLHomeViewModel.shared.toMoney))\(SLHomeViewModel.shared.fromMoneyDigits ?? "")"
         
-        cell.labRight.text = String(Double(indexPath.row + 1) * SLHomeViewModel.shared.exchange)
+        cell.labRight.text = "\(String(Double(indexPath.row + 1) * SLHomeViewModel.shared.fromMoney))\(SLHomeViewModel.shared.fromMoneyDigits ?? "")"
         
         return cell
     }
@@ -152,6 +187,10 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         tableView.isScrollEnabled = !tableView.isScrollEnabled
         
         headerView.btnBack.isHidden = !headerView.btnBack.isHidden
+        
+        
+        
+//        tableView.delegate?.tableView!(tableView, didSelectRowAt: IndexPath(row: indexPath.row + 1, section: indexPath.section))
         
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
             
