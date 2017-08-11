@@ -12,7 +12,25 @@ import SnapKit
 
 class SLHomeCell: FoldingCell {
     
+    var closure : (()->())?
+    
     static let detailID = "detailID"
+    
+    var fromMoneyDetailList : [String]? {
+        
+        didSet {
+            
+            detailView.fromMoneyDetailList = fromMoneyDetailList
+        }
+    }
+
+    var toMoneyDetailList : [String]? {
+        
+        didSet {
+            
+            detailView.toMoneyDetailList = toMoneyDetailList
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,7 +75,6 @@ class SLHomeCell: FoldingCell {
         
         addConstraint(containerViewTop)
         
-        
         contentView.addSubview(detailView)
         
         detailView.snp.makeConstraints { (make) in
@@ -96,6 +113,10 @@ class SLHomeCell: FoldingCell {
             make.height.equalTo(1)
         }
         
+        detailView.closure = { [weak self] in
+            
+            self?.closure?()
+        }
     }
     
     override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {

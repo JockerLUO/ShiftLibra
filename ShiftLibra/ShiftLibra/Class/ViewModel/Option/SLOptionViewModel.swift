@@ -11,9 +11,7 @@ import UIKit
 private let listPath = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! as NSString).appendingPathComponent("currency.plist")
 
 class SLOptionViewModel: NSObject {
-    
-    static let shared = SLOptionViewModel()
-    
+        
     var queryList : [SLCurrency]?
     
     var currencyTyeList : [String]?
@@ -37,6 +35,15 @@ class SLOptionViewModel: NSObject {
                 return
             }
         }
+        
+        let list : [String: [SLCurrency]] = SLTmpSQLManager.shared.orderSQL()!
+        
+        queryList = SLTmpSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+        
+        currencyList = list
+        
+        currencyTyeList = Array(currencyList!.keys).sorted()
+        
         getList()
     }
     

@@ -10,21 +10,17 @@ import UIKit
 
 class SLHomeViewModel: NSObject {
     
-    static let shared : SLHomeViewModel = SLHomeViewModel()
+    lazy var toMoneyList : [Any] = [Any]()
     
-    var toMoney : Double = 1.0
-    
-    var fromMoney : Double = 1.0
-    
-    var toMoneyDigits : String?
-    
-    var fromMoneyDigits : String?
+    lazy var fromMoneyList : [Any] = [Any]()
     
     var fromCurrency : SLCurrency? {
         
         didSet {
             
             exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
+            
+            multiple = 1.0
         }
     }
     
@@ -33,6 +29,8 @@ class SLHomeViewModel: NSObject {
         didSet {
             
             exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
+            
+            multiple = 1.0
         }
     }
     
@@ -50,9 +48,24 @@ class SLHomeViewModel: NSObject {
         
         super.init()
         
-        fromCurrency = SLOptionViewModel.shared.queryList?[0]
+        if SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';").count > 0 {
+            
+            let queryList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+            
+            fromCurrency = queryList[0]
+            
+            toCurrency = queryList[1]
+            
+        } else {
+            
+            let list = SLTmpSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+            
+            fromCurrency = list[0]
+            
+            toCurrency = list[1]
+        }
         
-        toCurrency = SLOptionViewModel.shared.queryList?[1]
+        
         
         exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
         
@@ -61,70 +74,138 @@ class SLHomeViewModel: NSObject {
     
     func changeMonyeAndDigits() -> () {
         
-        fromMoneyDigits = ""
         
-        toMoneyDigits = ""
-        
-        if multiple > 1e11 {
+        if multiple > 1e10 {
             
             multiple = 1e10
+            
+            return
         }
         
         if multiple < 1 {
             
             multiple = 1
+            
+            return
         }
         
-        fromMoney = multiple
+        toMoneyList.removeAll()
         
-        if fromMoney > 1e10 {
+        fromMoneyList.removeAll()
+        
+        for i in 1...10 {
             
-            fromMoney = fromMoney / 1e9
+            let fromMoney = multiple * Double(i)
             
-            fromMoneyDigits = "B"
+            let toMoney = multiple * exchange * Double(i)
             
-        } else if fromMoney > 1e7 {
+            fromMoneyList.append(getMoneyInfo(money: fromMoney))
             
-            fromMoney = fromMoney / 1e6
+            toMoneyList.append(getMoneyInfo(money: toMoney))
             
-            fromMoneyDigits = "M"
+            var fromMoneyDetailList = [String]()
             
-        } else if fromMoney > 1e4 {
+            var toMoneyDetailList = [String]()
             
-            fromMoney = fromMoney / 1e3
+            for n in 1...10 {
+                
+                let fromMoneyDetail = multiple * (Double(i) + Double(n) * 0.1)
+                
+                let toMoneyDetail = multiple * exchange * (Double(i) + Double(n) * 0.1)
+                
+                fromMoneyDetailList.append(getMoneyInfo(money: fromMoneyDetail))
+                
+                toMoneyDetailList.append(getMoneyInfo(money: toMoneyDetail))
+            }
             
-            fromMoneyDigits = "K"
+            fromMoneyList.append(fromMoneyDetailList)
+            
+            toMoneyList.append(toMoneyDetailList)
         }
+    }
+    
+    func getMoneyInfo(money : Double) -> (String) {
         
-        toMoney = multiple * exchange
+        var str : String = ""
         
+        var moneyDigits : String = ""
         
-        if toMoney > 1e10 {
-            
-            toMoney = toMoney / 1e9
-            
-            toMoneyDigits = "B"
-            
-        } else if toMoney > 1e7 {
-            
-            toMoney = toMoney / 1e6
-            
-            toMoneyDigits = "M"
-            
-        } else if toMoney > 1e4 {
-            
-            toMoney = toMoney / 1e3
-            
-            toMoneyDigits = "K"
-        }
+        var afterMoney : Double = 1.0
         
-        if toMoney < 10 {
+        getDigits(money: money, closure: { (alterMoney, digit) in
             
-            toMoney = (String(format: "%.2f", toMoney) as NSString).doubleValue
+            afterMoney = alterMoney
+            
+            moneyDigits = digit
+        })
+        
+        if afterMoney < 10 {
+            
+            afterMoney = (String(format: "%.2f", afterMoney) as NSString).doubleValue
             
         } else {
             
-            toMoney = Double(Int(toMoney))
+            afterMoney = Double(Int(afterMoney))
         }
+        
+        if afterMoney >= 10 {
+            
+            if afterMoney > 1000 {
+                
+                if Int(afterMoney) % 1000 == 0 {
+                    
+                     str = "\(Int(afterMoney) / 1000),000\(moneyDigits)"
+                    
+                } else {
+                    
+                    str = "\(Int(afterMoney) / 1000),\(Int(afterMoney) % 1000)\(moneyDigits)"
+                }
+                
+            } else {
+                
+                str = "\(Int(afterMoney))\(moneyDigits)"
+            }
+            
+        } else {
+            
+            str = "\(afterMoney)\(moneyDigits)"
+        }
+        
+        return str
+    }
+    
+    
+    func getDigits(money : Double, closure: (Double, String)->()) -> () {
+        
+        var alterMoney : Double
+        
+        var digit : String
+        
+        
+        if money >= 1e10 {
+            
+            alterMoney = money / 1e9
+            
+            digit = "B"
+            
+        } else if money >= 1e7 {
+            
+            alterMoney = money / 1e6
+            
+            digit = "M"
+            
+        } else if money >= 1e4 {
+            
+            alterMoney = money / 1e3
+            
+            digit = "K"
+        } else {
+            
+            alterMoney = money
+            
+            digit = ""
+        }
+        
+        closure(alterMoney, digit)
     }
 }

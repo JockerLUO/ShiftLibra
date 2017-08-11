@@ -62,10 +62,8 @@ class SLHomeDetailCell: UITableViewCell {
             
             make.height.equalTo(1)
         }
-
-
-        
     }
+    
     
     lazy var bgView : SLHomeDetailTableBackgroundView = SLHomeDetailTableBackgroundView()
 

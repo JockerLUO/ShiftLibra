@@ -11,22 +11,42 @@ import pop
 
 class SLHomeSettingView: UIView {
     
-    var superController : UIViewController?
+    var closure : (()->())?
+    
     
     var optionType : SLOptionCurrencyType?
     
-    class func show(superController : UIViewController, optionType : SLOptionCurrencyType) -> () {
+    var homeViewModel : SLHomeViewModel? {
         
-        let view = SLHomeSettingView(frame: superController.view.bounds)
-        
-        view.superController = superController
-        
-        view.optionType = optionType
-        
-        superController.view.addSubview(view)
+        didSet {
+            
+            let fromCurrency = homeViewModel?.fromCurrency
+            
+            let toCurrency = homeViewModel?.toCurrency
+            
+            let exchange = homeViewModel?.exchange ?? 1.0
+            
+            let name = "已更新:\(toCurrency?.updatetime ?? "刚刚")"
+            
+            let str = "1 \(fromCurrency?.code ?? "USD") → \(exchange) \(toCurrency?.code ?? "CNY")\n\(name)"
+            
+            let range : NSRange = (str as NSString).range(of: name)
+            
+            let attr = NSMutableAttributedString(string: str)
+            
+            attr.addAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: smallFontSize), NSForegroundColorAttributeName : mid_right_bgColor], range: range)
+            
+            labInfo.attributedText = attr
+            
+            labInfo.sizeToFit()
+            
+            labInfo.center = infoView.center
+        }
     }
     
+
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         setupUI()
@@ -44,6 +64,8 @@ class SLHomeSettingView: UIView {
         
         settingView.addSubview(infoView)
         
+        infoView.addSubview(labInfo)
+        
         settingView.addSubview(btnSetting)
         
         settingView.addSubview(btnShift)
@@ -53,7 +75,7 @@ class SLHomeSettingView: UIView {
         addSubview(btnCancel)
         
         anim()
-        
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -85,21 +107,10 @@ class SLHomeSettingView: UIView {
         
         let now = NSString.init(data: Data(), encoding: 5)
         
-        let fromCurrency = SLHomeViewModel.shared.fromCurrency
-        
-        let toCurrency = SLHomeViewModel.shared.toCurrency
-        
-        let exchange = SLHomeViewModel.shared.exchange
-        
-        let name = "已更新:\(toCurrency?.updatetime ?? "刚刚")"
-        
-        let str = "1 \(toCurrency?.code ?? "USD") → \(exchange) \(fromCurrency?.code ?? "CNY")\n\(name)"
-        
-        let range : NSRange = (str as NSString).range(of: name)
-        
-        let attr = NSMutableAttributedString(string: str)
-        
-        attr.addAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: smallFontSize), NSForegroundColorAttributeName : mid_right_bgColor], range: range)
+        return view
+    }()
+    
+    lazy var labInfo: UILabel = {
         
         let lab = UILabel()
         
@@ -109,71 +120,20 @@ class SLHomeSettingView: UIView {
         
         lab.textColor = bottom_right_bgColor
         
-        lab.attributedText = attr
-        
         lab.textAlignment = .center
         
         lab.sizeToFit()
         
-        view.addSubview(lab)
-        
-        lab.center = view.center
-        
-        return view
+        return lab
     }()
     
     
+    lazy var btnSetting: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight), title: " ✏️  设定自定义汇率...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnSettingClick))
     
-    lazy var btnSetting: UIButton = {
-        
-        let btn = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight))
-        
-        btn.setTitleColor(bottom_right_textColor, for: UIControlState.normal)
-        
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: settingFontSize)
-        
-        btn.titleLabel?.textAlignment = .left
-        
-        btn.setTitle(" ✏️  设定自定义汇率...", for: UIControlState.normal)
-        
-        btn.addTarget(self, action: #selector(btnSettingClick), for: .touchUpInside)
-        
-        return btn
-    }()
+    lazy var btnShift: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight), title: " 🔄  切换", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnShiftClick))
     
-    lazy var btnShift: UIButton = {
-        
-        let btn = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight))
-        
-        btn.setTitleColor(bottom_right_textColor, for: UIControlState.normal)
-        
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: settingFontSize)
-        
-        btn.titleLabel?.textAlignment = .left
-        
-        btn.setTitle(" 🔄  切换", for: UIControlState.normal)
-        
-        btn.addTarget(self, action: #selector(btnShiftClick), for: .touchUpInside)
-        
-        return btn
-    }()
-
-    lazy var btnOther: UIButton = {
-        
-        let btn = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight))
-        
-        btn.setTitleColor(bottom_right_textColor, for: UIControlState.normal)
-        
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: settingFontSize)
-        
-        btn.titleLabel?.textAlignment = .left
-
-        btn.setTitle(" ⌥  选择其他...", for: UIControlState.normal)
-        
-        btn.addTarget(self, action: #selector(btnOtherClick), for: .touchUpInside)
-        
-        return btn
-    }()
+    lazy var btnOther: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight), title: " ⌥  选择其他...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnOtherClick))
+    
     
     lazy var btnCancel : UIButton = {
         
@@ -211,10 +171,7 @@ extension SLHomeSettingView {
         
         vc.optionType = self.optionType!
         
-        self.superController?.present(vc, animated: true, completion: {
-            
-            self.removeFromSuperview()
-        })
+        closure?()
     }
     
     @objc fileprivate func btnCancelClick() -> () {
@@ -237,7 +194,6 @@ extension SLHomeSettingView {
         settingAnimation?.springBounciness = 0
         
         settingView.pop_add(settingAnimation, forKey: nil)
-        
         
         let cancelAnimation = POPSpringAnimation(propertyNamed: kPOPViewCenter)
         

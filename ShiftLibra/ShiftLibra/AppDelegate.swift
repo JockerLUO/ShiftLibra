@@ -16,9 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        let _ = SLOptionViewModel.shared
-        
+                
         window = UIWindow()
         
         window?.rootViewController = SLHomeViewController()

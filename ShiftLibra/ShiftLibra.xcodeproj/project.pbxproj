@@ -17,7 +17,6 @@
 		B144F8EE1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8ED1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift */; };
 		B144F8F01F2E0E8700F5BBD6 /* SLHomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */; };
 		B16943691F2444F9008F0029 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435A1F2444F9008F0029 /* Common.swift */; };
-		B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */; };
 		B169436B1F2444F9008F0029 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435D1F2444F9008F0029 /* Extension + UIButton.swift */; };
 		B169436C1F2444F9008F0029 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169435E1F2444F9008F0029 /* Extension + UIImage.swift */; };
 		B169436E1F2444F9008F0029 /* Extension + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16943601F2444F9008F0029 /* Extension + UILabel.swift */; };
@@ -35,6 +34,7 @@
 		B1CC4BAC1F306B0800336582 /* SLCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAB1F306B0800336582 /* SLCurrency.swift */; };
 		B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */; };
 		B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */; };
+		B1E1CC591F3DA74B006DCADA /* SLTmpSQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */; };
 		B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */; };
 		B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */; };
 		B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */; };
@@ -53,7 +53,6 @@
 		B144F8EF1F2E0E8700F5BBD6 /* SLHomeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeTableView.swift; sourceTree = "<group>"; };
 		B15097441F347F5800A8FAC5 /* ShiftLibra-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShiftLibra-Bridging-Header.h"; sourceTree = "<group>"; };
 		B169435A1F2444F9008F0029 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIBarButtonItem.swift"; sourceTree = "<group>"; };
 		B169435D1F2444F9008F0029 /* Extension + UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 		B169435E1F2444F9008F0029 /* Extension + UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		B16943601F2444F9008F0029 /* Extension + UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UILabel.swift"; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		B1CC4BAB1F306B0800336582 /* SLCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCurrency.swift; sourceTree = "<group>"; };
 		B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewModel.swift; sourceTree = "<group>"; };
 		B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewModel.swift; sourceTree = "<group>"; };
+		B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLTmpSQLManager.swift; sourceTree = "<group>"; };
 		B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailView.swift; sourceTree = "<group>"; };
 		B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailCell.swift; sourceTree = "<group>"; };
 		B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderView.swift; sourceTree = "<group>"; };
@@ -166,6 +166,7 @@
 				B169435A1F2444F9008F0029 /* Common.swift */,
 				B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */,
 				B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */,
+				B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */,
 				B169435B1F2444F9008F0029 /* Extension */,
 			);
 			path = Tools;
@@ -174,7 +175,6 @@
 		B169435B1F2444F9008F0029 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B169435C1F2444F9008F0029 /* Extension + UIBarButtonItem.swift */,
 				B169435D1F2444F9008F0029 /* Extension + UIButton.swift */,
 				B169435E1F2444F9008F0029 /* Extension + UIImage.swift */,
 				B16943601F2444F9008F0029 /* Extension + UILabel.swift */,
@@ -429,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18D27231F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift in Sources */,
+				B1E1CC591F3DA74B006DCADA /* SLTmpSQLManager.swift in Sources */,
 				B144F8EE1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift in Sources */,
 				B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */,
 				B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */,
@@ -452,7 +453,6 @@
 				B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */,
 				B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */,
 				B1CC4B9E1F3021D000336582 /* SLSQLManager.swift in Sources */,
-				B169436A1F2444F9008F0029 /* Extension + UIBarButtonItem.swift in Sources */,
 				B18D27211F2F507400C6A8EF /* SLOptionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

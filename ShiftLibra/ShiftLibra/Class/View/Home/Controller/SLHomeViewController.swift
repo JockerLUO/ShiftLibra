@@ -22,13 +22,15 @@ class SLHomeViewController: UIViewController {
         }
     }
     
+    lazy var homeViewModel : SLHomeViewModel = SLHomeViewModel()
+    
     var cellHeights = (0..<10).map { _ in C.CellHeight.close }
     
     let kCloseCellHeight = homeTableViewCellHight
     
     let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
     
-    var selectIndex : Int = -1
+    var selectIndex : Int = -3
     
     override func viewDidLoad() {
         
@@ -85,15 +87,21 @@ class SLHomeViewController: UIViewController {
         
         tableView.addGestureRecognizer(swipLeft)
         
+        headerView.closure = { [weak self] in
+            
+            self?.tableView.delegate?.tableView!((self?.tableView)!, didSelectRowAt: IndexPath(row: self?.selectIndex ?? 0, section: 0))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
-        self.headerView.labLeft.text = SLHomeViewModel.shared.fromCurrency?.code ?? "CNY"
+        self.headerView.labLeft.text = homeViewModel.fromCurrency?.code ?? "CNY"
         
-        self.headerView.labRight.text = SLHomeViewModel.shared.toCurrency?.code ?? "USD"
+        self.headerView.labRight.text = homeViewModel.toCurrency?.code ?? "USD"
+        
+        headerView.homeViewModel = homeViewModel
 
         tableView.reloadData()
     }
@@ -117,32 +125,72 @@ extension SLHomeViewController {
     
     func headerViewClick(tap : UITapGestureRecognizer) -> () {
         
-        var optionType : SLOptionCurrencyType = .to
-        
-        let point = tap.location(in: tap.view)
-        
-        let view = tap.view
-        
-        let framViewRect = CGRect(x: 0, y: 0, width: (view?.bounds.width)! * 0.5, height: (view?.bounds.height)!)
-        
-        if framViewRect.contains(point) {
+        if headerView.btnBack.isHidden {
             
-            optionType = .from
+            var optionType : SLOptionCurrencyType = .to
+            
+            let point = tap.location(in: tap.view)
+            
+            let view = tap.view
+            
+            let framViewRect = CGRect(x: 0, y: 0, width: (view?.bounds.width)! * 0.5, height: (view?.bounds.height)!)
+            
+            if framViewRect.contains(point) {
+                
+                optionType = .from
+            }
+            
+            let showView = SLHomeSettingView(frame: self.view.bounds)
+            
+            showView.optionType = optionType
+            
+            showView.homeViewModel = homeViewModel
+            
+            self.view.addSubview(showView)
+            
+            showView.closure = { [weak self] in
+                
+                let vc = SLOptionViewController()
+                
+                vc.optionType = optionType
+                
+                self?.present(vc, animated: true, completion: { 
+                    
+                })
+                
+                vc.closure = { model in
+                    
+                    if optionType == .to {
+                        
+                        self?.homeViewModel.toCurrency = model
+                        
+                    } else {
+                     
+                        self?.homeViewModel.fromCurrency = model
+                    }
+                    
+                    showView.removeFromSuperview()
+                }
+                
+            }
+            
+        } else {
+         
+            tableView.delegate?.tableView!(tableView, didSelectRowAt: IndexPath(row: selectIndex, section: 0))
         }
-    
-        SLHomeSettingView.show(superController: self, optionType: optionType)
     }
     
     func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
         
         switch swipe.direction {
+            
         case UISwipeGestureRecognizerDirection.left:
             
-            SLHomeViewModel.shared.multiple *= 10
+            homeViewModel.multiple *= 10
             
         case UISwipeGestureRecognizerDirection.right:
             
-            SLHomeViewModel.shared.multiple /= 10
+            homeViewModel.multiple /= 10
             
         default :
             break
@@ -170,9 +218,18 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        cell.labLeft.text = "\(String(Double(indexPath.row + 1) * SLHomeViewModel.shared.toMoney))\(SLHomeViewModel.shared.fromMoneyDigits ?? "")"
+        cell.labLeft.text = homeViewModel.fromMoneyList[indexPath.row * 2] as? String
         
-        cell.labRight.text = "\(String(Double(indexPath.row + 1) * SLHomeViewModel.shared.fromMoney))\(SLHomeViewModel.shared.fromMoneyDigits ?? "")"
+        cell.labRight.text = homeViewModel.toMoneyList[indexPath.row * 2] as? String
+        
+        cell.fromMoneyDetailList = homeViewModel.fromMoneyList[indexPath.row * 2 + 1] as? [String]
+        
+        cell.toMoneyDetailList = homeViewModel.toMoneyList[indexPath.row * 2 + 1] as? [String]
+        
+        cell.closure = {
+            
+            tableView.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
+        }
         
         return cell
     }
@@ -184,13 +241,19 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.isScrollEnabled = !tableView.isScrollEnabled
+        if indexPath.row - 1 == selectIndex {
+            
+            tableView.delegate?.tableView!(tableView, didSelectRowAt: IndexPath(row: indexPath.row - 1, section: indexPath.section))
+            
+            selectIndex = -3
+            
+            return
+            
+        }
         
         headerView.btnBack.isHidden = !headerView.btnBack.isHidden
         
-        
-        
-//        tableView.delegate?.tableView!(tableView, didSelectRowAt: IndexPath(row: indexPath.row + 1, section: indexPath.section))
+        tableView.isScrollEnabled = !tableView.isScrollEnabled
         
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
             
@@ -212,7 +275,7 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
             duration = 0.25
         }
         
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { 
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
             _ in
             
             tableView.beginUpdates()
@@ -222,6 +285,8 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
             
             self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
+        
+        selectIndex = selectIndex == -3 ? indexPath.row : -3
         
     }
     

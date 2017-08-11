@@ -30,6 +30,7 @@ class SLOptionTableHeaderView: UITableViewHeaderFooterView {
             
             make.centerY.equalTo(self.contentView)
         }
+                
     }
 
     lazy var label : UILabel = UILabel(text: "☆123", textColor: UIColor.red, fontSize: smallFontSize)

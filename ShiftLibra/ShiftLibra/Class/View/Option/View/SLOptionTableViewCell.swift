@@ -17,6 +17,15 @@ class SLOptionTableViewCell: UITableViewCell {
             labName.text = currency?.name
             
             labCode.text = currency?.code
+            
+            if let _ = currency?.query {
+                
+                labLock.isHidden = true
+                
+            } else {
+                
+                labLock.isHidden = false
+            }
         }
     }
     
@@ -87,6 +96,15 @@ class SLOptionTableViewCell: UITableViewCell {
         
         labName.textColor = UIColor.white
         
+        contentView.addSubview(labLock)
+        
+        labLock.snp.makeConstraints { (make) in
+            
+            make.right.equalTo(-16)
+            
+            make.centerY.equalTo(contentView)
+        }
+        
         contentView.addSubview(lineView)
         
         lineView.snp.makeConstraints { (make) in
@@ -117,6 +135,19 @@ class SLOptionTableViewCell: UITableViewCell {
         let lab = UILabel()
         
         lab.text = "人民币"
+        
+        lab.font = UIFont.systemFont(ofSize: normalFontSize)
+        
+        lab.sizeToFit()
+        
+        return lab
+    }()
+    
+    lazy var labLock : UILabel = {
+        
+        let lab = UILabel()
+        
+        lab.text = "🔒"
         
         lab.font = UIFont.systemFont(ofSize: normalFontSize)
         

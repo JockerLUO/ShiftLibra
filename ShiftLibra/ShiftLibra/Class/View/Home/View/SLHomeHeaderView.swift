@@ -9,6 +9,18 @@
 import UIKit
 
 class SLHomeHeaderView: SLHomeHeaderBackgroundView {
+    
+    var closure : (()->())?
+    
+    var homeViewModel : SLHomeViewModel? {
+        
+        didSet {
+            
+            update()
+        }
+    }
+    
+    
 
     override init(frame: CGRect) {
         
@@ -52,18 +64,19 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         
         btnBack.isHidden = true
         
-        labLeft.text = SLHomeViewModel.shared.fromCurrency?.code
-        
-        labRight.text = SLHomeViewModel.shared.toCurrency?.code
     }
     
     func update() -> () {
         
-        labLeft.text = SLHomeViewModel.shared.fromCurrency?.code
+        labLeft.text = homeViewModel?.fromCurrency?.code
         
-        labRight.text = SLHomeViewModel.shared.toCurrency?.code
+        labRight.text = homeViewModel?.toCurrency?.code
     }
     
+    func btnClick() -> () {
+        
+        closure?()
+    }
     
         
     lazy var labLeft: UILabel = {
@@ -103,6 +116,8 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         btn.setImage(UIImage(named : "button_close"), for: .normal)
         
         btn.sizeToFit()
+        
+        btn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
         
         return btn
     }()

@@ -17,6 +17,14 @@ enum SLOptionCurrencyType : Int {
 
 class SLOptionViewController: UIViewController {
     
+    lazy var homeViewModel : SLHomeViewModel = SLHomeViewModel()
+    
+    lazy var optionViewModel : SLOptionViewModel = SLOptionViewModel()
+    
+    var searchList : [SLCurrency]?
+    
+    var closure : ((SLCurrency)->())?
+    
     var optionType : SLOptionCurrencyType = .to {
         
         didSet {
@@ -38,7 +46,7 @@ class SLOptionViewController: UIViewController {
             case .to:
                 
                 tableViewBackgroundColor = RGB(R: 55, G: 71, B: 73, alpha: 1)
-
+                
                 themeTextColor = top_right_textColor
                 
                 subTextColor = bottom_right_textColor
@@ -61,7 +69,7 @@ class SLOptionViewController: UIViewController {
     let currencyID = "currencyID"
     
     let currencyTypeID = "currencyTypeID"
-
+    
     var textFiledColor : UIColor?
     
     override func viewDidLoad() {
@@ -95,6 +103,10 @@ class SLOptionViewController: UIViewController {
         
         tableView.sectionHeaderHeight = 25
         
+        tableView.sectionIndexBackgroundColor = tableViewBackgroundColor
+        
+        tableView.sectionIndexColor = themeTextColor
+        
         
         scrollerView.addSubview(headerView)
         
@@ -107,13 +119,13 @@ class SLOptionViewController: UIViewController {
         labInfo.textColor = themeTextColor
         
         headerView.addSubview(searchBar)
-    
+        
         searchBar.tintColor = themeTextColor
         
         for subView in searchBar.subviews {
             
             if subView.isKind(of: UIView.self) {
-
+                
                 subView.subviews[0].removeFromSuperview()
                 
                 if subView.subviews[0].isKind(of: UITextField.self) {
@@ -126,7 +138,9 @@ class SLOptionViewController: UIViewController {
                 }
             }
         }
-
+        
+        searchBar.delegate = self
+        
         headerView.addSubview(btnCancel)
         
         btnCancel.setTitleColor(self.themeTextColor, for: .normal)
@@ -254,7 +268,7 @@ class SLOptionViewController: UIViewController {
     }()
     
     lazy var tableView : TPKeyboardAvoidingTableView = {
-       
+        
         let view = TPKeyboardAvoidingTableView(frame: CGRect(), style: .plain)
         
         return view
@@ -267,7 +281,7 @@ extension SLOptionViewController {
         
         searchBar.endEditing(true)
         
-        self.dismiss(animated: true) { 
+        self.dismiss(animated: true) {
             
         }
     }
@@ -277,20 +291,29 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return (SLOptionViewModel.shared.currencyList?.count)! + 1
+        if searchList != nil {
+            
+            return 1
+        }
+        
+        return (optionViewModel.currencyList?.count)! + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if searchList != nil {
+            
+            return (searchList?.count)!
+        }
         
         if section == 0 {
             
-            return SLOptionViewModel.shared.queryList?.count ?? 0
+            return optionViewModel.queryList?.count ?? 0
         }
         
-        let keys = SLOptionViewModel.shared.currencyTyeList
-
-        let count = SLOptionViewModel.shared.currencyList![(keys?[section - 1])!]?.count
+        let keys = optionViewModel.currencyTyeList
+        
+        let count = optionViewModel.currencyList![(keys?[section - 1])!]?.count
         
         return count ?? 1
     }
@@ -305,22 +328,28 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        if indexPath.section == 0 {
+        cell.optionType = self.optionType
         
-            cell.currency = SLOptionViewModel.shared.queryList?[indexPath.item]
+        if searchList != nil {
             
-            cell.optionType = self.optionType
-
+            cell.currency = searchList?[indexPath.row]
+            
             return cell
         }
         
-        let keys = SLOptionViewModel.shared.currencyTyeList
+        if indexPath.section == 0 {
+            
+            cell.currency = optionViewModel.queryList?[indexPath.item]
+            
+            
+            return cell
+        }
         
-        let currency = SLOptionViewModel.shared.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item]
+        let keys = optionViewModel.currencyTyeList
+        
+        let currency = optionViewModel.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.row]
         
         cell.currency = currency
-        
-        cell.optionType = self.optionType
         
         return cell
     }
@@ -340,48 +369,71 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             return headerView
         }
         
-        headerView.label.text = SLOptionViewModel.shared.currencyTyeList?[section - 1] ?? "☆"
+        headerView.label.text = optionViewModel.currencyTyeList?[section - 1] ?? "☆"
         
         return headerView
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
-        var arr : [String] = NSMutableArray.init(array: SLOptionViewModel.shared.currencyTyeList!, copyItems: true) as! [String]
-    
+        var arr : [String] = NSMutableArray.init(array: optionViewModel.currencyTyeList!, copyItems: true) as! [String]
+        
         arr.insert("☆", at: 0)
         
         return arr
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
+        
         var model : SLCurrency
         
-        if indexPath.section == 0 {
+        if searchList != nil {
             
-            model = (SLOptionViewModel.shared.queryList?[indexPath.row])!
+            model = (searchList?[indexPath.row])!
+            
             
         } else {
             
-            let keys = SLOptionViewModel.shared.currencyTyeList
+            if indexPath.section == 0 {
+                
+                model = (optionViewModel.queryList?[indexPath.row])!
+                
+            } else {
+                
+                let keys = optionViewModel.currencyTyeList
+                
+                model = (optionViewModel.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item])!
+            }
             
-            model = (SLOptionViewModel.shared.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item])!
         }
         
-        if self.optionType == .to {
-            
-            SLHomeViewModel.shared.toCurrency = model
-            
-        } else {
-            
-            SLHomeViewModel.shared.fromCurrency = model
-        }
+        closure?(model)
         
         self.dismiss(animated: true, completion: {
             
         })
+    }
+}
+
+extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        let str = searchBar.text ?? ""
+        
+        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC;")
+        
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchList != nil {
+            
+            searchList = nil
+            
+            tableView.reloadData()
+        }
         
     }
 }

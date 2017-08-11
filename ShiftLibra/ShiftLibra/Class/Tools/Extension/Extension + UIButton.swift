@@ -23,4 +23,19 @@ extension UIButton {
         self.setBackgroundImage(UIImage.resizableImage(named: backgroundImgName), for: UIControlState.normal)
         
     }
+    
+    convenience init(frame : CGRect, title : String, titleColor : UIColor, font : CGFloat, target: Any?, action: Selector) {
+        
+        self.init()
+        
+        self.frame = frame
+        
+        self.setTitle(title, for: .normal)
+        
+        self.setTitleColor(titleColor, for: .normal)
+        
+        self.titleLabel?.font = UIFont.systemFont(ofSize: font)
+        
+        self.addTarget(target, action: action, for: .touchUpInside)
+    }
 }
