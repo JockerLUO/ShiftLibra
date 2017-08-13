@@ -37,5 +37,9 @@ extension UIButton {
         self.titleLabel?.font = UIFont.systemFont(ofSize: font)
         
         self.addTarget(target, action: action, for: .touchUpInside)
+        
+        self.contentHorizontalAlignment = .left
+        
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
     }
 }

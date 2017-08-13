@@ -40,7 +40,7 @@ class SLHomeDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupUI() -> () {
+    fileprivate func setupUI() -> () {
         
         addSubview(tableView)
         
@@ -77,12 +77,12 @@ class SLHomeDetailView: UIView {
         tableView.addGestureRecognizer(swipLeft)
     }
     
-    func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
+    @objc fileprivate func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
         
     }
 
     
-    lazy var tableView : UITableView = {
+    fileprivate lazy var tableView : UITableView = {
         
         let tableView = UITableView()
                 

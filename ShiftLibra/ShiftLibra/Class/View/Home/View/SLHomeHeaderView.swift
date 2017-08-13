@@ -20,8 +20,6 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         }
     }
     
-    
-
     override init(frame: CGRect) {
         
         super.init(frame: frame)
@@ -33,7 +31,7 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupUI() -> () {
+    fileprivate func setupUI() -> () {
         
         self.addSubview(labLeft)
         
@@ -73,13 +71,12 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         labRight.text = homeViewModel?.toCurrency?.code
     }
     
-    func btnClick() -> () {
+    @objc fileprivate func btnClick() -> () {
         
         closure?()
     }
     
-        
-    lazy var labLeft: UILabel = {
+    fileprivate lazy var labLeft: UILabel = {
         
         let lab = UILabel()
         
@@ -94,7 +91,7 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         return lab
     }()
     
-    lazy var labRight: UILabel = {
+    fileprivate lazy var labRight: UILabel = {
         
         let lab = UILabel()
         

@@ -17,6 +17,8 @@ let API_LIST_URL = "http://op.juhe.cn/onebox/exchange/list"
 
 let API_CURRENCY_URL = "http://op.juhe.cn/onebox/exchange/currency"
 
+let homeTableViewPanGestureNotification = NSNotification.Name(rawValue: "homeTableViewPanGesture")
+
 let SPACING : CGFloat = 8
 
 let SCREENH = UIScreen.main.bounds.height

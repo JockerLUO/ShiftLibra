@@ -26,7 +26,7 @@ class SLHomeDetailCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setupUI() -> () {
+    fileprivate func setupUI() -> () {
         
         contentView.addSubview(bgView)
         
@@ -65,7 +65,7 @@ class SLHomeDetailCell: UITableViewCell {
     }
     
     
-    lazy var bgView : SLHomeDetailTableBackgroundView = SLHomeDetailTableBackgroundView()
+    fileprivate lazy var bgView : SLHomeDetailTableBackgroundView = SLHomeDetailTableBackgroundView()
 
     lazy var labLeft: UILabel = {
         
@@ -97,5 +97,5 @@ class SLHomeDetailCell: UITableViewCell {
         return lab
     }()
     
-    lazy var line : SLHomeTableLineView = SLHomeTableLineView()
+    fileprivate lazy var line : SLHomeTableLineView = SLHomeTableLineView()
 }

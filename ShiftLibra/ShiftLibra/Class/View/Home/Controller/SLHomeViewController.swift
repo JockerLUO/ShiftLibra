@@ -22,15 +22,15 @@ class SLHomeViewController: UIViewController {
         }
     }
     
-    lazy var homeViewModel : SLHomeViewModel = SLHomeViewModel()
+    fileprivate lazy var homeViewModel : SLHomeViewModel = SLHomeViewModel()
     
-    var cellHeights = (0..<10).map { _ in C.CellHeight.close }
+    fileprivate var cellHeights = (0..<10).map { _ in C.CellHeight.close }
     
-    let kCloseCellHeight = homeTableViewCellHight
+    fileprivate let kCloseCellHeight = homeTableViewCellHight
     
-    let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
+    fileprivate let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
     
-    var selectIndex : Int = -3
+    fileprivate var selectIndex : Int = -3
     
     override func viewDidLoad() {
         
@@ -97,23 +97,19 @@ class SLHomeViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        self.headerView.labLeft.text = homeViewModel.fromCurrency?.code ?? "CNY"
-        
-        self.headerView.labRight.text = homeViewModel.toCurrency?.code ?? "USD"
-        
         headerView.homeViewModel = homeViewModel
-
+        
         tableView.reloadData()
     }
     
-    lazy var headerView: SLHomeHeaderView = {
+    fileprivate lazy var headerView: SLHomeHeaderView = {
         
         let view = SLHomeHeaderView()
         
         return view
     }()
     
-    lazy var tableView: SLHomeTableView = {
+    fileprivate lazy var tableView: SLHomeTableView = {
         
         let tableView = SLHomeTableView()
         
@@ -123,7 +119,7 @@ class SLHomeViewController: UIViewController {
 
 extension SLHomeViewController {
     
-    func headerViewClick(tap : UITapGestureRecognizer) -> () {
+    @objc fileprivate func headerViewClick(tap : UITapGestureRecognizer) -> () {
         
         if headerView.btnBack.isHidden {
             
@@ -154,6 +150,8 @@ extension SLHomeViewController {
                 
                 vc.optionType = optionType
                 
+                vc.currency = optionType == .to ? self?.homeViewModel.toCurrency : self?.homeViewModel.fromCurrency
+                
                 self?.present(vc, animated: true, completion: { 
                     
                 })
@@ -174,13 +172,32 @@ extension SLHomeViewController {
                 
             }
             
+            showView.shiftClosure = { [weak self] in
+                
+                let tmp = self?.homeViewModel.fromCurrency
+                
+                self?.homeViewModel.fromCurrency = self?.homeViewModel.toCurrency
+                
+                self?.homeViewModel.toCurrency = tmp
+                
+                self?.tableView.reloadData()
+                
+                self?.headerView.update()
+            }
+            
+            showView.settingClosure = {
+                
+                
+            }
+            
+            
         } else {
          
             tableView.delegate?.tableView!(tableView, didSelectRowAt: IndexPath(row: selectIndex, section: 0))
         }
     }
     
-    func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
+    @objc fileprivate func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
         
         switch swipe.direction {
             
@@ -193,6 +210,7 @@ extension SLHomeViewController {
             homeViewModel.multiple /= 10
             
         default :
+            
             break
         }
         
@@ -263,15 +281,19 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         var duration = 0.0
         
         if cellHeights[indexPath.row] == kCloseCellHeight {
+            
             cellHeights[indexPath.row] = kOpenCellHeight
             
             cell.setSelected(true, animated: true)
+            
             duration = 0.25
             
         } else {
             
             cellHeights[indexPath.row] = kCloseCellHeight
+            
             cell.setSelected(false, animated: true)
+            
             duration = 0.25
         }
         
@@ -279,6 +301,7 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
             _ in
             
             tableView.beginUpdates()
+            
             tableView.endUpdates()
             
         }) { (_) in
@@ -293,9 +316,13 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if case let cell as FoldingCell = cell {
+            
             if cellHeights[indexPath.row] == C.CellHeight.close {
+                
                 cell.setSelected(false, animated: false)
+                
             } else {
+                
                 cell.setSelected(true, animated: false)
             }
         }

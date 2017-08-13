@@ -18,14 +18,20 @@ class SLOptionTableViewCell: UITableViewCell {
             
             labCode.text = currency?.code
             
-            if let _ = currency?.query {
+            if currency?.query == nil {
                 
-                labLock.isHidden = true
+                labLock.text = "🔒"
+                
+            } else if currency?.query == "minority" {
+                
+                labLock.text = "🔐"
                 
             } else {
                 
-                labLock.isHidden = false
+                labLock.text = ""
             }
+            
+            
         }
     }
     
@@ -49,7 +55,8 @@ class SLOptionTableViewCell: UITableViewCell {
                 
                 labCode.textColor = top_right_textColor
                 
-                lineView.backgroundColor = RGB(R: 91, G: 108, B: 109, alpha: 1)
+                lineView.backgroundColor = RGB(R: 96, G: 113, B: 114, alpha: 1)
+        
             }
         }
     }
@@ -74,7 +81,7 @@ class SLOptionTableViewCell: UITableViewCell {
 
     }
     
-    func setupUI() -> () {
+    fileprivate func setupUI() -> () {
         
         contentView.addSubview(labCode)
         
@@ -117,7 +124,7 @@ class SLOptionTableViewCell: UITableViewCell {
         lineView.backgroundColor = UIColor.white
     }
     
-    lazy var labCode : UILabel = {
+    fileprivate lazy var labCode : UILabel = {
         
         let lab = UILabel()
         
@@ -130,7 +137,7 @@ class SLOptionTableViewCell: UITableViewCell {
         return lab
     }()
     
-    lazy var labName : UILabel = {
+    fileprivate lazy var labName : UILabel = {
         
         let lab = UILabel()
         
@@ -143,7 +150,7 @@ class SLOptionTableViewCell: UITableViewCell {
         return lab
     }()
     
-    lazy var labLock : UILabel = {
+    fileprivate lazy var labLock : UILabel = {
         
         let lab = UILabel()
         
@@ -156,5 +163,5 @@ class SLOptionTableViewCell: UITableViewCell {
         return lab
     }()
     
-    lazy var lineView : UIView = UIView()
+    fileprivate lazy var lineView : UIView = UIView()
 }

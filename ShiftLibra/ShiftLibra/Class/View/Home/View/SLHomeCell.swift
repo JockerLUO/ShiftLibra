@@ -124,14 +124,14 @@ class SLHomeCell: FoldingCell {
         return 0.01
     }
     
-    lazy var fgView: SLHomeTableBackgroundView! = {
+    fileprivate lazy var fgView: SLHomeTableBackgroundView! = {
         
         let view = SLHomeTableBackgroundView()
         
         return view
     }()
     
-    lazy var ctView: UIView = {
+    fileprivate lazy var ctView: UIView = {
         
         let view = UIView()
         
@@ -170,9 +170,9 @@ class SLHomeCell: FoldingCell {
         return lab
     }()
     
-    lazy var detailView: SLHomeDetailView = SLHomeDetailView()
+    fileprivate lazy var detailView: SLHomeDetailView = SLHomeDetailView()
     
-    lazy var line : SLHomeTableLineView = SLHomeTableLineView()
+    fileprivate lazy var line : SLHomeTableLineView = SLHomeTableLineView()
 }
 
 

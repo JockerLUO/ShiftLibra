@@ -20,7 +20,7 @@ class SLOptionTableHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupUI() -> () {
+    fileprivate func setupUI() -> () {
         
         contentView.addSubview(label)
         

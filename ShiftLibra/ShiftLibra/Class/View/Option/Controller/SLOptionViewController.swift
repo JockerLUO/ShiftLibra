@@ -17,7 +17,14 @@ enum SLOptionCurrencyType : Int {
 
 class SLOptionViewController: UIViewController {
     
-    lazy var homeViewModel : SLHomeViewModel = SLHomeViewModel()
+    var currency : SLCurrency? {
+        
+        didSet {
+            
+            labInfo.text = "? → \(currency?.code ?? "")"
+        }
+        
+    }
     
     lazy var optionViewModel : SLOptionViewModel = SLOptionViewModel()
     
@@ -37,8 +44,6 @@ class SLOptionViewController: UIViewController {
                 
                 themeTextColor = top_left_textColor
                 
-                subTextColor = top_left_textColor
-                
                 tableCellViewBackgroundColor = bottom_left_bgColor
                 
                 textFiledColor = RGB(R: 4, G: 3, B: 7, alpha: 1)
@@ -49,8 +54,6 @@ class SLOptionViewController: UIViewController {
                 
                 themeTextColor = top_right_textColor
                 
-                subTextColor = bottom_right_textColor
-                
                 tableCellViewBackgroundColor = RGB(R: 84, G: 101, B: 102, alpha: 1)
                 
                 textFiledColor = RGB(R: 24, G: 41, B: 43, alpha: 1)
@@ -58,32 +61,29 @@ class SLOptionViewController: UIViewController {
         }
     }
     
-    var tableViewBackgroundColor : UIColor?
+    fileprivate var tableViewBackgroundColor : UIColor?
     
-    var themeTextColor : UIColor?
+    fileprivate var themeTextColor : UIColor?
+        
+    fileprivate var tableCellViewBackgroundColor : UIColor?
     
-    var subTextColor : UIColor?
+    fileprivate let currencyID = "currencyID"
     
-    var tableCellViewBackgroundColor : UIColor?
+    fileprivate let currencyTypeID = "currencyTypeID"
     
-    let currencyID = "currencyID"
+    fileprivate var textFiled : UITextField?
     
-    let currencyTypeID = "currencyTypeID"
-    
-    var textFiledColor : UIColor?
+    fileprivate var textFiledColor : UIColor?
     
     override func viewDidLoad() {
         
-        
         super.viewDidLoad()
-        
         
         view.addSubview(scrollerView)
         
         scrollerView.backgroundColor = tableViewBackgroundColor
         
         scrollerView.addSubview(tableView)
-        
         
         tableView.delegate = self
         
@@ -106,7 +106,6 @@ class SLOptionViewController: UIViewController {
         tableView.sectionIndexBackgroundColor = tableViewBackgroundColor
         
         tableView.sectionIndexColor = themeTextColor
-        
         
         scrollerView.addSubview(headerView)
         
@@ -132,6 +131,8 @@ class SLOptionViewController: UIViewController {
                     
                     let textFiled : UITextField = subView.subviews[0] as! UITextField
                     
+                    self.textFiled = textFiled
+                    
                     textFiled.backgroundColor = textFiledColor
                     
                     textFiled.textColor = themeTextColor
@@ -153,6 +154,15 @@ class SLOptionViewController: UIViewController {
         super.viewWillAppear(animated)
         
         searchBar.becomeFirstResponder()
+        
+        textFiled?.becomeFirstResponder()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        textFiled?.becomeFirstResponder()
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -211,30 +221,26 @@ class SLOptionViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        super.viewDidLayoutSubviews()
-    }
-    
-    lazy var scrollerView : TPKeyboardAvoidingScrollView = {
+
+    fileprivate lazy var scrollerView : TPKeyboardAvoidingScrollView = {
         
         let scrollerView = TPKeyboardAvoidingScrollView()
         
         return scrollerView
     }()
     
-    lazy var headerView: UIView = {
+    fileprivate lazy var headerView: UIView = {
         
         let view = UIView()
         
         return view
     }()
     
-    lazy var labInfo : UILabel = {
+    fileprivate lazy var labInfo : UILabel = {
         
         let lab = UILabel()
         
-        lab.text = "? -> USD"
+        lab.text = "? → USD"
         
         lab.font = UIFont.systemFont(ofSize: smallFontSize)
         
@@ -243,7 +249,7 @@ class SLOptionViewController: UIViewController {
         return lab
     }()
     
-    lazy var searchBar : UISearchBar = {
+    fileprivate lazy var searchBar : UISearchBar = {
         
         let searchBar = UISearchBar()
         
@@ -254,7 +260,7 @@ class SLOptionViewController: UIViewController {
         return searchBar
     }()
     
-    lazy var btnCancel : UIButton = {
+    fileprivate lazy var btnCancel : UIButton = {
         
         let btn = UIButton()
         
@@ -267,7 +273,7 @@ class SLOptionViewController: UIViewController {
         return btn
     }()
     
-    lazy var tableView : TPKeyboardAvoidingTableView = {
+    fileprivate lazy var tableView : TPKeyboardAvoidingTableView = {
         
         let view = TPKeyboardAvoidingTableView(frame: CGRect(), style: .plain)
         
@@ -277,9 +283,11 @@ class SLOptionViewController: UIViewController {
 
 extension SLOptionViewController {
     
-    func btnCancelClick() -> () {
+    @objc fileprivate func btnCancelClick() -> () {
         
         searchBar.endEditing(true)
+        
+        self.isEditing = false
         
         self.dismiss(animated: true) {
             
@@ -323,9 +331,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: currencyID, for: indexPath) as! SLOptionTableViewCell
         
         cell.backgroundColor = tableCellViewBackgroundColor
-        
-        cell.labCode.textColor = subTextColor
-        
+                
         cell.selectionStyle = .none
         
         cell.optionType = self.optionType
@@ -409,6 +415,8 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         closure?(model)
         
+        self.isEditing = false
+        
         self.dismiss(animated: true, completion: {
             
         })
@@ -436,4 +444,6 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
         }
         
     }
+    
+    
 }

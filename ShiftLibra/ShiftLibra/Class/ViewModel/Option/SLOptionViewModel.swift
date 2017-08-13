@@ -11,7 +11,7 @@ import UIKit
 private let listPath = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! as NSString).appendingPathComponent("currency.plist")
 
 class SLOptionViewModel: NSObject {
-        
+    
     var queryList : [SLCurrency]?
     
     var currencyTyeList : [String]?
@@ -32,6 +32,21 @@ class SLOptionViewModel: NSObject {
                 
                 currencyTyeList = Array(currencyList!.keys).sorted()
                 
+                
+                //                for key in self.currencyTyeList! {
+                //
+                //
+                //                    let arr = self.currencyList?[key]
+                //
+                //                    for currency in  arr! {
+                //
+                //                        if currency.query == nil {
+                //
+                //                            self.getNewexchangeFromNetwoking(currency: currency)
+                //                        }
+                //
+                //                    }
+                //                }
                 return
             }
         }
@@ -92,7 +107,7 @@ class SLOptionViewModel: NSObject {
                 
                 return
             }
-
+            
             guard let list = result["list"] as? [[String]] else {
                 
                 return
@@ -144,13 +159,31 @@ class SLOptionViewModel: NSObject {
                 self.update(sql: sql)
                 
                 queryList.append(obj)
+                
             }
             
             self.currencyList = SLSQLManager.shared.orderSQL()
             
+            ///从临时数据库中导入数据到创建的数据库
+            for key in self.currencyTyeList! {
+                
+                let arr = self.currencyList?[key]
+                
+                for currency in  arr! {
+                    
+                    if currency.query != nil {
+                        
+                        let sql : String = "UPDATE T_Currency set exchange=\(currency.exchange),query='\(currency.query ?? "")',updatetime='\(currency.updatetime ?? "")' WHERE name='\(currency.name ?? "")';"
+                        
+                        SLSQLManager.shared.updateSQL(sql: sql)
+                    }
+                }
+            }
+            
             self.currencyTyeList = Array(self.currencyList!.keys).sorted()
             
             self.queryList = queryList
+            
             
         }, failure: { (error) in
             
@@ -163,7 +196,7 @@ extension SLOptionViewModel {
     
     func update(sql : String) -> () {
         
-       SLSQLManager.shared.updateSQL(sql: sql)
+        SLSQLManager.shared.updateSQL(sql: sql)
     }
     
     func select(key : String) -> [SLCurrency] {
@@ -173,7 +206,42 @@ extension SLOptionViewModel {
         return SLSQLManager.shared.selectSQL(sql: sql)
     }
     
-    
+    func getNewexchangeFromNetwoking(currency : SLCurrency) -> () {
+        
+        SLNetworkingTool.shared.getCurrency(from: "CNY", to: (currency.code)!, success: { (request) in
+            
+            guard let data = request as? [String : Any] else {
+                
+                return
+            }
+            
+            guard let list = (data["result"] as? [Any]) else {
+                
+                return
+            }
+            
+            let dic = list[0] as! [String : Any]
+            
+            let alterCurrency = SLCurrency()
+            
+            alterCurrency.name = currency.name
+            
+            alterCurrency.code = currency.code
+            
+            alterCurrency.exchange = ((dic["exchange"] as! NSString?)?.doubleValue)!
+            
+            alterCurrency.updatetime = dic["updateTime"] as? String
+            
+            let sql : String = "UPDATE T_Currency set exchange=\(alterCurrency.exchange),query='minority',updatetime='\(alterCurrency.updatetime ?? "")' WHERE name='\(alterCurrency.name ?? "")';"
+            
+            SLSQLManager.shared.updateSQL(sql: sql)
+            
+        }, failure: { (error) in
+            
+            print("出错了",error)
+        })
+        
+    }
     
     
 }

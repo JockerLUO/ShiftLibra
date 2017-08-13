@@ -10,6 +10,11 @@ import UIKit
 
 class SLHomeViewModel: NSObject {
     
+    enum SLHomeViewModelType : Int {
+        case to = 1101
+        case from = 1102
+    }
+    
     lazy var toMoneyList : [Any] = [Any]()
     
     lazy var fromMoneyList : [Any] = [Any]()
@@ -18,9 +23,7 @@ class SLHomeViewModel: NSObject {
         
         didSet {
             
-            exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
-            
-            multiple = 1.0
+            setCurrency(currency: fromCurrency!, type: .from)
         }
     }
     
@@ -28,9 +31,7 @@ class SLHomeViewModel: NSObject {
         
         didSet {
             
-            exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
-            
-            multiple = 1.0
+            setCurrency(currency: fromCurrency!, type: .from)
         }
     }
     
@@ -72,7 +73,7 @@ class SLHomeViewModel: NSObject {
         changeMonyeAndDigits()
     }
     
-    func changeMonyeAndDigits() -> () {
+    fileprivate func changeMonyeAndDigits() -> () {
         
         
         if multiple > 1e10 {
@@ -82,9 +83,9 @@ class SLHomeViewModel: NSObject {
             return
         }
         
-        if multiple < 1 {
+        if multiple < 10 {
             
-            multiple = 1
+            multiple = 10
             
             return
         }
@@ -124,7 +125,7 @@ class SLHomeViewModel: NSObject {
         }
     }
     
-    func getMoneyInfo(money : Double) -> (String) {
+    fileprivate func getMoneyInfo(money : Double) -> (String) {
         
         var str : String = ""
         
@@ -174,8 +175,7 @@ class SLHomeViewModel: NSObject {
         return str
     }
     
-    
-    func getDigits(money : Double, closure: (Double, String)->()) -> () {
+    fileprivate func getDigits(money : Double, closure: (Double, String)->()) -> () {
         
         var alterMoney : Double
         
@@ -208,4 +208,68 @@ class SLHomeViewModel: NSObject {
         
         closure(alterMoney, digit)
     }
+    
+    fileprivate func setCurrency(currency : SLCurrency ,type : SLHomeViewModelType) -> () {
+        
+        if currency.exchange == 0 {
+            
+            currency.exchange = 1.0
+            
+            getNewexchangeFromNetwoking(currency: currency, type: type)
+        }
+        
+        exchange = (fromCurrency?.exchange)! / (toCurrency?.exchange)!
+        
+        multiple = 1.0
+    }
+    
+    fileprivate func getNewexchangeFromNetwoking(currency : SLCurrency ,type : SLHomeViewModelType) -> () {
+        
+        SLNetworkingTool.shared.getCurrency(from: "CNY", to: (currency.code)!, success: { (request) in
+            
+            guard let data = request as? [String : Any] else {
+                
+                return
+            }
+            
+            guard let list = (data["result"] as? [Any]) else {
+                
+                return
+            }
+            
+            let dic = list[0] as! [String : Any]
+            
+            let alterCurrency = SLCurrency()
+            
+            alterCurrency.name = currency.name
+            
+            alterCurrency.code = currency.code
+            
+            alterCurrency.exchange = ((dic["exchange"] as! NSString?)?.doubleValue)!
+            
+            alterCurrency.updatetime = dic["updateTime"] as? String
+            
+            let sql : String = "UPDATE T_Currency set exchange=\(alterCurrency.exchange),query='minority',updatetime='\(alterCurrency.updatetime ?? "")' WHERE name='\(alterCurrency.name ?? "")';"
+            
+            SLSQLManager.shared.updateSQL(sql: sql)
+            if type == .to {
+                
+                self.toCurrency = alterCurrency
+                
+            } else {
+                
+                self.fromCurrency = alterCurrency
+            }
+            
+        }, failure: { (error) in
+            
+            print("出错了",error)
+        })
+
+    }
+    
+    
+    
+    
+    
 }

@@ -13,6 +13,9 @@ class SLHomeSettingView: UIView {
     
     var closure : (()->())?
     
+    var shiftClosure : (()->())?
+    
+    var settingClosure : (()->())?
     
     var optionType : SLOptionCurrencyType?
     
@@ -83,7 +86,7 @@ class SLHomeSettingView: UIView {
         self.removeFromSuperview()
     }
     
-    lazy var bgView: UIView = {
+    fileprivate lazy var bgView: UIView = {
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREENW, height: SCREENH))
         
@@ -92,7 +95,7 @@ class SLHomeSettingView: UIView {
         return view
     }()
     
-    lazy var settingView: UIView = {
+    fileprivate lazy var settingView: UIView = {
         
         let view = UIView(frame: CGRect(x: 0, y: SCREENH, width: SCREENW, height: homeHeaderHight + homeTableViewCellHight * 3))
         
@@ -101,7 +104,7 @@ class SLHomeSettingView: UIView {
         return view
     }()
     
-    lazy var infoView : UIView = {
+    fileprivate lazy var infoView : UIView = {
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREENW, height: homeHeaderHight))
         
@@ -110,7 +113,7 @@ class SLHomeSettingView: UIView {
         return view
     }()
     
-    lazy var labInfo: UILabel = {
+    fileprivate lazy var labInfo: UILabel = {
         
         let lab = UILabel()
         
@@ -127,15 +130,13 @@ class SLHomeSettingView: UIView {
         return lab
     }()
     
+    fileprivate lazy var btnSetting: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight), title: " ✏️  设定自定义汇率...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnSettingClick))
     
-    lazy var btnSetting: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight), title: " ✏️  设定自定义汇率...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnSettingClick))
+    fileprivate lazy var btnShift: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight), title: " 🔄  切换", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnShiftClick))
     
-    lazy var btnShift: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight), title: " 🔄  切换", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnShiftClick))
+    fileprivate lazy var btnOther: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight), title: " ⌥  选择其他...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnOtherClick))
     
-    lazy var btnOther: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight), title: " ⌥  选择其他...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnOtherClick))
-    
-    
-    lazy var btnCancel : UIButton = {
+    fileprivate lazy var btnCancel: UIButton = {
         
         let btn = UIButton(frame: CGRect(x: 0, y: SCREENH, width: SCREENW, height: homeTableViewCellHight))
         
@@ -157,12 +158,17 @@ extension SLHomeSettingView {
     
     @objc fileprivate func btnSettingClick() -> () {
         
+        settingClosure?()
+        
+        self.removeFromSuperview()
         
     }
     
     @objc fileprivate func btnShiftClick() -> () {
         
+        shiftClosure?()
         
+        self.removeFromSuperview()
     }
     
     @objc fileprivate func btnOtherClick() -> () {
@@ -183,7 +189,7 @@ extension SLHomeSettingView {
 
 extension SLHomeSettingView {
     
-    func anim() -> () {
+    fileprivate func anim() -> () {
         
         let settingAnimation = POPSpringAnimation(propertyNamed: kPOPViewCenter)
         
