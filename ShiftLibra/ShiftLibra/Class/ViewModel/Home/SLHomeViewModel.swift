@@ -15,9 +15,20 @@ class SLHomeViewModel: NSObject {
         case from = 1102
     }
     
-    lazy var toMoneyList : [Any] = [Any]()
+    lazy var toMoneyList : [String] = [String]()
     
-    lazy var fromMoneyList : [Any] = [Any]()
+    lazy var fromMoneyList : [String] = [String]()
+    
+    
+    
+    
+    lazy var fromMoneyDetailList : [[String]] = [[String]]()
+    
+    lazy var toMoneyDetailList : [[String]] = [[String]]()
+    
+    
+    
+    
     
     var fromCurrency : SLCurrency? {
         
@@ -94,6 +105,10 @@ class SLHomeViewModel: NSObject {
         
         fromMoneyList.removeAll()
         
+        toMoneyDetailList.removeAll()
+        
+        fromMoneyDetailList.removeAll()
+        
         for i in 1...10 {
             
             let fromMoney = multiple * Double(i)
@@ -104,9 +119,9 @@ class SLHomeViewModel: NSObject {
             
             toMoneyList.append(getMoneyInfo(money: toMoney))
             
-            var fromMoneyDetailList = [String]()
+            var fromMoneyDetailListTmp = [String]()
             
-            var toMoneyDetailList = [String]()
+            var toMoneyDetailListTmp = [String]()
             
             for n in 1...10 {
                 
@@ -114,15 +129,16 @@ class SLHomeViewModel: NSObject {
                 
                 let toMoneyDetail = multiple * exchange * (Double(i) + Double(n) * 0.1)
                 
-                fromMoneyDetailList.append(getMoneyInfo(money: fromMoneyDetail))
+                fromMoneyDetailListTmp.append(getMoneyInfo(money: fromMoneyDetail))
                 
-                toMoneyDetailList.append(getMoneyInfo(money: toMoneyDetail))
+                toMoneyDetailListTmp.append(getMoneyInfo(money: toMoneyDetail))
             }
             
-            fromMoneyList.append(fromMoneyDetailList)
+            fromMoneyDetailList.append(fromMoneyDetailListTmp)
             
-            toMoneyList.append(toMoneyDetailList)
+            toMoneyDetailList.append(toMoneyDetailListTmp)
         }
+        
     }
     
     fileprivate func getMoneyInfo(money : Double) -> (String) {

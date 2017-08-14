@@ -236,13 +236,13 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        cell.labLeft.text = homeViewModel.fromMoneyList[indexPath.row * 2] as? String
+        cell.labLeft.text = homeViewModel.fromMoneyList[indexPath.row]
         
-        cell.labRight.text = homeViewModel.toMoneyList[indexPath.row * 2] as? String
+        cell.labRight.text = homeViewModel.toMoneyList[indexPath.row]
         
-        cell.fromMoneyDetailList = homeViewModel.fromMoneyList[indexPath.row * 2 + 1] as? [String]
+        cell.fromMoneyDetailList = homeViewModel.fromMoneyDetailList[indexPath.row]
         
-        cell.toMoneyDetailList = homeViewModel.toMoneyList[indexPath.row * 2 + 1] as? [String]
+        cell.toMoneyDetailList = homeViewModel.toMoneyDetailList[indexPath.row]
         
         cell.closure = {
             
