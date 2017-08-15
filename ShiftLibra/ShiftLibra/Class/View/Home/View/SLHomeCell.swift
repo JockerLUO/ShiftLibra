@@ -14,6 +14,8 @@ class SLHomeCell: FoldingCell {
     
     var closure : (()->())?
     
+    var gestureClosure : (()->())?
+    
     static let detailID = "detailID"
     
     var fromMoneyDetailList : [String]? {
@@ -116,6 +118,57 @@ class SLHomeCell: FoldingCell {
         detailView.closure = { [weak self] in
             
             self?.closure?()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(swipeAnimation(noti:)), name: homeTableViewSwipeGestureNotification, object: nil)
+    }
+    
+    func swipeAnimation(noti : Notification) -> () {
+        
+        guard let direction = noti.object as? UISwipeGestureRecognizerDirection else {
+            
+            return
+        }
+        
+        let i : Int = direction == .left ? -1 : 1
+        
+        labLeft.snp.updateConstraints { (make) in
+            
+            make.right.equalTo(foregroundView.snp.centerX).offset(-labSpace + i * labSpace)
+        }
+        
+        labRight.snp.updateConstraints { (make) in
+            
+            make.left.equalTo(foregroundView.snp.centerX).offset(labSpace + i * labSpace)
+        }
+        
+        self.layoutIfNeeded()
+        
+        UIView.animate(withDuration: swipeAnimationDuration) {
+            
+            self.labLeft.snp.updateConstraints { (make) in
+                
+                make.right.equalTo(self.foregroundView.snp.centerX).offset(-labSpace)
+            }
+            
+            self.labRight.snp.updateConstraints { (make) in
+                
+                make.left.equalTo(self.foregroundView.snp.centerX).offset(labSpace)
+            }
+            
+            self.layoutIfNeeded()
+            
+            UIView.animate(withDuration: swipeAnimationDuration, animations: {
+                
+            })
+        }
+        
+        let time : TimeInterval = swipeAnimationDuration
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+            
+            self.gestureClosure?()
+            
         }
     }
     

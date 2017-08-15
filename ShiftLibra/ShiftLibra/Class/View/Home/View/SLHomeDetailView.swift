@@ -59,9 +59,7 @@ class SLHomeDetailView: UIView {
         tableView.separatorInset = .zero
         
         tableView.separatorStyle = .none
-        
-//        tableView.isUserInteractionEnabled = false
-        
+                
         tableView.register(SLHomeDetailCell.self, forCellReuseIdentifier:SLHomeDetailView.detailID)
         
         let swipLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(swipe:)))

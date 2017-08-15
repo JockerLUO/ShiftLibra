@@ -24,11 +24,13 @@ extension UIButton {
         
     }
     
-    convenience init(frame : CGRect, title : String, titleColor : UIColor, font : CGFloat, target: Any?, action: Selector) {
+    convenience init(frame : CGRect, imgName: String, title : String, titleColor : UIColor, font : CGFloat, target: Any?, action: Selector) {
         
         self.init()
         
         self.frame = frame
+        
+        self.setImage(UIImage(named : imgName), for: .normal)
         
         self.setTitle(title, for: .normal)
         
@@ -40,6 +42,8 @@ extension UIButton {
         
         self.contentHorizontalAlignment = .left
         
-        self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, 18, 0, 0)
     }
 }

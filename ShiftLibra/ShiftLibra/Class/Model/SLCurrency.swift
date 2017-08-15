@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import YYModel
 
-class SLCurrency: NSObject,NSCoding {
+class SLCurrency: NSObject {
     
     var code : String?
     
@@ -20,17 +19,4 @@ class SLCurrency: NSObject,NSCoding {
     var updatetime : String?
     
     var query : String?
-    
-    override init() {
-        super.init()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init()
-        self.yy_modelInit(with: aDecoder)
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        self.yy_modelEncode(with: aCoder)
-    }
 }

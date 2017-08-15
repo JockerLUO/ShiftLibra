@@ -110,7 +110,7 @@ class SLHomeHeaderView: SLHomeHeaderBackgroundView {
         
         let btn = UIButton()
         
-        btn.setImage(UIImage(named : "button_close"), for: .normal)
+        btn.setImage(UIImage(named : "button_back"), for: .normal)
         
         btn.sizeToFit()
         

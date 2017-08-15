@@ -70,12 +70,19 @@ extension SLSQLManager{
         })
     }
     
+    func insertToSQL(sql : String) -> () {
+        
+        SLSQLManager.shared.queue.inTransaction({ (db, rollback) in
+                
+                db.executeStatements(sql)
+        })
+    }
     
     func orderSQL() -> [String : [SLCurrency]]? {
         
         var list : [String: [SLCurrency]] = [String : [SLCurrency]]()
         
-        let sql = "SELECT * FROM T_Currency ORDER BY code;"
+        let sql = "SELECT * FROM T_Currency ORDER BY code AND query != 'customize';"
         
         SLSQLManager.shared.queue.inDatabase { (db) -> Void in
             
@@ -134,6 +141,7 @@ extension SLSQLManager{
                 list.append(obj)
             }
         }
+        
         return list
     }
     

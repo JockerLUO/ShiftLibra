@@ -34,8 +34,9 @@
 		B1CC4BAC1F306B0800336582 /* SLCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAB1F306B0800336582 /* SLCurrency.swift */; };
 		B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */; };
 		B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */; };
-		B1DB1EE41F402F7500A943A9 /* SLCustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB1EE31F402F7400A943A9 /* SLCustomizeView.swift */; };
 		B1E1CC591F3DA74B006DCADA /* SLTmpSQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */; };
+		B1E66A4C1F41814400F9E9F5 /* SLCustomizeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1E66A4A1F41814400F9E9F5 /* SLCustomizeView.xib */; };
+		B1E66A511F4181DD00F9E9F5 /* SLCustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E66A501F4181DD00F9E9F5 /* SLCustomizeView.swift */; };
 		B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */; };
 		B1F57A9D1F261AA0005DAE9A /* SLHomeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */; };
 		B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */; };
@@ -73,8 +74,9 @@
 		B1CC4BAB1F306B0800336582 /* SLCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCurrency.swift; sourceTree = "<group>"; };
 		B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewModel.swift; sourceTree = "<group>"; };
 		B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewModel.swift; sourceTree = "<group>"; };
-		B1DB1EE31F402F7400A943A9 /* SLCustomizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCustomizeView.swift; sourceTree = "<group>"; };
 		B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLTmpSQLManager.swift; sourceTree = "<group>"; };
+		B1E66A4A1F41814400F9E9F5 /* SLCustomizeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SLCustomizeView.xib; sourceTree = "<group>"; };
+		B1E66A501F4181DD00F9E9F5 /* SLCustomizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCustomizeView.swift; sourceTree = "<group>"; };
 		B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailView.swift; sourceTree = "<group>"; };
 		B1F57A9C1F261AA0005DAE9A /* SLHomeDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailCell.swift; sourceTree = "<group>"; };
 		B1F57A9E1F262DA3005DAE9A /* SLHomeHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeHeaderView.swift; sourceTree = "<group>"; };
@@ -123,7 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				B144F8E21F2DFC8A00F5BBD6 /* SLHomeSettingView.swift */,
-				B1DB1EE31F402F7400A943A9 /* SLCustomizeView.swift */,
+				B1E66A501F4181DD00F9E9F5 /* SLCustomizeView.swift */,
+				B1E66A4A1F41814400F9E9F5 /* SLCustomizeView.xib */,
 				B18D27201F2F507400C6A8EF /* SLOptionTableViewCell.swift */,
 				B18D27221F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift */,
 			);
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B195C8E71F2C88CD00864709 /* Launch Screen.storyboard in Resources */,
+				B1E66A4C1F41814400F9E9F5 /* SLCustomizeView.xib in Resources */,
 				B16943781F2445E9008F0029 /* Assets.xcassets in Resources */,
 				B1967EAC1F3F4D0D00D50120 /* currency_tmp.db in Resources */,
 				B1066D181F3352BB00B66653 /* currency.db in Resources */,
@@ -447,7 +451,6 @@
 				B1CC4B9C1F301C0B00336582 /* SLNetworkingTool.swift in Sources */,
 				B1CC4BA21F3029BA00336582 /* SLHomeTableLineView.swift in Sources */,
 				B144F8F01F2E0E8700F5BBD6 /* SLHomeTableView.swift in Sources */,
-				B1DB1EE41F402F7500A943A9 /* SLCustomizeView.swift in Sources */,
 				B144F8E51F2DFD0200F5BBD6 /* SLOptionViewController.swift in Sources */,
 				B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */,
 				B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */,
@@ -457,6 +460,7 @@
 				B1F57A9F1F262DA3005DAE9A /* SLHomeHeaderView.swift in Sources */,
 				B16943711F2444F9008F0029 /* SLHomeCell.swift in Sources */,
 				B1CC4B9E1F3021D000336582 /* SLSQLManager.swift in Sources */,
+				B1E66A511F4181DD00F9E9F5 /* SLCustomizeView.swift in Sources */,
 				B18D27211F2F507400C6A8EF /* SLOptionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

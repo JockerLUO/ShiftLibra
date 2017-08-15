@@ -146,48 +146,70 @@ extension SLHomeViewController {
             
             showView.closure = { [weak self] in
                 
+                
                 let vc = SLOptionViewController()
                 
                 vc.optionType = optionType
                 
                 vc.currency = optionType == .to ? self?.homeViewModel.toCurrency : self?.homeViewModel.fromCurrency
                 
-                self?.present(vc, animated: true, completion: { 
+                self?.present(vc, animated: true, completion: {
                     
+                    showView.removeFromSuperview()
                 })
                 
                 vc.closure = { model in
                     
                     if optionType == .to {
                         
-                        self?.homeViewModel.toCurrency = model
+                        if self?.homeViewModel.toCurrency?.code == model.code {
+                            
+                            self?.shiftHomeModelView()
+                            
+                        } else {
+                            
+                            self?.homeViewModel.toCurrency = model
+                        }
                         
                     } else {
                      
-                        self?.homeViewModel.fromCurrency = model
+                        if self?.homeViewModel.fromCurrency?.code == model.code {
+                            
+                            self?.shiftHomeModelView()
+                            
+                        } else {
+                            
+                            self?.homeViewModel.fromCurrency = model
+                        }
                     }
                     
-                    showView.removeFromSuperview()
                 }
                 
             }
             
             showView.shiftClosure = { [weak self] in
                 
-                let tmp = self?.homeViewModel.fromCurrency
-                
-                self?.homeViewModel.fromCurrency = self?.homeViewModel.toCurrency
-                
-                self?.homeViewModel.toCurrency = tmp
+                self?.shiftHomeModelView()
                 
                 self?.tableView.reloadData()
                 
                 self?.headerView.update()
             }
             
-            showView.settingClosure = {
+            showView.settingClosure = { [weak self] in
                 
+                let customizeView = SLCustomizeView(frame: (self?.view.bounds)!)
                 
+                var model = optionType == .to ? self?.homeViewModel.toCurrency : self?.homeViewModel.fromCurrency
+                
+                if model?.code == "CNY" {
+                    
+                    model = optionType != .to ? self?.homeViewModel.toCurrency : self?.homeViewModel.fromCurrency
+                }
+                
+                customizeView.currency = model
+                
+                self?.view.addSubview(customizeView)
             }
             
             
@@ -197,24 +219,37 @@ extension SLHomeViewController {
         }
     }
     
+    func shiftHomeModelView() -> () {
+        
+        let tmp = self.homeViewModel.fromCurrency
+        
+        self.homeViewModel.fromCurrency = self.homeViewModel.toCurrency
+        
+        self.homeViewModel.toCurrency = tmp
+    }
+    
     @objc fileprivate func swipeGesture(swipe : UISwipeGestureRecognizer) -> () {
         
-        switch swipe.direction {
+        if headerView.btnBack.isHidden {
             
-        case UISwipeGestureRecognizerDirection.left:
+            switch swipe.direction {
+                
+            case UISwipeGestureRecognizerDirection.left:
+                
+                homeViewModel.multiple *= 10
+                
+            case UISwipeGestureRecognizerDirection.right:
+                
+                homeViewModel.multiple /= 10
+                
+            default :
+                
+                break
+            }
             
-            homeViewModel.multiple *= 10
-            
-        case UISwipeGestureRecognizerDirection.right:
-            
-            homeViewModel.multiple /= 10
-            
-        default :
-            
-            break
+            NotificationCenter.default.post(name: homeTableViewSwipeGestureNotification, object: swipe.direction)
         }
         
-        tableView.reloadData()
     }
 }
 
@@ -247,6 +282,11 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         cell.closure = {
             
             tableView.delegate?.tableView!(tableView, didSelectRowAt: indexPath)
+        }
+        
+        cell.gestureClosure = {
+            
+            tableView.reloadData()
         }
         
         return cell

@@ -45,7 +45,7 @@ extension SLTmpSQLManager{
         
         var list : [String: [SLCurrency]] = [String : [SLCurrency]]()
         
-        let sql = "SELECT * FROM T_Currency ORDER BY code;"
+        let sql = "SELECT * FROM T_Currency ORDER BY code AND query != 'customize';"
         
         SLTmpSQLManager.shared.queue.inDatabase { (db) -> Void in
             

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SLCustomizeView" customModule="ShiftLibra" customModuleProvider="target">
+            <connections>
+                <outlet property="labFrom" destination="fz7-Dk-nIa" id="SXt-j6-q9C"/>
+                <outlet property="labInfo" destination="4Dk-fW-zbY" id="wgA-OO-74M"/>
+                <outlet property="labTo" destination="xlI-Al-UNE" id="vyI-hb-Uln"/>
+                <outlet property="textFrom" destination="LXv-Hf-3dF" id="hc3-M2-rZL"/>
+                <outlet property="textTo" destination="o2P-fZ-4ke" id="m0X-5J-0vI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ql9-yz-DfM" customClass="SLCustomizeView" customModule="ShiftLibra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="195"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设定自定义汇率:USD → CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dk-fW-zbY">
+                    <rect key="frame" x="67.5" y="17.5" width="257" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.53725490196078429" green="0.57647058823529407" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-Al-UNE">
+                    <rect key="frame" x="258" y="47.5" width="71.5" height="42"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <color key="textColor" red="0.93333333333333335" green="0.69803921568627447" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz7-Dk-nIa">
+                    <rect key="frame" x="63" y="47.5" width="70.5" height="42"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                    <color key="textColor" red="0.76470588235294112" green="0.3529411764705882" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ilw-o8-06n">
+                    <rect key="frame" x="8" y="99" width="375" height="36"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1.0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-Hf-3dF">
+                            <rect key="frame" x="0.0" y="0.0" width="182.5" height="36"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.76470588240000004" green="0.35294117650000001" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.76470588240000004" green="0.35294117650000001" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o2P-fZ-4ke">
+                            <rect key="frame" x="192.5" y="0.0" width="182.5" height="36"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.93333333330000001" green="0.69803921570000005" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.93333333330000001" green="0.69803921570000005" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bFY-pU-x0O">
+                    <rect key="frame" x="0.0" y="146.5" width="391" height="39"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ju4-gA-Ozw">
+                            <rect key="frame" x="0.0" y="0.0" width="195.5" height="39"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.95294117647058818" green="0.93725490196078431" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="btnCancelClick:" destination="-1" eventType="touchUpInside" id="Wda-QE-jmk"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf7-dz-vFC">
+                            <rect key="frame" x="195.5" y="0.0" width="195.5" height="39"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="完成">
+                                <color key="titleColor" red="0.95294117647058818" green="0.93725490196078431" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="btnFinishClick:" destination="-1" eventType="touchUpInside" id="RcV-rP-wrr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="0.12549019607843137" green="0.12156862745098039" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="tintColor" red="0.12549019607843137" green="0.12156862745098039" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="bFY-pU-x0O" firstAttribute="centerX" secondItem="ql9-yz-DfM" secondAttribute="centerX" id="1fr-ON-0mV"/>
+                <constraint firstItem="fz7-Dk-nIa" firstAttribute="centerY" secondItem="ql9-yz-DfM" secondAttribute="centerY" multiplier="0.7" id="47B-4e-ngC"/>
+                <constraint firstAttribute="trailing" secondItem="bFY-pU-x0O" secondAttribute="trailing" id="4lo-44-gh6"/>
+                <constraint firstItem="4Dk-fW-zbY" firstAttribute="centerX" secondItem="ql9-yz-DfM" secondAttribute="centerX" id="6RC-qP-O1n"/>
+                <constraint firstItem="bFY-pU-x0O" firstAttribute="leading" secondItem="ql9-yz-DfM" secondAttribute="leading" id="AEN-FA-AMh"/>
+                <constraint firstItem="ilw-o8-06n" firstAttribute="centerY" secondItem="ql9-yz-DfM" secondAttribute="centerY" multiplier="1.2" id="MHo-LD-XCk"/>
+                <constraint firstItem="xlI-Al-UNE" firstAttribute="centerX" secondItem="ql9-yz-DfM" secondAttribute="centerX" multiplier="1.5" id="VkF-vx-CIo"/>
+                <constraint firstItem="4Dk-fW-zbY" firstAttribute="centerY" secondItem="ql9-yz-DfM" secondAttribute="centerY" multiplier="0.3" id="WrV-wj-mG2"/>
+                <constraint firstItem="xlI-Al-UNE" firstAttribute="centerY" secondItem="ql9-yz-DfM" secondAttribute="centerY" multiplier="0.7" id="aYy-g9-eo6"/>
+                <constraint firstItem="fz7-Dk-nIa" firstAttribute="centerX" secondItem="ql9-yz-DfM" secondAttribute="centerX" multiplier="0.5" id="byS-bZ-Me3"/>
+                <constraint firstItem="ilw-o8-06n" firstAttribute="centerX" secondItem="ql9-yz-DfM" secondAttribute="centerX" id="hXq-aH-Tjp"/>
+                <constraint firstItem="ilw-o8-06n" firstAttribute="leading" secondItem="ql9-yz-DfM" secondAttribute="leading" constant="8" id="pFK-Nx-Lfv"/>
+                <constraint firstItem="bFY-pU-x0O" firstAttribute="centerY" secondItem="ql9-yz-DfM" secondAttribute="centerY" multiplier="1.7" id="pce-qk-fRh"/>
+                <constraint firstAttribute="trailing" secondItem="ilw-o8-06n" secondAttribute="trailing" constant="8" id="zjT-k7-Z5U"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="183" y="-345"/>
+        </view>
+    </objects>
+</document>

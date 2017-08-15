@@ -96,7 +96,7 @@ class SLOptionTableViewCell: UITableViewCell {
         
         labName.snp.makeConstraints { (make) in
             
-            make.left.equalTo(70)
+            make.left.equalTo(80)
             
             make.centerY.equalTo(contentView)
         }

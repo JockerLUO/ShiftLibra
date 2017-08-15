@@ -64,7 +64,7 @@ class SLOptionViewController: UIViewController {
     fileprivate var tableViewBackgroundColor : UIColor?
     
     fileprivate var themeTextColor : UIColor?
-        
+    
     fileprivate var tableCellViewBackgroundColor : UIColor?
     
     fileprivate let currencyID = "currencyID"
@@ -155,15 +155,27 @@ class SLOptionViewController: UIViewController {
         
         searchBar.becomeFirstResponder()
         
-        textFiled?.becomeFirstResponder()
-        
     }
+    
+    /*
+     NSConcreteNotification 0x1744436f0 {name = UIKeyboardWillChangeFrameNotification; userInfo = {
+     UIKeyboardAnimationCurveUserInfoKey = 7;
+     UIKeyboardAnimationDurationUserInfoKey = 0;
+     UIKeyboardBoundsUserInfoKey = "NSRect: {{0, 0}, {320, 254}}";
+     UIKeyboardCenterBeginUserInfoKey = "NSPoint: {160, 460}";
+     UIKeyboardCenterEndUserInfoKey = "NSPoint: {160, 441}";
+     UIKeyboardFrameBeginUserInfoKey = "NSRect: {{0, 352}, {320, 216}}";
+     UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 314}, {320, 254}}";
+     UIKeyboardIsLocalUserInfoKey = 1;
+     }}
+     */
     
     override func viewDidAppear(_ animated: Bool) {
         
         textFiled?.becomeFirstResponder()
-
+        
     }
+    
     
     override func viewWillLayoutSubviews() {
         
@@ -221,7 +233,7 @@ class SLOptionViewController: UIViewController {
         }
     }
     
-
+    
     fileprivate lazy var scrollerView : TPKeyboardAvoidingScrollView = {
         
         let scrollerView = TPKeyboardAvoidingScrollView()
@@ -279,6 +291,8 @@ class SLOptionViewController: UIViewController {
         
         return view
     }()
+    
+    
 }
 
 extension SLOptionViewController {
@@ -304,7 +318,8 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             return 1
         }
         
-        return (optionViewModel.currencyList?.count)! + 1
+        
+        return (optionViewModel.currencyList?.count)!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -314,14 +329,9 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             return (searchList?.count)!
         }
         
-        if section == 0 {
-            
-            return optionViewModel.queryList?.count ?? 0
-        }
-        
         let keys = optionViewModel.currencyTyeList
         
-        let count = optionViewModel.currencyList![(keys?[section - 1])!]?.count
+        let count = optionViewModel.currencyList![(keys?[section])!]?.count
         
         return count ?? 1
     }
@@ -331,7 +341,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: currencyID, for: indexPath) as! SLOptionTableViewCell
         
         cell.backgroundColor = tableCellViewBackgroundColor
-                
+        
         cell.selectionStyle = .none
         
         cell.optionType = self.optionType
@@ -343,17 +353,9 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             return cell
         }
         
-        if indexPath.section == 0 {
-            
-            cell.currency = optionViewModel.queryList?[indexPath.item]
-            
-            
-            return cell
-        }
-        
         let keys = optionViewModel.currencyTyeList
         
-        let currency = optionViewModel.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.row]
+        let currency = optionViewModel.currencyList![(keys?[indexPath.section])!]?[indexPath.row]
         
         cell.currency = currency
         
@@ -368,14 +370,19 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         headerView.contentView.backgroundColor = tableViewBackgroundColor
         
-        if section == 0 {
+        var str = optionViewModel.currencyTyeList?[section] ?? ""
+        
+        if str == "query" {
             
-            headerView.label.text = "☆ 热门"
-            
-            return headerView
+            str = "☆热门"
         }
         
-        headerView.label.text = optionViewModel.currencyTyeList?[section - 1] ?? "☆"
+        if str == "customize" {
+            
+            str = "自定义汇率"
+        }
+        
+        headerView.label.text = str
         
         return headerView
     }
@@ -384,7 +391,22 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         var arr : [String] = NSMutableArray.init(array: optionViewModel.currencyTyeList!, copyItems: true) as! [String]
         
-        arr.insert("☆", at: 0)
+        if arr[0] == "customize" {
+            
+            arr.remove(at: 0)
+            
+            arr.remove(at: 0)
+            
+            arr.insert("☆", at: 0)
+            
+            arr.insert("★", at: 0)
+            
+        } else {
+            
+            arr.remove(at: 0)
+            
+            arr.insert("☆", at: 0)
+        }
         
         return arr
     }
@@ -400,17 +422,26 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             
         } else {
             
-            if indexPath.section == 0 {
-                
-                model = (optionViewModel.queryList?[indexPath.row])!
-                
-            } else {
-                
-                let keys = optionViewModel.currencyTyeList
-                
-                model = (optionViewModel.currencyList![(keys?[indexPath.section - 1])!]?[indexPath.item])!
-            }
+            let keys = optionViewModel.currencyTyeList
             
+            model = (optionViewModel.currencyList![(keys?[indexPath.section])!]?[indexPath.item])!
+            
+        }
+        
+        if model.query == nil {
+            
+            let alertVC = UIAlertController(title: "提示", message: "查询不到该货币兑换相关信息", preferredStyle: .actionSheet)
+            
+            let confirm = UIAlertAction(title: "确定", style: .default, handler: { (_) in
+                
+                return
+            })
+            
+            alertVC.addAction(confirm)
+            
+            self.present(alertVC, animated: true, completion: nil)
+            
+            return
         }
         
         closure?(model)
@@ -429,7 +460,7 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
         
         let str = searchBar.text ?? ""
         
-        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC;")
+        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC AND query != 'customize';")
         
         tableView.reloadData()
     }

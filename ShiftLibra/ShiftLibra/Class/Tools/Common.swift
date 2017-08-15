@@ -19,6 +19,11 @@ let API_CURRENCY_URL = "http://op.juhe.cn/onebox/exchange/currency"
 
 let homeTableViewPanGestureNotification = NSNotification.Name(rawValue: "homeTableViewPanGesture")
 
+let homeTableViewSwipeGestureNotification = NSNotification.Name(rawValue: "homeTableViewSwipeGesture")
+
+let swipeAnimationDuration = 0.125
+
+
 let SPACING : CGFloat = 8
 
 let SCREENH = UIScreen.main.bounds.height
@@ -43,7 +48,7 @@ let homeTableViewCellHight = (SCREENH - 20 - 20) / 11
 
 let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 10
 
-let labSpace = 30
+let labSpace = 35
 
 func RGB(R : CGFloat, G : CGFloat, B : CGFloat, alpha : CGFloat) -> (UIColor) {
     return UIColor(colorLiteralRed: Float(R / 255), green: Float(G / 255), blue: Float(B / 255), alpha: Float(alpha))

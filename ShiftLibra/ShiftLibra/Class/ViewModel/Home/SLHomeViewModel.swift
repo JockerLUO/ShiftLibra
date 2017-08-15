@@ -210,7 +210,7 @@ class SLHomeViewModel: NSObject {
             
             digit = "M"
             
-        } else if money >= 1e4 {
+        } else if money >= 1e5 {
             
             alterMoney = money / 1e3
             
@@ -246,6 +246,17 @@ class SLHomeViewModel: NSObject {
             guard let data = request as? [String : Any] else {
                 
                 return
+            }
+            
+            if let reason = data["reason"] as? String {
+                
+                if reason != "查询成功" {
+                    
+                    print(reason)
+                    
+                    return
+                }
+                
             }
             
             guard let list = (data["result"] as? [Any]) else {
