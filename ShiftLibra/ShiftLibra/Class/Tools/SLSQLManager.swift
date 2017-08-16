@@ -17,16 +17,28 @@ class SLSQLManager{
     // 全局访问点
     static let shared: SLSQLManager = SLSQLManager()
     
+    static let sharedTmp : SLSQLManager = SLSQLManager(istmp: true)
+    
     // 串行队列
     let queue: FMDatabaseQueue
     
     // 路径
     let path = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! as NSString).appendingPathComponent(dbName)
     
+    let tmpPath = Bundle.main.path(forResource: "currency_tmp.db", ofType: nil) ?? ""
+
+    
     // 类的构造函数
-    init() {
+    private init() {
         
         queue = FMDatabaseQueue(path: path)
+        
+        createTable()
+    }
+    
+    private init(istmp : Bool ) {
+        
+        queue = FMDatabaseQueue(path: tmpPath)
         
         createTable()
     }
@@ -58,7 +70,7 @@ extension SLSQLManager{
     
     func insertToSQL(dataList : [SLCurrency]) -> () {
         
-        SLSQLManager.shared.queue.inTransaction({ (db, rollback) in
+        queue.inTransaction({ (db, rollback) in
             
             for obj in dataList {
                 
@@ -72,7 +84,7 @@ extension SLSQLManager{
     
     func insertToSQL(sql : String) -> () {
         
-        SLSQLManager.shared.queue.inTransaction({ (db, rollback) in
+        queue.inTransaction({ (db, rollback) in
                 
                 db.executeStatements(sql)
         })
@@ -84,7 +96,7 @@ extension SLSQLManager{
         
         let sql = "SELECT * FROM T_Currency ORDER BY code AND query != 'customize';"
         
-        SLSQLManager.shared.queue.inDatabase { (db) -> Void in
+        queue.inDatabase { (db) -> Void in
             
             guard let rs = db.executeQuery(sql, withParameterDictionary: nil) else {
                 return
@@ -122,7 +134,7 @@ extension SLSQLManager{
         
         var list : [SLCurrency] = [SLCurrency]()
         
-        SLSQLManager.shared.queue.inDatabase { (db) in
+        queue.inDatabase { (db) in
             
             guard let rs = db.executeQuery(sql, withParameterDictionary: nil) else {
                 return
@@ -147,7 +159,7 @@ extension SLSQLManager{
     
     func updateSQL(sql : String) -> () {
         
-        SLSQLManager.shared.queue.inTransaction { (db, rollback) in
+        queue.inTransaction { (db, rollback) in
             
             db.executeStatements(sql)
         }

@@ -87,7 +87,4 @@ class SLNetworkingTool: AFHTTPSessionManager {
         
         self.requst(type: .GET, URLString: urlStr, parameters: parameters, success: success, failure: failure)
     }
-    
-    
-    
 }

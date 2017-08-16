@@ -34,7 +34,6 @@
 		B1CC4BAC1F306B0800336582 /* SLCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAB1F306B0800336582 /* SLCurrency.swift */; };
 		B1CC4BAE1F306DDB00336582 /* SLHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */; };
 		B1CC4BB01F306E0C00336582 /* SLOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */; };
-		B1E1CC591F3DA74B006DCADA /* SLTmpSQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */; };
 		B1E66A4C1F41814400F9E9F5 /* SLCustomizeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1E66A4A1F41814400F9E9F5 /* SLCustomizeView.xib */; };
 		B1E66A511F4181DD00F9E9F5 /* SLCustomizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E66A501F4181DD00F9E9F5 /* SLCustomizeView.swift */; };
 		B1F57A9B1F26196E005DAE9A /* SLHomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */; };
@@ -74,7 +73,6 @@
 		B1CC4BAB1F306B0800336582 /* SLCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCurrency.swift; sourceTree = "<group>"; };
 		B1CC4BAD1F306DDB00336582 /* SLHomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeViewModel.swift; sourceTree = "<group>"; };
 		B1CC4BAF1F306E0C00336582 /* SLOptionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLOptionViewModel.swift; sourceTree = "<group>"; };
-		B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLTmpSQLManager.swift; sourceTree = "<group>"; };
 		B1E66A4A1F41814400F9E9F5 /* SLCustomizeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SLCustomizeView.xib; sourceTree = "<group>"; };
 		B1E66A501F4181DD00F9E9F5 /* SLCustomizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLCustomizeView.swift; sourceTree = "<group>"; };
 		B1F57A9A1F26196E005DAE9A /* SLHomeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLHomeDetailView.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 				B169435A1F2444F9008F0029 /* Common.swift */,
 				B1CC4B9B1F301C0B00336582 /* SLNetworkingTool.swift */,
 				B1CC4B9D1F3021D000336582 /* SLSQLManager.swift */,
-				B1E1CC581F3DA74B006DCADA /* SLTmpSQLManager.swift */,
 				B169435B1F2444F9008F0029 /* Extension */,
 			);
 			path = Tools;
@@ -436,7 +433,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18D27231F2F5B8700C6A8EF /* SLOptionTableHeaderView.swift in Sources */,
-				B1E1CC591F3DA74B006DCADA /* SLTmpSQLManager.swift in Sources */,
 				B144F8EE1F2E03C300F5BBD6 /* SLHomeHeaderBackgroundView.swift in Sources */,
 				B16943771F2445E9008F0029 /* AppDelegate.swift in Sources */,
 				B16943811F24471E008F0029 /* SLHomeViewController.swift in Sources */,

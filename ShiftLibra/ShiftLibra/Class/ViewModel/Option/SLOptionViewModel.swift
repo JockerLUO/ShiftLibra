@@ -33,6 +33,23 @@ class SLOptionViewModel: NSObject {
                 
                 queryList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
                 
+                let currency = queryList?[0]
+                
+                let dataFormatterStr : String = "YYYY-MM-dd HH:mm:ss"
+                
+                let dateF = DateFormatter()
+                
+                dateF.dateFormat = dataFormatterStr
+                
+                let createdTime = dateF.date(from: (currency?.updatetime!)!)
+                
+                let s = Int(-(createdTime?.timeIntervalSinceNow)!)
+                
+                if currency?.query == "minority" && s > 60 * 60 * 24 {
+                    
+                    getQuery()
+                }
+                
                 currencyList = list
                 
                 currencyTyeList = Array(currencyList!.keys).sorted()
@@ -58,13 +75,17 @@ class SLOptionViewModel: NSObject {
             }
         }
         
-        let list : [String: [SLCurrency]] = SLTmpSQLManager.shared.orderSQL()!
+        let list : [String: [SLCurrency]] = SLSQLManager.sharedTmp.orderSQL()!
         
-        queryList = SLTmpSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+        queryList = SLSQLManager.sharedTmp.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
         
         currencyList = list
         
         currencyTyeList = Array(currencyList!.keys).sorted()
+        
+        currencyTyeList?.insert("query", at: 0)
+        
+        currencyList?.updateValue(queryList!, forKey: "query")
         
         getList()
     }

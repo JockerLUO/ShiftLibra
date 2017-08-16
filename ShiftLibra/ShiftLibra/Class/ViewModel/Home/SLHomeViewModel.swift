@@ -19,16 +19,9 @@ class SLHomeViewModel: NSObject {
     
     lazy var fromMoneyList : [String] = [String]()
     
-    
-    
-    
     lazy var fromMoneyDetailList : [[String]] = [[String]]()
     
     lazy var toMoneyDetailList : [[String]] = [[String]]()
-    
-    
-    
-    
     
     var fromCurrency : SLCurrency? {
         
@@ -70,7 +63,7 @@ class SLHomeViewModel: NSObject {
             
         } else {
             
-            let list = SLTmpSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+            let list = SLSQLManager.sharedTmp.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
             
             fromCurrency = list[0]
             
@@ -227,6 +220,11 @@ class SLHomeViewModel: NSObject {
     
     fileprivate func setCurrency(currency : SLCurrency ,type : SLHomeViewModelType) -> () {
         
+        if setCurrencyUpdatetime(currency: currency, type: type) {
+            
+            return
+        }
+        
         if currency.exchange == 0 {
             
             currency.exchange = 1.0
@@ -239,6 +237,35 @@ class SLHomeViewModel: NSObject {
         multiple = 1.0
     }
     
+    func setCurrencyUpdatetime(currency : SLCurrency ,type : SLHomeViewModelType) -> (Bool) {
+        
+        let dataFormatterStr : String = "YYYY-MM-dd HH:mm:ss"
+        
+        let dateF = DateFormatter()
+        
+        dateF.dateFormat = dataFormatterStr
+        
+        let createdTime = dateF.date(from: currency.updatetime!)
+        
+        guard let time = createdTime else {
+            
+            return false
+        }
+        
+        let s = Int(-time.timeIntervalSinceNow)
+        
+        if currency.query == "minority" && s > 60 * 60 * 24 * 7 {
+            
+            getNewexchangeFromNetwoking(currency: currency, type: type)
+            
+            return true
+        }
+        
+        return false
+    }
+    
+
+    
     fileprivate func getNewexchangeFromNetwoking(currency : SLCurrency ,type : SLHomeViewModelType) -> () {
         
         SLNetworkingTool.shared.getCurrency(from: "CNY", to: (currency.code)!, success: { (request) in
@@ -250,13 +277,12 @@ class SLHomeViewModel: NSObject {
             
             if let reason = data["reason"] as? String {
                 
-                if reason != "查询成功" {
+                if reason != "查询成功!" {
                     
                     print(reason)
                     
                     return
                 }
-                
             }
             
             guard let list = (data["result"] as? [Any]) else {
@@ -292,11 +318,5 @@ class SLHomeViewModel: NSObject {
             
             print("出错了",error)
         })
-
     }
-    
-    
-    
-    
-    
 }
