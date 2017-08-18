@@ -29,7 +29,7 @@ class SLHomeSettingView: UIView {
             
             let exchange = String(format: "%.4f", homeViewModel?.exchange ?? 1.0)
             
-            let name = "已更新:\(toCurrency?.updatetime ?? "刚刚")"
+            let name = "\(updatedTime):\(toCurrency?.updatetime ?? "")"
             
             let str = "1 \(fromCurrency?.code ?? "USD") → \(exchange) \(toCurrency?.code ?? "CNY")\n\(name)"
             
@@ -130,17 +130,17 @@ class SLHomeSettingView: UIView {
         return lab
     }()
     
-    fileprivate lazy var btnSetting: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_custom_rate", title: "设定自定义汇率...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnSettingClick))
+    fileprivate lazy var btnSetting: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_custom_rate", title: customExchange, titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnSettingClick))
     
-    fileprivate lazy var btnShift: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_swap", title: "切换", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnShiftClick))
+    fileprivate lazy var btnShift: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_swap", title: btnShiftText, titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnShiftClick))
     
-    fileprivate lazy var btnOther: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_others", title: "选择其他...", titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnOtherClick))
+    fileprivate lazy var btnOther: UIButton = UIButton(frame: CGRect(x: 0, y: homeHeaderHight + homeTableViewCellHight * 2, width: SCREENW, height: homeTableViewCellHight), imgName: "icon_others", title: btnOtherText, titleColor: bottom_right_textColor, font: settingFontSize, target: self, action: #selector(btnOtherClick))
     
     fileprivate lazy var btnCancel: UIButton = {
         
         let btn = UIButton(frame: CGRect(x: 0, y: SCREENH, width: SCREENW, height: homeTableViewCellHight))
         
-        btn.setTitle("取消", for: UIControlState.normal)
+        btn.setTitle(btnCancelText, for: UIControlState.normal)
         
         btn.setTitleColor(bottom_left_textColor, for: UIControlState.normal)
         

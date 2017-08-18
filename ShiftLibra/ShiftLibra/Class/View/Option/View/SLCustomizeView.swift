@@ -17,7 +17,7 @@ class SLCustomizeView: UIView {
         
         didSet {
             
-            labInfo.text = "设定自定义汇率:\(currency?.code ?? "") → CNY"
+            labInfo.text = "\(customExchange):\(currency?.code ?? "") → CNY"
             
             labFrom.text = currency?.code ?? ""
             
@@ -35,6 +35,10 @@ class SLCustomizeView: UIView {
     @IBOutlet weak var textFrom: UITextField!
     
     @IBOutlet weak var textTo: UITextField!
+    
+    @IBOutlet weak var btnCancel: UIButton!
+    
+    @IBOutlet weak var btnFinish: UIButton!
     
     @IBAction func btnCancelClick(_ sender: Any) {
         
@@ -54,7 +58,7 @@ class SLCustomizeView: UIView {
         }
         
         
-        let sql = "INSERT INTO T_Currency (name,code,query,exchange) VALUES('自定义\(currency?.name! ?? "")','\(currency?.code! ?? "")★','customize',\(toVulue / fromVulue))"
+        let sql = "INSERT INTO T_Currency (name,code,query,exchange) VALUES('\(customCurrency)\(currency?.name! ?? "")','\(currency?.code! ?? "")★','customize',\(toVulue / fromVulue))"
         
         SLSQLManager.shared.insertToSQL(sql: sql)
         
@@ -80,6 +84,10 @@ class SLCustomizeView: UIView {
         addSubview(settingView)
         
         textTo.becomeFirstResponder()
+        
+        btnCancel.setTitle(btnCancelText, for: .normal)
+        
+        btnFinish.setTitle(btnFinishText, for: .normal)
         
         anim()
     }

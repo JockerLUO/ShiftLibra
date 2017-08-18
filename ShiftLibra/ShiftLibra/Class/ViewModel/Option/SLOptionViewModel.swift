@@ -196,12 +196,20 @@ class SLOptionViewModel: NSObject {
                 
                 for currency in  arr! {
                     
-                    if currency.query != nil {
+                    if currency.query != "query" {
                         
-                        let sql : String = "UPDATE T_Currency set exchange=\(currency.exchange),query='\(currency.query ?? "")',updatetime='\(currency.updatetime ?? "")' WHERE name='\(currency.name ?? "")';"
+                        let sql : String = "UPDATE T_Currency set exchange=\(currency.exchange),query='\(currency.query ?? "")',updatetime='\(currency.updatetime ?? "")',name_English = '\(currency.name_English ?? "")' WHERE code='\(currency.code ?? "")';"
                         
                         SLSQLManager.shared.updateSQL(sql: sql)
                     }
+                    
+                    if currency.query == "query" {
+                        
+                        let sql : String = "UPDATE T_Currency set query='\(currency.query ?? "")',updatetime='\(currency.updatetime ?? "")',name_English = '\(currency.name_English ?? "")' WHERE code='\(currency.code ?? "")';"
+                        
+                        SLSQLManager.shared.updateSQL(sql: sql)
+                    }
+                    
                 }
             }
             

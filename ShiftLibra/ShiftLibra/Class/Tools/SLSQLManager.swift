@@ -111,6 +111,7 @@ extension SLSQLManager{
                 obj.updatetime = rs.string(forColumn: "updatetime")
                 obj.exchange = rs.double(forColumn: "exchange")
                 obj.query = rs.string(forColumn: "query")
+                obj.name_English = rs.string(forColumn: "name_English")
                 
                 let mainString = obj.code ?? "CNY"
                 
@@ -149,6 +150,7 @@ extension SLSQLManager{
                 obj.updatetime = rs.string(forColumn: "updatetime")
                 obj.exchange = rs.double(forColumn: "exchange")
                 obj.query = rs.string(forColumn: "query")
+                obj.name_English = rs.string(forColumn: "name_English")
                 
                 list.append(obj)
             }

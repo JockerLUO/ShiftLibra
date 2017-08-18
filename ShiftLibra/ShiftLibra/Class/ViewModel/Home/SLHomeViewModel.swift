@@ -166,6 +166,14 @@ class SLHomeViewModel: NSObject {
                     
                      str = "\(Int(afterMoney) / 1000),000\(moneyDigits)"
                     
+                } else if Int(afterMoney) % 1000 < 10 {
+                    
+                    str = "\(Int(afterMoney) / 1000),00\(Int(afterMoney) % 1000)\(moneyDigits)"
+                    
+                } else if Int(afterMoney) % 1000 < 100 {
+                    
+                    str = "\(Int(afterMoney) / 1000),0\(Int(afterMoney) % 1000)\(moneyDigits)"
+                    
                 } else {
                     
                     str = "\(Int(afterMoney) / 1000),\(Int(afterMoney) % 1000)\(moneyDigits)"

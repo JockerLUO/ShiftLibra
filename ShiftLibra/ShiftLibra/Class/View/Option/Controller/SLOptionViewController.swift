@@ -79,11 +79,7 @@ class SLOptionViewController: UIViewController {
         
         super.viewDidLoad()
         
-        view.addSubview(scrollerView)
-        
-        scrollerView.backgroundColor = tableViewBackgroundColor
-        
-        scrollerView.addSubview(tableView)
+        view.addSubview(tableView)
         
         tableView.delegate = self
         
@@ -107,7 +103,7 @@ class SLOptionViewController: UIViewController {
         
         tableView.sectionIndexColor = themeTextColor
         
-        scrollerView.addSubview(headerView)
+        view.addSubview(headerView)
         
         headerView.backgroundColor = tableViewBackgroundColor
         
@@ -149,15 +145,7 @@ class SLOptionViewController: UIViewController {
         btnCancel.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        searchBar.becomeFirstResponder()
-        
-    }
-    
-    /*
+       /*
      NSConcreteNotification 0x1744436f0 {name = UIKeyboardWillChangeFrameNotification; userInfo = {
      UIKeyboardAnimationCurveUserInfoKey = 7;
      UIKeyboardAnimationDurationUserInfoKey = 0;
@@ -172,6 +160,8 @@ class SLOptionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        super.viewDidAppear(animated)
+        
         textFiled?.becomeFirstResponder()
         
     }
@@ -179,19 +169,11 @@ class SLOptionViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
-        scrollerView.snp.makeConstraints { (make) in
-            
-            make.edges.equalTo(self.view)
-            
-        }
-        
         headerView.snp.makeConstraints { (make) in
             
-            make.top.equalTo(scrollerView).offset(20)
+            make.top.equalTo(view).offset(20)
             
-            make.left.equalTo(scrollerView)
-            
-            make.width.equalTo(SCREENW)
+            make.left.right.equalTo(view)
             
             make.height.equalTo(homeHeaderHight)
         }
@@ -276,7 +258,7 @@ class SLOptionViewController: UIViewController {
         
         let btn = UIButton()
         
-        btn.setTitle("取消", for: UIControlState.normal)
+        btn.setTitle(btnCancelText, for: UIControlState.normal)
         
         btn.titleLabel?.font = UIFont.systemFont(ofSize: smallFontSize)
         
@@ -291,8 +273,6 @@ class SLOptionViewController: UIViewController {
         
         return view
     }()
-    
-    
 }
 
 extension SLOptionViewController {
@@ -374,12 +354,17 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         if str == "query" {
             
-            str = "☆热门"
+            str = indexHotText
         }
         
         if str == "customize" {
             
-            str = "自定义汇率"
+            str = indexcustomExchangeText
+        }
+        
+        if searchList != nil {
+            
+            str = searchResultsText
         }
         
         headerView.label.text = str
@@ -388,6 +373,11 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        
+        if searchList != nil {
+            
+            return nil
+        }
         
         var arr : [String] = NSMutableArray.init(array: optionViewModel.currencyTyeList!, copyItems: true) as! [String]
         
@@ -428,23 +418,72 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        if model.query == nil {
+        if model.query == "expire" && model.exchange != 0 {
             
-            let alertVC = UIAlertController(title: "提示", message: "查询不到该货币兑换相关信息", preferredStyle: .actionSheet)
+            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCMessage, preferredStyle: .actionSheet)
             
-            let confirm = UIAlertAction(title: "确定", style: .default, handler: { (_) in
+            let confirm = UIAlertAction(title: confirmTitle, style: .default, handler: {  [weak self] (_) in
+                
+                self?.closure?(model)
+                
+                self?.isEditing = false
+                
+                self?.dismiss(animated: true, completion: {
+                    
+                })
+            })
+            
+            let confirmCancel = UIAlertAction(title: btnCancelText, style: .default, handler: { (_) in
                 
                 return
             })
             
             alertVC.addAction(confirm)
             
+            alertVC.addAction(confirmCancel)
+            
             self.present(alertVC, animated: true, completion: nil)
             
             return
         }
         
+        //处理津巴布韦元
+        if model.exchange == 0 {
+            
+            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCZWDMessage, preferredStyle: .actionSheet)
+            
+            let confirm = UIAlertAction(title: confirmTitle, style: .default, handler: { (_) in
+                
+               return
+            })
+           
+            alertVC.addAction(confirm)
+            
+            self.present(alertVC, animated: true, completion: nil)
+            
+            return
+        }
+    
         closure?(model)
+        
+//        for key in optionViewModel.currencyTyeList! {
+//            
+//            let arr = optionViewModel.currencyList?[key]
+//            
+//            for obj in arr! {
+//                
+//                if obj.query == "minority" {
+//                    
+//                    getNewexchangeFromNetwoking(currency: obj)
+//                }
+//            }
+//        }
+        
+        
+        
+        
+        
+        
         
         self.isEditing = false
         
@@ -452,6 +491,57 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             
         })
     }
+    
+    
+    
+    
+    fileprivate func getNewexchangeFromNetwoking(currency : SLCurrency) -> () {
+        
+        SLNetworkingTool.shared.getCurrency(from: "CNY", to: (currency.code)!, success: { (request) in
+            
+            guard let data = request as? [String : Any] else {
+                
+                return
+            }
+            
+            if let reason = data["reason"] as? String {
+                
+                if reason != "查询成功!" {
+                    
+                    print(reason)
+                    
+                    return
+                }
+            }
+            
+            guard let list = (data["result"] as? [Any]) else {
+                
+                return
+            }
+            
+            let dic = list[0] as! [String : Any]
+            
+            let alterCurrency = SLCurrency()
+            
+            alterCurrency.name = currency.name
+            
+            alterCurrency.code = currency.code
+            
+            alterCurrency.exchange = 1 / ((dic["exchange"] as! NSString?)?.doubleValue)!
+            
+            alterCurrency.updatetime = dic["updateTime"] as? String
+            
+            let sql : String = "UPDATE T_Currency set exchange=\(alterCurrency.exchange),query='minority',updatetime='\(alterCurrency.updatetime ?? "")' WHERE name='\(alterCurrency.name ?? "")';"
+            
+            SLSQLManager.shared.updateSQL(sql: sql)
+            
+        }, failure: { (error) in
+            
+            print("出错了",error)
+        })
+    }
+    
+    
 }
 
 extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
@@ -460,7 +550,7 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
         
         let str = searchBar.text ?? ""
         
-        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC AND query != 'customize';")
+        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC;")
         
         tableView.reloadData()
     }

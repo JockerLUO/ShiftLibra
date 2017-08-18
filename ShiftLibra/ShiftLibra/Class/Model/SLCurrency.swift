@@ -19,4 +19,6 @@ class SLCurrency: NSObject {
     var updatetime : String?
     
     var query : String?
+    
+    var name_English : String?
 }

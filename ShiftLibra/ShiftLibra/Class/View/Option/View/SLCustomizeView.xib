@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SLCustomizeView" customModule="ShiftLibra" customModuleProvider="target">
             <connections>
+                <outlet property="btnCancel" destination="Ju4-gA-Ozw" id="GHv-bI-YRY"/>
+                <outlet property="btnFinish" destination="Pf7-dz-vFC" id="bi4-L6-QyR"/>
                 <outlet property="labFrom" destination="fz7-Dk-nIa" id="SXt-j6-q9C"/>
                 <outlet property="labInfo" destination="4Dk-fW-zbY" id="wgA-OO-74M"/>
                 <outlet property="labTo" destination="xlI-Al-UNE" id="vyI-hb-Uln"/>

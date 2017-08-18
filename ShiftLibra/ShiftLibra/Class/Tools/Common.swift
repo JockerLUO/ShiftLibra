@@ -30,17 +30,19 @@ let SCREENH = UIScreen.main.bounds.height
 
 let SCREENW = UIScreen.main.bounds.width
 
-let smallFontSize = CGFloat(17)
+let smallFontSize = CGFloat(SCREENW <= 667 ? 15 : 17)
 
-let normalFontSize = CGFloat(20)
+let normalFontSize = CGFloat(SCREENW <= 667 ? 20 : 21)
 
-let settingFontSize = CGFloat(25)
+let settingFontSize = CGFloat(SCREENW <= 667 ? 25 : 27)
 
-let topFontSize = CGFloat(33)
+let topFontSize = CGFloat(SCREENW <= 667 ? 33 : 35)
 
-let midFontSize = CGFloat(29)
+let midFontSize = CGFloat(SCREENW <= 667 ? 29 : 31)
 
-let bottomFontSize = CGFloat(31)
+let bottomFontSize = CGFloat(SCREENW <= 667 ? 31 : 33)
+
+let currencyListFont = CGFloat(SCREENW <= 667 ? 17 : 19)
 
 let homeHeaderHight = (SCREENH - 20 - 20) / 11 + 20
 
@@ -48,7 +50,7 @@ let homeTableViewCellHight = (SCREENH - 20 - 20) / 11
 
 let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 10
 
-let labSpace = 35
+let labSpace = SCREENW <= 667 ? 35 : 40
 
 func RGB(R : CGFloat, G : CGFloat, B : CGFloat, alpha : CGFloat) -> (UIColor) {
     return UIColor(colorLiteralRed: Float(R / 255), green: Float(G / 255), blue: Float(B / 255), alpha: Float(alpha))

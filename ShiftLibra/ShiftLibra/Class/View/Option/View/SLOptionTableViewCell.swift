@@ -14,11 +14,11 @@ class SLOptionTableViewCell: UITableViewCell {
         
         didSet {
             
-            labName.text = currency?.name
+            labName.text = country == "China" ? currency?.name : currency?.name_English
             
             labCode.text = currency?.code
             
-            if currency?.query == nil {
+            if currency?.query == "expire" {
                 
                 labLock.text = "🔒"
                 
@@ -98,7 +98,7 @@ class SLOptionTableViewCell: UITableViewCell {
             
             make.left.equalTo(80)
             
-            make.centerY.equalTo(contentView)
+            make.centerY.equalTo(contentView)            
         }
         
         labName.textColor = UIColor.white
@@ -130,7 +130,7 @@ class SLOptionTableViewCell: UITableViewCell {
         
         lab.text = "CNY"
         
-        lab.font = UIFont.systemFont(ofSize: normalFontSize)
+        lab.font = UIFont.systemFont(ofSize: currencyListFont)
         
         lab.sizeToFit()
         
@@ -143,7 +143,7 @@ class SLOptionTableViewCell: UITableViewCell {
         
         lab.text = "人民币"
         
-        lab.font = UIFont.systemFont(ofSize: normalFontSize)
+        lab.font = UIFont.systemFont(ofSize: currencyListFont)
         
         lab.sizeToFit()
         
