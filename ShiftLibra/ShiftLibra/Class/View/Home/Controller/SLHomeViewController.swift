@@ -171,27 +171,20 @@ extension SLHomeViewController {
                 
                 vc.closure = { model in
                     
+                    if self?.homeViewModel.toCurrency?.code == model.code || self?.homeViewModel.fromCurrency?.code == model.code {
+                        
+                        self?.shiftHomeModelView()
+                        
+                        return
+                    }
+                    
                     if optionType == .to {
                         
-                        if self?.homeViewModel.toCurrency?.code == model.code {
-                            
-                            self?.shiftHomeModelView()
-                            
-                        } else {
-                            
                             self?.homeViewModel.toCurrency = model
-                        }
                         
                     } else {
-                     
-                        if self?.homeViewModel.fromCurrency?.code == model.code {
-                            
-                            self?.shiftHomeModelView()
-                            
-                        } else {
-                            
+                        
                             self?.homeViewModel.fromCurrency = model
-                        }
                     }
                     
                 }

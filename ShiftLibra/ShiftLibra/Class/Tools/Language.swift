@@ -12,7 +12,7 @@ var country = "China" {
     
     didSet {
         
-        customExchange = country == "China" ? "设定自定义汇率" : "Set a custom exchange rate"
+        customExchange = country == "China" ? "设定自定义汇率" : "Custom exchange rate"
         
         customCurrency = country == "China" ? "自定义" : "custom"
         

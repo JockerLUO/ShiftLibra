@@ -58,8 +58,22 @@ class SLCustomizeView: UIView {
         }
         
         
-        let sql = "INSERT INTO T_Currency (name,code,query,exchange) VALUES('\(customCurrency)\(currency?.name! ?? "")','\(currency?.code! ?? "")★','customize',\(toVulue / fromVulue))"
+        let customizeList = SLOptionViewModel().customizeList
         
+        var sql : String = "INSERT INTO T_Currency (name,code,query,exchange,name_English) VALUES('\(customCurrency)\(currency?.name! ?? "")','\(currency?.code! ?? "")★','customize',\(toVulue / fromVulue),'\(currency?.name_English ?? "")★')"
+        
+        if (customizeList?.count)! > 0 {
+            
+            for customizeCurrency in customizeList! {
+                
+                if customizeCurrency.code! == ((currency?.code)! + "★") {
+                    
+                    sql = "UPDATE T_Currency set exchange=\(toVulue / fromVulue) WHERE code='\(customizeCurrency)';"
+                    
+                }
+            }
+        }
+            
         SLSQLManager.shared.insertToSQL(sql: sql)
         
         self.removeFromSuperview()

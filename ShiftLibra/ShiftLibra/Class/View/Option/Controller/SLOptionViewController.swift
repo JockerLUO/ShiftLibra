@@ -145,19 +145,6 @@ class SLOptionViewController: UIViewController {
         btnCancel.addTarget(self, action: #selector(btnCancelClick), for: .touchUpInside)
     }
     
-       /*
-     NSConcreteNotification 0x1744436f0 {name = UIKeyboardWillChangeFrameNotification; userInfo = {
-     UIKeyboardAnimationCurveUserInfoKey = 7;
-     UIKeyboardAnimationDurationUserInfoKey = 0;
-     UIKeyboardBoundsUserInfoKey = "NSRect: {{0, 0}, {320, 254}}";
-     UIKeyboardCenterBeginUserInfoKey = "NSPoint: {160, 460}";
-     UIKeyboardCenterEndUserInfoKey = "NSPoint: {160, 441}";
-     UIKeyboardFrameBeginUserInfoKey = "NSRect: {{0, 352}, {320, 216}}";
-     UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 314}, {320, 254}}";
-     UIKeyboardIsLocalUserInfoKey = 1;
-     }}
-     */
-    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
@@ -200,7 +187,7 @@ class SLOptionViewController: UIViewController {
             
             make.left.equalTo(headerView).offset(8)
             
-            make.right.equalTo(headerView).offset(-48)
+            make.right.equalTo(headerView).offset(-58)
             
             make.centerY.equalTo(headerView.snp.centerY).multipliedBy(1.5)
         }
@@ -426,7 +413,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
                 
                 self?.closure?(model)
                 
-                self?.isEditing = false
+                self?.searchBar.resignFirstResponder()
                 
                 self?.dismiss(animated: true, completion: {
                     
@@ -465,27 +452,8 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         }
     
         closure?(model)
-        
-//        for key in optionViewModel.currencyTyeList! {
-//            
-//            let arr = optionViewModel.currencyList?[key]
-//            
-//            for obj in arr! {
-//                
-//                if obj.query == "minority" {
-//                    
-//                    getNewexchangeFromNetwoking(currency: obj)
-//                }
-//            }
-//        }
-        
-        
-        
-        
-        
-        
-        
-        self.isEditing = false
+
+        searchBar.resignFirstResponder()
         
         self.dismiss(animated: true, completion: {
             
@@ -550,7 +518,17 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
         
         let str = searchBar.text ?? ""
         
-        searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC;")
+        if country == "China" {
+            
+            searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' ORDER BY code ASC;")
+            
+        } else {
+
+            searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' OR name_English LIKE '%\(str)%' ORDER BY code ASC;")
+        }
+        
+        
+        
         
         tableView.reloadData()
     }
