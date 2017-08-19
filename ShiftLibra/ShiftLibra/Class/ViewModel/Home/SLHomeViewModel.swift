@@ -116,7 +116,7 @@ class SLHomeViewModel: NSObject {
             
             var toMoneyDetailListTmp = [String]()
             
-            for n in 1...10 {
+            for n in 1...9 {
                 
                 let fromMoneyDetail = multiple * (Double(i) + Double(n) * 0.1)
                 

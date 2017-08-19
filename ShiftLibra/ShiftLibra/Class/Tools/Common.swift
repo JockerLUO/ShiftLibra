@@ -48,7 +48,9 @@ let homeHeaderHight = (SCREENH - 20 - 20) / 11 + 20
 
 let homeTableViewCellHight = (SCREENH - 20 - 20) / 11
 
-let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 10
+let homeDetailTableViewCellHight = ((SCREENH - 20 - 20) / 11) * 8 / 9
+
+let lineHight = CGFloat(1.5)
 
 let labSpace = SCREENW <= 667 ? 35 : 40
 

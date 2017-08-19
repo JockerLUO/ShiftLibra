@@ -56,9 +56,11 @@ class SLHomeDetailCell: UITableViewCell {
         
         line.snp.makeConstraints { (make) in
             
-            make.left.right.bottom.equalTo(contentView)
+            make.left.right.equalTo(contentView)
             
-            make.height.equalTo(1)
+            make.top.equalTo(contentView.snp.bottom)
+            
+            make.height.equalTo(lineHight)
         }
     }
     

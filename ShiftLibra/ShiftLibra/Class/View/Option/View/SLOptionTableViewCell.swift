@@ -118,7 +118,7 @@ class SLOptionTableViewCell: UITableViewCell {
             
             make.left.right.bottom.equalTo(contentView)
             
-            make.height.equalTo(0.5)
+            make.height.equalTo(0.7)
         }
         
         lineView.backgroundColor = UIColor.white

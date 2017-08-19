@@ -70,7 +70,7 @@ class SLHomeCell: FoldingCell {
         containerView.snp.makeConstraints { (make) in
             
             make.left.right.equalTo(foregroundView.snp.left)
-            make.height.equalTo(homeDetailTableViewCellHight * 10)
+            make.height.equalTo(homeDetailTableViewCellHight * 9)
         }
         
         containerViewTop = NSLayoutConstraint(item: containerView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: contentView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: (homeTableViewCellHight))
@@ -112,7 +112,7 @@ class SLHomeCell: FoldingCell {
             
             make.left.right.bottom.equalTo(foregroundView)
             
-            make.height.equalTo(1)
+            make.height.equalTo(lineHight)
         }
         
         detailView.closure = { [weak self] in

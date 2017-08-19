@@ -19,7 +19,7 @@ class SLHomeViewController: UIViewController {
             
             static let close: CGFloat = homeTableViewCellHight
             
-            static let open: CGFloat = homeTableViewCellHight + homeDetailTableViewCellHight * 10
+            static let open: CGFloat = homeTableViewCellHight + homeDetailTableViewCellHight * 9
         }
     }
     
@@ -29,7 +29,7 @@ class SLHomeViewController: UIViewController {
     
     fileprivate let kCloseCellHeight = homeTableViewCellHight
     
-    fileprivate let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 10
+    fileprivate let kOpenCellHeight = homeTableViewCellHight + homeDetailTableViewCellHight * 9
     
     fileprivate var selectIndex : Int = -3
     
