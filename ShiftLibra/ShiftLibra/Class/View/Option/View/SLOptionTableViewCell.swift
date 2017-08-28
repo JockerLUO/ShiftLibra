@@ -10,6 +10,8 @@ import UIKit
 
 class SLOptionTableViewCell: UITableViewCell {
     
+    var closure : (()->())?
+    
     var currency : SLCurrency? {
         
         didSet {
@@ -122,7 +124,22 @@ class SLOptionTableViewCell: UITableViewCell {
         }
         
         lineView.backgroundColor = UIColor.white
+        
+        let swipLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
+        
+        swipLeft.direction = .left
+        
+        contentView.addGestureRecognizer(swipLeft)
     }
+    
+    func swipeGesture() -> () {
+        
+        if currency?.query == "customize" {
+            
+            closure?()
+        }
+    }
+    
     
     fileprivate lazy var labCode : UILabel = {
         

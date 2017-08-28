@@ -320,11 +320,17 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
             return cell
         }
         
+        
         let keys = optionViewModel.currencyTyeList
         
         let currency = optionViewModel.currencyList![(keys?[indexPath.section])!]?[indexPath.row]
         
         cell.currency = currency
+        
+        cell.closure = {
+            
+            tableView.isEditing = true
+        }
         
         return cell
     }
@@ -460,56 +466,22 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         })
     }
     
-    
-    
-    
-    fileprivate func getNewexchangeFromNetwoking(currency : SLCurrency) -> () {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        SLNetworkingTool.shared.getCurrency(from: "CNY", to: (currency.code)!, success: { (request) in
+        if (optionViewModel.customizeList?.count)! > 0, indexPath.section == 0 {
             
-            guard let data = request as? [String : Any] else {
-                
-                return
-            }
-            
-            if let reason = data["reason"] as? String {
-                
-                if reason != "查询成功!" {
-                    
-                    print(reason)
-                    
-                    return
-                }
-            }
-            
-            guard let list = (data["result"] as? [Any]) else {
-                
-                return
-            }
-            
-            let dic = list[0] as! [String : Any]
-            
-            let alterCurrency = SLCurrency()
-            
-            alterCurrency.name = currency.name
-            
-            alterCurrency.code = currency.code
-            
-            alterCurrency.exchange = 1 / ((dic["exchange"] as! NSString?)?.doubleValue)!
-            
-            alterCurrency.updatetime = dic["updateTime"] as? String
-            
-            let sql : String = "UPDATE T_Currency set exchange=\(alterCurrency.exchange),query='minority',updatetime='\(alterCurrency.updatetime ?? "")' WHERE name='\(alterCurrency.name ?? "")';"
-            
-            SLSQLManager.shared.updateSQL(sql: sql)
-            
-        }, failure: { (error) in
-            
-            print("出错了",error)
-        })
+                return true
+        }
+        
+        return false
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        optionViewModel.deleteCustomize(index: indexPath.row)
+        
+        tableView.reloadData()
+    }
 }
 
 extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
@@ -526,9 +498,6 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
 
             searchList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE name LIKE '%\(str)%' OR  code LIKE '%\(str)%' OR name_English LIKE '%\(str)%' ORDER BY code ASC;")
         }
-        
-        
-        
         
         tableView.reloadData()
     }

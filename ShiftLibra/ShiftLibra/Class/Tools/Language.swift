@@ -12,29 +12,29 @@ var country = "China" {
     
     didSet {
         
-        customExchange = country == "China" ? "设定自定义汇率" : "Custom exchange rate"
+        customExchange = country == "China" ? "设定自定义汇率" : "Set Custom Rate"
         
-        customCurrency = country == "China" ? "自定义" : "custom"
+        customCurrency = country == "China" ? "自定义" : "CUSTOM RATES"
         
         updatedTime = country == "China" ? "已更新" : "Updated"
         
-        btnShiftText = country == "China" ? "切换" : "Shift"
+        btnShiftText = country == "China" ? "切换" : "Swap"
         
-        btnOtherText = country == "China" ? "选择其他" : "Other"
+        btnOtherText = country == "China" ? "选择其他" : "Choose Currency"
         
         btnCancelText = country == "China" ? "取消" : "Cancel"
         
         btnFinishText = country == "China" ? "完成" : "Finish"
         
-        indexHotText = country == "China" ? "☆热门" : "☆Hot"
+        indexHotText = country == "China" ? "☆热门" : "☆POPULAR"
 
-        indexcustomExchangeText = country == "China" ? "自定义汇率" : "Custom Exchange Rate"
+        indexcustomExchangeText = country == "China" ? "自定义汇率" : "Set Custom Rate"
 
         alertVCTitle = country == "China" ? "提示" : "Info"
 
         alertVCMessage = country == "China" ? "由于服务器原因未收录此货币,汇率信息已过期\n您是否仍要查询此货币汇率" : "The currency has not been credited due to server reasons, Do you still want to check this currency exchange rate?"
 
-        confirmTitle = country == "China" ? "确定" : "OK"
+        confirmTitle = country == "China" ? "确定" : "Done"
         
         alertVCLangangeMessage = country == "China" ? "当前所在地为国外是否切换为英语" : "Now in China whether to switch to Chinese"
 

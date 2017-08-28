@@ -25,54 +25,11 @@ class SLOptionViewModel: NSObject {
         
         super.init()
         
-        if let list : [String: [SLCurrency]] = SLSQLManager.shared.orderSQL() {
-            
-            if list.count > 0 {
-                
-                customizeList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='customize';")
-                
-                queryList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
-                
-                let currency = queryList?[0]
-                
-                let dataFormatterStr : String = "YYYY-MM-dd HH:mm:ss"
-                
-                let dateF = DateFormatter()
-                
-                dateF.dateFormat = dataFormatterStr
-                
-                let createdTime = dateF.date(from: (currency?.updatetime!)!)
-                
-                let s = Int(-(createdTime?.timeIntervalSinceNow)!)
-                
-                if currency?.query == "minority" && s > 60 * 60 * 24 {
-                    
-                    getQuery()
-                }
-                
-                currencyList = list
-                
-                currencyTyeList = Array(currencyList!.keys).sorted()
-                
-                if (customizeList?.count)! > 0 {
-                    
-                    currencyTyeList?.insert("query", at: 0)
-                    
-                    currencyTyeList?.insert("customize", at: 0)
-                    
-                    currencyList?.updateValue(queryList!, forKey: "query")
-                    
-                    currencyList?.updateValue(customizeList!, forKey: "customize")
-                    
-                } else {
-                 
-                    currencyTyeList?.insert("query", at: 0)
-
-                    currencyList?.updateValue(queryList!, forKey: "query")
-                }
+        if (SLSQLManager.shared.orderSQL()?.count)! > 0 {
+        
+                getListFromSQL()
                 
                 return
-            }
         }
         
         let list : [String: [SLCurrency]] = SLSQLManager.sharedTmp.orderSQL()!
@@ -88,6 +45,62 @@ class SLOptionViewModel: NSObject {
         currencyList?.updateValue(queryList!, forKey: "query")
         
         getList()
+    }
+    
+    func deleteCustomize(index : Int) -> () {
+        
+        let sql = "DELETE FROM T_Currency WHERE code='\(customizeList?[index].code ?? "000")';"
+        
+        SLSQLManager.shared.updateSQL(sql: sql)
+        
+        getListFromSQL()
+    }
+    
+    func getListFromSQL() -> () {
+        
+        let list : [String: [SLCurrency]] = SLSQLManager.shared.orderSQL()!
+        
+        customizeList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='customize';")
+        
+        queryList = SLSQLManager.shared.selectSQL(sql: "SELECT * FROM T_Currency WHERE query='query';")
+        
+        let currency = queryList?[0]
+        
+        let dataFormatterStr : String = "YYYY-MM-dd HH:mm:ss"
+        
+        let dateF = DateFormatter()
+        
+        dateF.dateFormat = dataFormatterStr
+        
+        let createdTime = dateF.date(from: (currency?.updatetime!)!)
+        
+        let s = Int(-(createdTime?.timeIntervalSinceNow)!)
+        
+        if currency?.query == "query" && s > 60 * 60 * 24 {
+            
+            getQuery()
+        }
+        
+        currencyList = list
+        
+        currencyTyeList = Array(currencyList!.keys).sorted()
+        
+        if (customizeList?.count)! > 0 {
+            
+            currencyTyeList?.insert("query", at: 0)
+            
+            currencyTyeList?.insert("customize", at: 0)
+            
+            currencyList?.updateValue(queryList!, forKey: "query")
+            
+            currencyList?.updateValue(customizeList!, forKey: "customize")
+            
+        } else {
+            
+            currencyTyeList?.insert("query", at: 0)
+            
+            currencyList?.updateValue(queryList!, forKey: "query")
+        }
     }
     
     private func getList() -> () {
@@ -119,8 +132,6 @@ class SLOptionViewModel: NSObject {
             print("出错了",error)
         })
     }
-    
-    
     
     private func getQuery() -> () {
         
