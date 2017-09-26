@@ -23,7 +23,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.makeKeyAndVisible()
      
+        getLanguage()
+        
         return true
+    }
+    
+    fileprivate func getLanguage() -> () {
+        
+        let defs = UserDefaults.standard
+        
+        let languages = defs.object(forKey: "AppleLanguages")
+        
+        let preferredLanguage = (languages! as? [String])?.first
+        
+        if preferredLanguage == "zh-Hant-CN" || preferredLanguage == "zh-Hans-CN" || preferredLanguage == "zh-Hans-US" || preferredLanguage == "zh-Hant-US" {
+            
+            country = "China"
+            
+        } else {
+            
+            country = "Foreign"
+        }
     }
 
 }

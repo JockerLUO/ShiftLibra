@@ -117,7 +117,7 @@ extension SLSQLManager{
                 
                 let index = mainString.index(mainString.startIndex, offsetBy: 1)
                 
-                let key = mainString.substring(to: index)
+                let key = String(mainString[..<index])
                 
                 if list[key] == nil {
                     

@@ -8,7 +8,6 @@
 
 import UIKit
 import FoldingCell
-import CoreLocation
 
 class SLHomeViewController: UIViewController {
 
@@ -33,19 +32,9 @@ class SLHomeViewController: UIViewController {
     
     fileprivate var selectIndex : Int = -3
     
-    fileprivate lazy var locationManager = CLLocationManager()
-
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        getLanguage()
-        
-        locationManager.requestWhenInUseAuthorization()
-        
-        locationManager.delegate = self
-        
-        locationManager.startUpdatingLocation()
         
         view.addSubview(headerView)
         
@@ -342,7 +331,7 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
         }
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
-            _ in
+            
             
             tableView.beginUpdates()
             
@@ -371,85 +360,5 @@ extension SLHomeViewController : UITableViewDelegate,UITableViewDataSource {
             }
         }
     }
-}
-
-extension SLHomeViewController : CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let newLocation = locations.first
-        
-        let time = Int(-(newLocation?.timestamp.timeIntervalSinceNow)!)
-        
-        if time > 1 {
-            
-            return
-        }
-        
-        locationManager.stopUpdatingLocation()
-        
-        CLGeocoder().reverseGeocodeLocation(newLocation!) { (placemarks, error) in
-            
-            if error != nil || placemarks?.count == 0 {
-                
-                if country == "China" {
-                
-                self.addAlertController(newcountry: "Foreign")
-                
-                }
-                return
-            }
-            
-            
-            if country == "Foreign" {
-                
-                self.addAlertController(newcountry: "China")
-            }
-        }
-        
-    }
-    
-    fileprivate func getLanguage() -> () {
-        
-        let defs = UserDefaults.standard
-        
-        let languages = defs.object(forKey: "AppleLanguages")
-        
-        let preferredLanguage = (languages! as? [String])?.first
-        
-        if preferredLanguage == "zh-Hant-CN" || preferredLanguage == "zh-Hans-CN" {
-            
-            country = "China"
-            
-        } else {
-            
-            country = "Foreign"
-        }
-    }
-    
-    func addAlertController(newcountry : String) -> () {
-        
-        let alertVC = UIAlertController(title: alertVCTitle, message: alertVCLangangeMessage, preferredStyle: .actionSheet)
-        
-        let confirmOK = UIAlertAction(title: confirmTitle, style: .default, handler: { (_) in
-            
-            country = newcountry
-            
-            return
-        })
-        
-        let confirmCancal = UIAlertAction(title: btnCancelText, style: .default, handler: { (_) in
-            
-            return
-        })
-        
-        alertVC.addAction(confirmOK)
-        
-        alertVC.addAction(confirmCancal)
-        
-        self.present(alertVC, animated: true, completion: nil)
-        
-    }
-    
 }
 

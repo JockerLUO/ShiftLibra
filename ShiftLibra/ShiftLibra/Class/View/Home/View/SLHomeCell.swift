@@ -123,7 +123,7 @@ class SLHomeCell: FoldingCell {
         NotificationCenter.default.addObserver(self, selector: #selector(swipeAnimation(noti:)), name: homeTableViewSwipeGestureNotification, object: nil)
     }
     
-    func swipeAnimation(noti : Notification) -> () {
+    @objc func swipeAnimation(noti : Notification) -> () {
         
         guard let direction = noti.object as? UISwipeGestureRecognizerDirection else {
             

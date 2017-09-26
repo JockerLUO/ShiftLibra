@@ -93,7 +93,7 @@ open class FoldingCell: UITableViewCell {
     }
     
     containerViewTop.constant = foregroundViewTop.constant
-    containerView.alpha = 0;
+    containerView.alpha = 0
     
     if let height = (foregroundView.constraints.filter { $0.firstAttribute == .height && $0.secondItem == nil}).first?.constant {
       foregroundView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
@@ -101,7 +101,7 @@ open class FoldingCell: UITableViewCell {
     }
     foregroundView.layer.transform = foregroundView.transform3d()
     
-    createAnimationView();
+    createAnimationView()
     self.contentView.bringSubview(toFront: foregroundView)
   }
   
@@ -133,7 +133,7 @@ open class FoldingCell: UITableViewCell {
       for view in animationViewSuperView.filter({$0 is RotatedView}) {
         view.alpha = 0;
       }
-    } else { // close
+    } else {
       for case let view as RotatedView in animationViewSuperView.filter({$0 is RotatedView}) {
         if animationType == .open {
           view.alpha = 0
@@ -146,7 +146,6 @@ open class FoldingCell: UITableViewCell {
   }
   
   func createAnimationView() {
-    
     animationView = UIView(frame: containerView.frame)
     animationView?.layer.cornerRadius = foregroundView.layer.cornerRadius
     animationView?.backgroundColor = .clear
@@ -190,18 +189,18 @@ open class FoldingCell: UITableViewCell {
   
   func addImageItemsToAnimationView() {
     containerView.alpha = 1;
-    let contSize        = containerView.bounds.size
-    let forgSize        = foregroundView.bounds.size
+    let containerViewSize = containerView.bounds.size
+    let foregroundViewSize = foregroundView.bounds.size
     
     // added first item
-    var image = containerView.pb_takeSnapshot(CGRect(x: 0, y: 0, width: contSize.width, height: forgSize.height))
+    var image = containerView.pb_takeSnapshot(CGRect(x: 0, y: 0, width: containerViewSize.width, height: foregroundViewSize.height))
     var imageView = UIImageView(image: image)
     imageView.tag = 0
     imageView.layer.cornerRadius = foregroundView.layer.cornerRadius
     animationView?.addSubview(imageView)
     
     // added secod item
-    image = containerView.pb_takeSnapshot(CGRect(x: 0, y: forgSize.height, width: contSize.width, height: forgSize.height))
+    image = containerView.pb_takeSnapshot(CGRect(x: 0, y: foregroundViewSize.height, width: containerViewSize.width, height: foregroundViewSize.height))
     
     imageView                     = UIImageView(image: image)
     let rotatedView               = RotatedView(frame: imageView.frame)
@@ -211,24 +210,24 @@ open class FoldingCell: UITableViewCell {
     
     rotatedView.addSubview(imageView)
     animationView?.addSubview(rotatedView)
-    rotatedView.frame = CGRect(x: imageView.frame.origin.x, y: forgSize.height, width: contSize.width, height: forgSize.height)
+    rotatedView.frame = CGRect(x: imageView.frame.origin.x, y: foregroundViewSize.height, width: containerViewSize.width, height: foregroundViewSize.height)
     
     // added other views
-    let itemHeight = (contSize.height - 2 * forgSize.height) / CGFloat(itemCount - 2)
+    let itemHeight = (containerViewSize.height - 2 * foregroundViewSize.height) / CGFloat(itemCount - 2)
     
     if itemCount == 2 {
         // decrease containerView height or increase itemCount
-        assert(contSize.height - 2 * forgSize.height == 0, "contanerView.height too high")
+        assert(containerViewSize.height - 2 * foregroundViewSize.height == 0, "contanerView.height too high")
     }
     else{
         // decrease containerView height or increase itemCount
-        assert(contSize.height - 2 * forgSize.height >= itemHeight, "contanerView.height too high")
+        assert(containerViewSize.height - 2 * foregroundViewSize.height >= itemHeight, "contanerView.height too high")
     }
     
-    var yPosition = 2 * forgSize.height
+    var yPosition = 2 * foregroundViewSize.height
     var tag = 2
     for _ in 2..<itemCount {
-      image = containerView.pb_takeSnapshot(CGRect(x: 0, y: yPosition, width: contSize.width, height: itemHeight))
+      image = containerView.pb_takeSnapshot(CGRect(x: 0, y: yPosition, width: containerViewSize.width, height: itemHeight))
       
       imageView = UIImageView(image: image)
       let rotatedView = RotatedView(frame: imageView.frame)
@@ -241,18 +240,18 @@ open class FoldingCell: UITableViewCell {
       rotatedView.tag = tag
       
       yPosition += itemHeight
-      tag += 1;
+      tag += 1
     }
     
     containerView.alpha = 0;
     
     if let animationView = self.animationView {
       // added back view
-      var previusView: RotatedView?
-      for case let contener as RotatedView in animationView.subviews.sorted(by: { $0.tag < $1.tag })
-        where contener.tag > 0 && contener.tag < animationView.subviews.count {
-          previusView?.addBackView(contener.bounds.size.height, color: backViewColor)
-          previusView = contener
+      var previuosView: RotatedView?
+      for case let container as RotatedView in animationView.subviews.sorted(by: { $0.tag < $1.tag })
+        where container.tag > 0 && container.tag < animationView.subviews.count {
+          previuosView?.addBackView(container.bounds.size.height, color: backViewColor)
+          previuosView = container
       }
     }
     animationItemViews = createAnimationItemView()
@@ -270,6 +269,21 @@ open class FoldingCell: UITableViewCell {
   
   // MARK: public
   
+  /// Unfold cell.
+  ///
+  /// - Parameters:
+  ///   - value: unfold = true; collapse = false.
+  ///   - animated: animate changes.
+  ///   - completion: A block object to be executed when the animation sequence ends.
+  open func unfold(_ value: Bool, animated: Bool = true, completion: ((Void) -> Void)? = nil) {
+    if animated {
+      value ? openAnimation(completion) : closeAnimation(completion)
+    } else {
+      foregroundView.alpha = value ? 0 : 1
+      containerView.alpha = value ? 1 : 0
+    }
+  }
+  
   /**
    Open or close cell
    
@@ -277,42 +291,29 @@ open class FoldingCell: UITableViewCell {
    - parameter animated:   Specify true if you want to animate the change in visibility or false if you want immediately.
    - parameter completion: A block object to be executed when the animation sequence ends.
    */
+  @available(iOS, deprecated, message: "Use unfold(_:animated:completion) method instead.")
   open func selectedAnimation(_ isSelected: Bool, animated: Bool, completion: ((Void) -> Void)?) {
-    
-    if isSelected {
-      
-      if animated {
-        containerView.alpha = 0;
-        openAnimation(completion)
-      } else  {
-        foregroundView.alpha = 0
-        containerView.alpha = 1;
-      }
-      
-    } else {
-      if animated {
-        closeAnimation(completion)
-      } else {
-        foregroundView.alpha = 1;
-        containerView.alpha = 0;
-      }
-    }
+    unfold(isSelected, animated: animated, completion: completion)
   }
   
-  open func isAnimating()->Bool {
+  open func isAnimating() -> Bool {
     return animationView?.alpha == 1 ? true : false
   }
   
-  // MARK: animations
-  open func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
-    assert(false, "added this method to cell")
-    return 0
+  open var isUnfolded = false
+  
+  // MARK: Animations
+  open func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
+    return type == .close ? durationsForCollapsedState[itemIndex] : durationsForExpandedState[itemIndex]
   }
+  
+  open var durationsForExpandedState: [TimeInterval] = []
+  open var durationsForCollapsedState: [TimeInterval] = []
   
   func durationSequence(_ type: AnimationType)-> [TimeInterval] {
     var durations  = [TimeInterval]()
-    for index in 0..<itemCount-1 {
-      let duration = animationDuration(index, type: type)
+    for i in 0..<itemCount-1 {
+      let duration = animationDuration(i, type: type)
       durations.append(TimeInterval(duration / 2.0))
       durations.append(TimeInterval(duration / 2.0))
     }
@@ -320,7 +321,7 @@ open class FoldingCell: UITableViewCell {
   }
   
   func openAnimation(_ completion: ((Void) -> Void)?) {
-    
+    isUnfolded = true
     removeImageItemsFromAnimationView()
     addImageItemsToAnimationView()
     
@@ -328,12 +329,12 @@ open class FoldingCell: UITableViewCell {
       return
     }
     
-    animationView.alpha = 1;
-    containerView.alpha = 0;
+    animationView.alpha = 1
+    containerView.alpha = 0
     
     let durations = durationSequence(.open)
     
-    var delay: TimeInterval = 0
+    var delay: TimeInterval   = 0
     var timing                = kCAMediaTimingFunctionEaseIn
     var from: CGFloat         = 0.0;
     var to: CGFloat           = -CGFloat.pi / 2
@@ -356,22 +357,22 @@ open class FoldingCell: UITableViewCell {
       delay += durations[index]
     }
     
-    let firstItemView = animationView.subviews.filter{$0.tag == 0}.first
+    let firstItemView = animationView.subviews.filter { $0.tag == 0 }.first
     
     firstItemView?.layer.masksToBounds = true
     DispatchQueue.main.asyncAfter(deadline: .now() + durations[0], execute: {
       firstItemView?.layer.cornerRadius = 0
     })
     
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { 
       self.animationView?.alpha = 0
       self.containerView.alpha  = 1
-      completion?()
-    })
+      completion
+    }
   }
   
   func closeAnimation(_ completion: ((Void) -> Void)?) {
-    
+    isUnfolded = false
     removeImageItemsFromAnimationView()
     addImageItemsToAnimationView()
     
@@ -379,14 +380,14 @@ open class FoldingCell: UITableViewCell {
       fatalError()
     }
     
-    animationView?.alpha = 1;
-    containerView.alpha  = 0;
+    animationView?.alpha = 1
+    containerView.alpha  = 0
     
     var durations: [TimeInterval] = durationSequence(.close).reversed()
     
-    var delay: TimeInterval = 0
+    var delay: TimeInterval   = 0
     var timing                = kCAMediaTimingFunctionEaseIn
-    var from: CGFloat         = 0.0;
+    var from: CGFloat         = 0.0
     var to: CGFloat           = CGFloat.pi / 2
     var hidden                = true
     configureAnimationItems(.close)
@@ -407,10 +408,10 @@ open class FoldingCell: UITableViewCell {
     }
     DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
       self.animationView?.alpha = 0
-      completion?()
+      completion
     })
     
-    let firstItemView = animationView?.subviews.filter{$0.tag == 0}.first
+    let firstItemView = animationView?.subviews.filter { $0.tag == 0 }.first
     firstItemView?.layer.cornerRadius = 0
     firstItemView?.layer.masksToBounds = true
     if let durationFirst = durations.first {
@@ -434,7 +435,7 @@ open class RotatedView: UIView {
     view.backgroundColor                           = color
     view.layer.anchorPoint                         = CGPoint.init(x: 0.5, y: 1)
     view.layer.transform                           = view.transform3d()
-    view.translatesAutoresizingMaskIntoConstraints = false;
+    view.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(view)
     backView = view
     
@@ -500,23 +501,22 @@ extension RotatedView: CAAnimationDelegate {
     self.layer.shouldRasterize = false
     self.rotatedX(CGFloat(0))
   }
+  
 }
 
-extension UIView {
+private extension UIView {
+  
   func pb_takeSnapshot(_ frame: CGRect) -> UIImage? {
-    UIGraphicsBeginImageContextWithOptions(frame.size, false, 0.0)
+    UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
     
     guard let context = UIGraphicsGetCurrentContext() else { return nil }
     context.translateBy(x: frame.origin.x * -1, y: frame.origin.y * -1)
     
-    guard let currentContext = UIGraphicsGetCurrentContext() else {
-      return nil
-    }
-    
-    self.layer.render(in: currentContext)
+    layer.render(in: context)
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
     return image
   }
+  
 }

@@ -132,7 +132,7 @@ class SLOptionTableViewCell: UITableViewCell {
         contentView.addGestureRecognizer(swipLeft)
     }
     
-    func swipeGesture() -> () {
+    @objc func swipeGesture() -> () {
         
         if currency?.query == "customize" {
             

@@ -413,7 +413,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         if model.query == "expire" && model.exchange != 0 {
             
-            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCMessage, preferredStyle: .actionSheet)
+            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCMessage, preferredStyle: .alert)
             
             let confirm = UIAlertAction(title: confirmTitle, style: .default, handler: {  [weak self] (_) in
                 
@@ -443,7 +443,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         //处理津巴布韦元
         if model.exchange == 0 {
             
-            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCZWDMessage, preferredStyle: .actionSheet)
+            let alertVC = UIAlertController(title: alertVCTitle, message: alertVCZWDMessage, preferredStyle: .alert)
             
             let confirm = UIAlertAction(title: confirmTitle, style: .default, handler: { (_) in
                 
@@ -468,7 +468,7 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        if (optionViewModel.customizeList?.count)! > 0, indexPath.section == 0 {
+        if (optionViewModel.customizeList?.count) ?? 0 > 0, indexPath.section == 0 {
             
                 return true
         }
@@ -482,6 +482,8 @@ extension SLOptionViewController : UITableViewDelegate,UITableViewDataSource {
         
         tableView.reloadData()
     }
+    
+    
 }
 
 extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
@@ -504,7 +506,7 @@ extension SLOptionViewController : UISearchBarDelegate,UITextFieldDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchList != nil {
+        if searchList != nil, searchText == "" {
             
             searchList = nil
             

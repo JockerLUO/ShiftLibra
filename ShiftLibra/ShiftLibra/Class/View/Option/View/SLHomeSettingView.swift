@@ -37,7 +37,7 @@ class SLHomeSettingView: UIView {
             
             let attr = NSMutableAttributedString(string: str)
             
-            attr.addAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: smallFontSize), NSForegroundColorAttributeName : mid_right_bgColor], range: range)
+            attr.addAttributes([NSAttributedStringKey.font : UIFont.systemFont(ofSize: smallFontSize), NSAttributedStringKey.foregroundColor : mid_right_bgColor], range: range)
             
             labInfo.attributedText = attr
             

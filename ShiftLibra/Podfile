@@ -9,18 +9,18 @@ target 'ShiftLibra' do
 
   # Pods for ShiftLibra
 
-    pod 'SnapKit', '~> 3.0.0'
+   pod 'SnapKit'
 
-    pod 'AFNetworking'
+   pod 'AFNetworking'
 
-    pod 'YYModel'
+   pod 'YYModel'
 
-    pod 'pop'
+   pod 'pop'
 
-    pod 'FMDB'
+   pod 'FMDB'
 
-    pod 'FoldingCell', '~> 2.0.3'
+   pod 'FoldingCell'
 
-    pod 'TPKeyboardAvoiding'
+   pod 'TPKeyboardAvoiding'
 
 end

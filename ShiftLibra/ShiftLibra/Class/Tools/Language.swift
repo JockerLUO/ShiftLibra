@@ -32,7 +32,7 @@ var country = "China" {
 
         alertVCTitle = country == "China" ? "提示" : "Info"
 
-        alertVCMessage = country == "China" ? "由于服务器原因未收录此货币,汇率信息已过期\n您是否仍要查询此货币汇率" : "The currency has not been credited due to server reasons, Do you still want to check this currency exchange rate?"
+        alertVCMessage = country == "China" ? "由于服务器原因未收录此货币\n汇率信息已过期\n您是否仍要查询此货币汇率" : "The currency has not been credited due to server reasons, Do you still want to check this currency exchange rate?"
 
         confirmTitle = country == "China" ? "确定" : "Done"
         
